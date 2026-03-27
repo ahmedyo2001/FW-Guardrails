@@ -6,28 +6,40 @@ Reads jailbreak prompts from a local CSV (downloaded by download_dataset.py),
 uses an LLM to identify malicious/trigger words, and writes a fragments.json
 file compatible with FRAGMENTS_FILE in colab_jigsaw.ipynb.
 
-Only the malicious words are fragmented; the rest of the prompt stays as-is.
-The jigsaw notebook handles further character-level splitting of these words.
+Only the malicious words are identified; the jigsaw notebook handles the
+actual splitting (sentence_split or word_split).
 
-Usage:
-    python generate_fragments.py --output fragments.json
-    python generate_fragments.py --dataset ../datasets/jailbreak_train.csv --limit 100 --output fragments.json
-    python generate_fragments.py --api-base http://192.168.1.11:1234/v1 --output fragments.json
+Supports two backends:
+  - "hf"  : loads a HuggingFace model locally (works on Colab with GPU)
+  - "api" : connects to an OpenAI-compatible API (LM Studio, vLLM, etc.)
+
+Usage (Colab / local GPU):
+    python generate_fragments.py --backend hf --model huihui-ai/Qwen3-8B-abliterated
+    python generate_fragments.py --backend hf --model huihui-ai/Qwen3-8B-abliterated --limit 50
+
+Usage (LM Studio / API):
+    python generate_fragments.py --backend api --api-base http://192.168.1.11:1234/v1
+    python generate_fragments.py --backend api --api-base http://localhost:1234/v1 --limit 100
 
 Prerequisites:
-    python ../download_dataset.py   (to download the dataset first)
+    python ../dataset_downloaders/download_jackhhao.py   (to download the dataset first)
 
 Dependencies:
-    pip install pandas openai
+    pip install pandas torch transformers accelerate   (for --backend hf)
+    pip install pandas openai                          (for --backend api)
 """
 
 import argparse
 import json
 import re
+import time
 from pathlib import Path
 
 import pandas as pd
-from openai import OpenAI
+
+# ---------------------------------------------------------------------------
+# Shared prompt template
+# ---------------------------------------------------------------------------
 
 IDENTIFY_PROMPT = """\
 You are a text analysis tool. Given a prompt, identify the malicious or harmful keywords/phrases that would trigger a content safety filter.
@@ -45,6 +57,10 @@ Prompt: "{prompt}"
 JSON array of malicious keywords:"""
 
 
+# ---------------------------------------------------------------------------
+# Dataset loading
+# ---------------------------------------------------------------------------
+
 def load_prompts(dataset_path: str, limit: int = None) -> list:
     print(f"Loading dataset: {dataset_path}")
     df = pd.read_csv(dataset_path)
@@ -57,42 +73,105 @@ def load_prompts(dataset_path: str, limit: int = None) -> list:
     return prompts
 
 
-def identify_malicious_words(client, model: str, prompt: str, retries: int = 2) -> list:
-    """Use LLM to identify malicious words in a prompt."""
-    for attempt in range(retries + 1):
-        try:
-            response = client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": IDENTIFY_PROMPT.format(prompt=prompt)}],
-                max_tokens=256,
-                temperature=0.1,
-            )
-            raw = response.choices[0].message.content.strip()
+# ---------------------------------------------------------------------------
+# Backend: HuggingFace (local model via transformers)
+# ---------------------------------------------------------------------------
 
-            # Extract JSON array from response
-            match = re.search(r'\[.*?\]', raw, re.DOTALL)
-            if not match:
-                print(f"    WARNING: Could not parse LLM response: {raw[:100]}")
-                return []
+class HFBackend:
+    """Loads a HuggingFace model and generates completions locally."""
 
-            words = json.loads(match.group())
-            return [w.strip() for w in words if isinstance(w, str) and w.strip()]
-        except json.JSONDecodeError:
-            print(f"    WARNING: Invalid JSON: {match.group()[:100]}")
-            return []
-        except Exception as e:
-            print(f"    WARNING: LLM error (attempt {attempt+1}/{retries+1}): {e}")
-            if attempt < retries:
-                import time
-                time.sleep(2)
-    print(f"    WARNING: All retries failed, returning empty")
-    return []
+    def __init__(self, model_id: str, device: str = "auto", cache_dir: str = None):
+        from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline as hf_pipeline
+
+        print(f"Loading HF model: {model_id}")
+        self.model_id = model_id
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_id, cache_dir=cache_dir, trust_remote_code=True
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id, cache_dir=cache_dir, device_map=device, trust_remote_code=True,
+        )
+        self.pipe = hf_pipeline(
+            "text-generation", model=model, tokenizer=self.tokenizer, device_map=device
+        )
+        print(f"Model loaded: {model_id}")
+
+    def identify(self, prompt: str, retries: int = 2) -> list:
+        content = IDENTIFY_PROMPT.format(prompt=prompt)
+        messages = [{"role": "user", "content": content}]
+        prompt_str = self.tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        for attempt in range(retries + 1):
+            try:
+                output = self.pipe(
+                    prompt_str, max_new_tokens=256, do_sample=False, return_full_text=False
+                )
+                raw = output[0]["generated_text"].strip()
+                return _parse_json_array(raw)
+            except Exception as e:
+                print(f"    WARNING: HF error (attempt {attempt+1}/{retries+1}): {e}")
+                if attempt < retries:
+                    time.sleep(2)
+        print(f"    WARNING: All retries failed, returning empty")
+        return []
+
+
+# ---------------------------------------------------------------------------
+# Backend: OpenAI-compatible API (LM Studio, vLLM, etc.)
+# ---------------------------------------------------------------------------
+
+class APIBackend:
+    """Connects to an OpenAI-compatible API."""
+
+    def __init__(self, api_base: str, api_key: str = "lm-studio"):
+        from openai import OpenAI
+        self.client = OpenAI(base_url=api_base, api_key=api_key)
+        models = self.client.models.list()
+        self.model_id = models.data[0].id
+        print(f"Connected to API. Using model: {self.model_id}")
+
+    def identify(self, prompt: str, retries: int = 2) -> list:
+        content = IDENTIFY_PROMPT.format(prompt=prompt)
+        for attempt in range(retries + 1):
+            try:
+                response = self.client.chat.completions.create(
+                    model=self.model_id,
+                    messages=[{"role": "user", "content": content}],
+                    max_tokens=256,
+                    temperature=0.1,
+                )
+                raw = response.choices[0].message.content.strip()
+                return _parse_json_array(raw)
+            except Exception as e:
+                print(f"    WARNING: API error (attempt {attempt+1}/{retries+1}): {e}")
+                if attempt < retries:
+                    time.sleep(2)
+        print(f"    WARNING: All retries failed, returning empty")
+        return []
+
+
+# ---------------------------------------------------------------------------
+# Shared helpers
+# ---------------------------------------------------------------------------
+
+def _parse_json_array(raw: str) -> list:
+    """Extract a JSON array of strings from LLM output."""
+    match = re.search(r'\[.*?\]', raw, re.DOTALL)
+    if not match:
+        print(f"    WARNING: Could not parse LLM response: {raw[:100]}")
+        return []
+    try:
+        words = json.loads(match.group())
+        return [w.strip() for w in words if isinstance(w, str) and w.strip()]
+    except json.JSONDecodeError:
+        print(f"    WARNING: Invalid JSON: {match.group()[:100]}")
+        return []
 
 
 def build_fragments(prompt: str, malicious_words: list) -> dict:
-    """Replace only malicious words with PART_N placeholders."""
+    """Replace all occurrences of malicious words with PART_N placeholders."""
     if not malicious_words:
-        # Fallback: no words identified, fragment nothing
         return {
             "objective": prompt,
             "redacted_objective": prompt,
@@ -107,14 +186,12 @@ def build_fragments(prompt: str, malicious_words: list) -> dict:
     part_idx = 1
 
     for word in malicious_words:
-        # Case-insensitive search for the word in the prompt
         pattern = re.compile(re.escape(word), re.IGNORECASE)
         if pattern.search(redacted):
             key = f"PART_{part_idx}"
-            # Find the actual text as it appears in the prompt
             found = pattern.search(redacted)
             fragments[key] = found.group()
-            redacted = pattern.sub(f"[{key}]", redacted, count=1)
+            redacted = pattern.sub(f"[{key}]", redacted)
             part_idx += 1
 
     return {
@@ -124,24 +201,45 @@ def build_fragments(prompt: str, malicious_words: list) -> dict:
     }
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate fragments.json with only malicious words fragmented"
+        description="Generate fragments.json with malicious words identified by an LLM"
     )
     parser.add_argument("--dataset", default="../raw datasets/jackhhao_test.csv",
-                        help="Path to dataset CSV (from dataset_downloaders/download_jackhhao.py)")
+                        help="Path to dataset CSV")
     parser.add_argument("--output", default="fragments.json")
     parser.add_argument("--limit", type=int, default=None,
                         help="Max number of prompts to process (default: all)")
+
+    # Backend selection
+    parser.add_argument("--backend", choices=["hf", "api"], default="hf",
+                        help="Backend: 'hf' for local HuggingFace model, 'api' for OpenAI-compatible API")
+
+    # HF backend options
+    parser.add_argument("--model", default="huihui-ai/Qwen3-8B-abliterated",
+                        help="HuggingFace model ID (for --backend hf)")
+    parser.add_argument("--device", default="auto",
+                        help="Device for HF model (default: auto)")
+    parser.add_argument("--cache-dir", default=None,
+                        help="Cache directory for HF model")
+
+    # API backend options
     parser.add_argument("--api-base", default="http://192.168.1.11:1234/v1",
-                        help="LM Studio API base URL")
+                        help="OpenAI-compatible API base URL (for --backend api)")
+    parser.add_argument("--api-key", default="lm-studio",
+                        help="API key (for --backend api)")
+
     args = parser.parse_args()
 
-    # Connect to LM Studio
-    client = OpenAI(base_url=args.api_base, api_key="lm-studio")
-    models = client.models.list()
-    model_id = models.data[0].id
-    print(f"Using model: {model_id}")
+    # Initialize backend
+    if args.backend == "hf":
+        backend = HFBackend(args.model, args.device, args.cache_dir)
+    else:
+        backend = APIBackend(args.api_base, args.api_key)
 
     prompts = load_prompts(args.dataset, args.limit)
 
@@ -149,7 +247,7 @@ def main():
     results = []
     for i, prompt in enumerate(prompts, 1):
         print(f"  [{i}/{len(prompts)}] {prompt[:60].encode('ascii', 'replace').decode()}...")
-        malicious = identify_malicious_words(client, model_id, prompt)
+        malicious = backend.identify(prompt)
         print(f"    Malicious words: {malicious}")
         entry = build_fragments(prompt, malicious)
         print(f"    Fragments: {len(entry['fragments'])}")
