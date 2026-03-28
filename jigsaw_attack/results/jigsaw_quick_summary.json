@@ -110,24 +110,7 @@
         "count": 0,
         "pct": "0.0%"
       }
-    },
-    "allenai/wildguard": {
-      "both_flagged": {
-        "count": 0,
-        "pct": "0.0%"
-      },
-      "both_passed": {
-        "count": 526,
-        "pct": "99.8%"
-      },
-      "flagged_orig_passed_mod (bypassed)": {
-        "count": 1,
-        "pct": "0.2%"
-      },
-      "passed_orig_flagged_mod (worse)": {
-        "count": 0,
-        "pct": "0.0%"
-      }
     }
+
   }
 }

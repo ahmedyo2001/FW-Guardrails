@@ -65,8 +65,16 @@ def load_prompts(dataset_path: str, limit: int = None) -> list:
     print(f"Loading dataset: {dataset_path}")
     df = pd.read_csv(dataset_path)
 
-    prompts = df[df["type"] == "jailbreak"]["prompt"].dropna().tolist()
-    print(f"  {len(prompts)} jailbreak prompts (of {len(df)} total rows)")
+    # Auto-detect dataset format:
+    #   SafeBench: has "question" column, all rows are harmful
+    #   jackhhao:  has "prompt" + "type" columns, filter to jailbreak only
+    if "question" in df.columns:
+        prompts = df["question"].dropna().tolist()
+        print(f"  {len(prompts)} prompts (SafeBench format, {len(df)} total rows)")
+    else:
+        prompts = df[df["type"] == "jailbreak"]["prompt"].dropna().tolist()
+        print(f"  {len(prompts)} jailbreak prompts (of {len(df)} total rows)")
+
     if limit:
         prompts = prompts[:limit]
         print(f"  Capped to {limit}")
