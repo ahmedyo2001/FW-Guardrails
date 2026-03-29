@@ -12,3 +12,4 @@ executed_*.ipynb
 Thumbs.db
 .DS_Store
 .tex
+*.tex
