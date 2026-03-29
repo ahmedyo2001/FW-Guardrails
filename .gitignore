@@ -11,3 +11,4 @@ executed_*.ipynb
 # OS files
 Thumbs.db
 .DS_Store
+.tex
