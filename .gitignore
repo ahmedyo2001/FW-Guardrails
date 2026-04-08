@@ -13,3 +13,6 @@ Thumbs.db
 .DS_Store
 .tex
 *.tex
+analysis/agreement.py
+analysis/agreement_results.json
+analysis/agreement_safebench.json
