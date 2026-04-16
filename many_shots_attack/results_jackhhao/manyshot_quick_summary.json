@@ -9,52 +9,52 @@
   "guardrails": {
     "meta-llama/Llama-Guard-3-1B": {
       "both_flagged": {
-        "count": 131,
-        "pct": "25.3%"
+        "count": 160,
+        "pct": "30.9%"
       },
       "both_passed": {
-        "count": 227,
-        "pct": "43.9%"
+        "count": 282,
+        "pct": "54.5%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 57,
-        "pct": "11.0%"
+        "count": 17,
+        "pct": "3.3%"
       },
       "passed_orig_flagged_mod (worse)": {
-        "count": 102,
-        "pct": "19.7%"
+        "count": 58,
+        "pct": "11.2%"
       }
     },
     "meta-llama/Llama-Guard-3-8B": {
       "both_flagged": {
-        "count": 39,
-        "pct": "7.5%"
+        "count": 109,
+        "pct": "21.1%"
       },
       "both_passed": {
-        "count": 440,
-        "pct": "85.1%"
+        "count": 349,
+        "pct": "67.5%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 35,
-        "pct": "6.8%"
+        "count": 40,
+        "pct": "7.7%"
       },
       "passed_orig_flagged_mod (worse)": {
-        "count": 3,
-        "pct": "0.6%"
+        "count": 19,
+        "pct": "3.7%"
       }
     },
     "ibm-granite/granite-guardian-3.3-8b": {
       "both_flagged": {
-        "count": 310,
-        "pct": "60.0%"
+        "count": 313,
+        "pct": "60.5%"
       },
       "both_passed": {
         "count": 108,
         "pct": "20.9%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 98,
-        "pct": "19.0%"
+        "count": 95,
+        "pct": "18.4%"
       },
       "passed_orig_flagged_mod (worse)": {
         "count": 1,
@@ -63,34 +63,34 @@
     },
     "ibm-granite/granite-guardian-3.2-3b-a800m": {
       "both_flagged": {
-        "count": 488,
-        "pct": "94.4%"
+        "count": 490,
+        "pct": "94.8%"
       },
       "both_passed": {
-        "count": 8,
-        "pct": "1.5%"
-      },
-      "flagged_orig_passed_mod (bypassed)": {
         "count": 10,
         "pct": "1.9%"
       },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 7,
+        "pct": "1.4%"
+      },
       "passed_orig_flagged_mod (worse)": {
-        "count": 11,
-        "pct": "2.1%"
+        "count": 10,
+        "pct": "1.9%"
       }
     },
     "google/shieldgemma-9b": {
       "both_flagged": {
-        "count": 30,
-        "pct": "5.8%"
+        "count": 33,
+        "pct": "6.4%"
       },
       "both_passed": {
         "count": 428,
         "pct": "82.8%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 59,
-        "pct": "11.4%"
+        "count": 56,
+        "pct": "10.8%"
       },
       "passed_orig_flagged_mod (worse)": {
         "count": 0,
@@ -99,16 +99,16 @@
     },
     "Qwen/Qwen3Guard-Gen-8B": {
       "both_flagged": {
-        "count": 306,
-        "pct": "59.2%"
+        "count": 375,
+        "pct": "72.5%"
       },
       "both_passed": {
         "count": 117,
         "pct": "22.6%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 94,
-        "pct": "18.2%"
+        "count": 25,
+        "pct": "4.8%"
       },
       "passed_orig_flagged_mod (worse)": {
         "count": 0,
