@@ -5,34 +5,34 @@
   "guardrails": {
     "meta-llama/Llama-Guard-3-1B": {
       "both_flagged": {
-        "count": 82,
-        "pct": "23.4%"
+        "count": 51,
+        "pct": "14.6%"
       },
       "both_passed": {
-        "count": 88,
-        "pct": "25.1%"
+        "count": 86,
+        "pct": "24.6%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 169,
-        "pct": "48.3%"
+        "count": 199,
+        "pct": "56.9%"
       },
       "passed_orig_flagged_mod (worse)": {
-        "count": 11,
-        "pct": "3.1%"
+        "count": 14,
+        "pct": "4.0%"
       }
     },
     "meta-llama/Llama-Guard-3-8B": {
       "both_flagged": {
-        "count": 4,
-        "pct": "1.1%"
+        "count": 9,
+        "pct": "2.6%"
       },
       "both_passed": {
-        "count": 121,
-        "pct": "34.6%"
+        "count": 94,
+        "pct": "26.9%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 225,
-        "pct": "64.3%"
+        "count": 247,
+        "pct": "70.6%"
       },
       "passed_orig_flagged_mod (worse)": {
         "count": 0,
@@ -99,12 +99,12 @@
         "pct": "0.6%"
       },
       "both_passed": {
-        "count": 61,
-        "pct": "17.4%"
+        "count": 49,
+        "pct": "14.0%"
       },
       "flagged_orig_passed_mod (bypassed)": {
-        "count": 287,
-        "pct": "82.0%"
+        "count": 299,
+        "pct": "85.4%"
       },
       "passed_orig_flagged_mod (worse)": {
         "count": 0,
