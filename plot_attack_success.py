@@ -17,6 +17,15 @@ MODEL_LABELS = {
     "Qwen/Qwen3Guard-Gen-8B":                    "Qwen3Guard\n8B",
 }
 
+FAMILY_COLORS = {
+    "meta-llama/Llama-Guard-3-1B":               "#1f77b4",
+    "meta-llama/Llama-Guard-3-8B":               "#1f77b4",
+    "ibm-granite/granite-guardian-3.3-8b":       "#2ca02c",
+    "ibm-granite/granite-guardian-3.2-3b-a800m": "#2ca02c",
+    "google/shieldgemma-9b":                     "#000000",
+    "Qwen/Qwen3Guard-Gen-8B":                    "#000000",
+}
+
 COLORS = {
     0:    "#d0dce8",
     2000: "#8aafc8",
@@ -111,6 +120,8 @@ def plot_dataset(results, title, out_path):
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=10)
+    for tick, m in zip(ax.get_xticklabels(), model_ids):
+        tick.set_color(FAMILY_COLORS.get(m, "#333333"))
     ax.set_ylabel("Attack Success Rate\n(% bypassed)", fontsize=11)
     ax.set_title(title, fontsize=13, fontweight="bold")
     ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=0))

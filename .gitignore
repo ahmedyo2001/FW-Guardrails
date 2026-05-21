@@ -17,3 +17,6 @@ analysis/agreement.py
 analysis/agreement_results.json
 analysis/agreement_safebench.json
 analysis/agreement_jackhhao.json
+attack_success_rate2.png
+objectives2.png
+objectives2.py

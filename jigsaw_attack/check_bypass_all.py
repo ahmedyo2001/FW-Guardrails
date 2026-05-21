@@ -18,12 +18,13 @@ hashmap_malicious: dict[str, int] = {}
 
 for obj in data:
     prompt = obj["objective"]
-    
+    malprompt = obj["jsp_prompt_raw"]
+
     if not obj["flagged_original"]:
         hashmap_bening[prompt] = hashmap_bening.get(prompt, 0) + 1
     
     if not obj["flagged_modified"]:
-        hashmap_malicious[prompt] = hashmap_malicious.get(prompt, 0) + 1
+        hashmap_malicious[malprompt] = hashmap_malicious.get(malprompt, 0) + 1
 
 benign_6 = {p: c for p, c in hashmap_bening.items() if c >= 6}
 malicious_6 = {p: c for p, c in hashmap_malicious.items() if c >= 6}
