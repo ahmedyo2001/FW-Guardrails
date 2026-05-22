@@ -1,8 +1,7 @@
 """
 Approach 1 — Windowed PPL Threshold Detector
 =============================================
-Scoring:   GPT-2 perplexity with sliding window (1024 tokens, stride 512)
-           following HuggingFace Transformers documentation.
+Scoring:   LLaMA 3.2 1B perplexity with sliding window (2048 tokens, stride 1024)
 Detection: single PPL threshold, tuned on training data to maximise F2 (β=2),
            then evaluated on held-out test data.
 
@@ -15,11 +14,16 @@ Input
 
 Output
 ------
-  results/approach1_results.json   threshold + full metrics
-  results/approach1_predictions.jsonl  per-sample predictions on test set
+  results/approach1_results.json           threshold + full metrics
+  results/approach1_predictions.jsonl      per-sample predictions on test set
 
 Usage
 -----
+  pip install transformers torch scikit-learn numpy accelerate
+
+  # requires HuggingFace login for LLaMA access:
+  huggingface-cli login
+
   python approach1_ppl_threshold.py
   python approach1_ppl_threshold.py --train data/train.jsonl --test data/test.jsonl
   python approach1_ppl_threshold.py --cache-dir ppl_cache   # reuse scored prompts
@@ -32,40 +36,52 @@ import os
 import numpy as np
 import torch
 from sklearn.metrics import (classification_report, confusion_matrix,
-                             fbeta_score, precision_recall_curve,
-                             roc_auc_score)
-from transformers import GPT2LMHeadModel, GPT2TokenizerFast
+                             fbeta_score, roc_auc_score)
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ── config ────────────────────────────────────────────────────────────────────
-MODEL_NAME  = "gpt2"
-MAX_TOKENS  = 1024          # GPT-2 context window
-STRIDE      = 512           # half-window stride (HuggingFace recommendation)
+MODEL_NAME  = "meta-llama/Llama-3.2-1B"
+MAX_TOKENS  = 2048          # LLaMA 3.2 supports up to 128k, but 2048 is enough
+STRIDE      = 1024          # half-window stride
 BETA        = 2             # F-beta score β — penalises false negatives more
 RANDOM_SEED = 42
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-# ── PPL scorer ────────────────────────────────────────────────────────────────
+# ── model loader ──────────────────────────────────────────────────────────────
 
-def load_gpt2():
-    print(f"Loading GPT-2 on {DEVICE}...")
-    tokenizer = GPT2TokenizerFast.from_pretrained(MODEL_NAME)
-    model     = GPT2LMHeadModel.from_pretrained(MODEL_NAME).to(DEVICE)
+def load_llama():
+    print(f"Loading {MODEL_NAME} on {DEVICE}...")
+    print("  (first run will download ~2.5 GB — this may take a few minutes)")
+
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model     = AutoModelForCausalLM.from_pretrained(
+        MODEL_NAME,
+        torch_dtype=torch.float16,   # half precision — saves ~50% VRAM
+        device_map="auto",           # auto places layers on GPU/CPU as available
+    )
     model.eval()
+
+    # LLaMA tokenizer has no default pad token — set it to eos to avoid warnings
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    print(f"  Model loaded. Device map: {model.hf_device_map if hasattr(model, 'hf_device_map') else DEVICE}")
     return tokenizer, model
 
 
+# ── PPL scorer ────────────────────────────────────────────────────────────────
+
 def compute_ppl(text: str, tokenizer, model) -> float:
     """
-    Windowed perplexity following HuggingFace Transformers documentation:
+    Windowed perplexity following the HuggingFace Transformers documentation:
     https://huggingface.co/docs/transformers/en/perplexity
 
-    Window = 1024 tokens (GPT-2 context limit)
-    Stride = 512 tokens  (half-window overlap)
+    Window = 2048 tokens
+    Stride = 1024 tokens (half-window overlap)
 
-    Each token is scored with at least 512 tokens of left context,
-    giving a closer approximation to the true autoregressive likelihood
-    than non-overlapping chunking.
+    Each token is scored with at least 1024 tokens of left context,
+    giving a close approximation to the true autoregressive likelihood.
     """
     encodings = tokenizer(text, return_tensors="pt")
     input_ids = encodings.input_ids.to(DEVICE)
@@ -74,27 +90,31 @@ def compute_ppl(text: str, tokenizer, model) -> float:
     if seq_len == 0:
         return float("inf")
 
-    nlls      = []
-    prev_end  = 0
+    nlls     = []
+    prev_end = 0
 
     for begin in range(0, seq_len, STRIDE):
         end        = min(begin + MAX_TOKENS, seq_len)
-        target_len = end - prev_end      # tokens being scored this window
+        target_len = end - prev_end      # only newly seen tokens are scored
 
-        # mask context tokens so only new tokens contribute to the loss
-        target_ids              = input_ids[:, begin:end].clone()
-        target_ids[:, :-target_len] = -100   # -100 is ignored by CrossEntropyLoss
+        # mask context tokens — -100 is ignored by CrossEntropyLoss
+        target_ids                      = input_ids[:, begin:end].clone()
+        target_ids[:, :-target_len]     = -100
 
         with torch.no_grad():
-            loss = model(input_ids[:, begin:end],
-                         labels=target_ids).loss
-        nlls.append(loss * target_len)
+            loss = model(
+                input_ids[:, begin:end],
+                labels=target_ids
+            ).loss
 
+        nlls.append(loss * target_len)
         prev_end = end
+
         if end == seq_len:
             break
 
-    return torch.exp(torch.stack(nlls).sum() / seq_len).item()
+    ppl = torch.exp(torch.stack(nlls).sum() / seq_len).item()
+    return ppl
 
 
 # ── data loading ──────────────────────────────────────────────────────────────
@@ -109,8 +129,8 @@ def load_jsonl(path: str) -> list[dict]:
 def score_records(records: list[dict], tokenizer, model,
                   cache_path: str | None = None) -> np.ndarray:
     """
-    Returns a 1-D array of PPL values aligned with records.
-    If cache_path is given, previously scored texts are reused.
+    Returns a 1-D float array of PPL values aligned with records.
+    Caches results to disk so reruns skip already-scored prompts.
     """
     cache = {}
     if cache_path and os.path.exists(cache_path):
@@ -118,8 +138,9 @@ def score_records(records: list[dict], tokenizer, model,
             cache = json.load(f)
         print(f"  Loaded {len(cache)} cached PPL scores from {cache_path}")
 
-    ppls    = []
-    n_new   = 0
+    ppls  = []
+    n_new = 0
+
     for i, r in enumerate(records):
         key = r["text"]
         if key in cache:
@@ -148,7 +169,7 @@ def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """
     Sweep 500 candidate thresholds across the PPL range of the training set.
-    Pick the one that maximises F-beta score.
+    Pick the one that maximises F-beta score (default β=2).
     Returns (best_threshold, best_f_beta).
     """
     candidates = np.linspace(ppls.min(), ppls.max(), 500)
@@ -167,16 +188,14 @@ def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
 
 def evaluate(ppls: np.ndarray, labels: np.ndarray,
              threshold: float) -> dict:
-    preds = (ppls >= threshold).astype(int)
-
-    f2    = fbeta_score(labels, preds, beta=BETA,  zero_division=0)
-    f1    = fbeta_score(labels, preds, beta=1,     zero_division=0)
-    auc   = roc_auc_score(labels, ppls)   # PPL itself as the score
-    cm    = confusion_matrix(labels, preds)
+    preds  = (ppls >= threshold).astype(int)
+    f2     = fbeta_score(labels, preds, beta=BETA, zero_division=0)
+    f1     = fbeta_score(labels, preds, beta=1,    zero_division=0)
+    auc    = roc_auc_score(labels, ppls)
+    cm     = confusion_matrix(labels, preds)
     report = classification_report(labels, preds,
                                    target_names=["benign", "adversarial"],
                                    output_dict=True)
-
     tn, fp, fn, tp = cm.ravel()
     return {
         "threshold": float(threshold),
@@ -195,7 +214,7 @@ def evaluate(ppls: np.ndarray, labels: np.ndarray,
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Approach 1 — Windowed PPL threshold guardrail")
+        description="Approach 1 — Windowed PPL threshold guardrail (LLaMA 3.2 1B)")
     parser.add_argument("--train",     default="data/train.jsonl")
     parser.add_argument("--test",      default="data/test.jsonl")
     parser.add_argument("--cache-dir", default="ppl_cache",
@@ -214,19 +233,20 @@ def main():
     train_labels = np.array([r["label"] for r in train_records])
     test_labels  = np.array([r["label"] for r in test_records])
 
-    # ── score with GPT-2 windowed PPL ─────────────────────────────────────────
-    tokenizer, model = load_gpt2()
+    # ── load LLaMA 3.2 1B ────────────────────────────────────────────────────
+    tokenizer, model = load_llama()
 
     train_cache = os.path.join(args.cache_dir, "train_ppl.json")
     test_cache  = os.path.join(args.cache_dir, "test_ppl.json")
 
+    # ── score with windowed PPL ───────────────────────────────────────────────
     print("\n=== Scoring training set ===")
     train_ppls = score_records(train_records, tokenizer, model, train_cache)
 
     print("\n=== Scoring test set ===")
     test_ppls  = score_records(test_records,  tokenizer, model, test_cache)
 
-    # ── find threshold on training data ───────────────────────────────────────
+    # ── tune threshold on training data ───────────────────────────────────────
     print("\n=== Tuning threshold on training set (maximising F2) ===")
     threshold, train_f2 = find_best_threshold(train_ppls, train_labels)
     print(f"  Best threshold : {threshold:.2f}")
@@ -253,13 +273,14 @@ def main():
 
     # ── save results ──────────────────────────────────────────────────────────
     results = {
-        "approach":        "1_windowed_ppl_threshold",
-        "window":          MAX_TOKENS,
-        "stride":          STRIDE,
-        "beta":            BETA,
-        "train_size":      len(train_records),
-        "test_size":       len(test_records),
-        "train_f2":        float(train_f2),
+        "approach":   "1_windowed_ppl_threshold",
+        "model":      MODEL_NAME,
+        "window":     MAX_TOKENS,
+        "stride":     STRIDE,
+        "beta":       BETA,
+        "train_size": len(train_records),
+        "test_size":  len(test_records),
+        "train_f2":   float(train_f2),
         **metrics,
     }
 
@@ -268,19 +289,21 @@ def main():
         json.dump(results, f, indent=2)
     print(f"\n  Saved → {results_path}")
 
-    # per-sample predictions
+    # ── per-sample predictions ────────────────────────────────────────────────
     preds_path = os.path.join(args.out_dir, "approach1_predictions.jsonl")
     with open(preds_path, "w", encoding="utf-8") as f:
-        for r, ppl, pred in zip(test_records,
-                                 test_ppls.tolist(),
-                                 (test_ppls >= threshold).astype(int).tolist()):
+        for r, ppl, pred in zip(
+            test_records,
+            test_ppls.tolist(),
+            (test_ppls >= threshold).astype(int).tolist()
+        ):
             f.write(json.dumps({
-                "text":       r["text"],
-                "source":     r.get("source", ""),
-                "label":      r["label"],
-                "ppl":        round(ppl, 2),
-                "predicted":  pred,
-                "correct":    int(pred == r["label"]),
+                "text":      r["text"],
+                "source":    r.get("source", ""),
+                "label":     r["label"],
+                "ppl":       round(ppl, 2),
+                "predicted": pred,
+                "correct":   int(pred == r["label"]),
             }, ensure_ascii=False) + "\n")
     print(f"  Saved → {preds_path}")
 
