@@ -35,26 +35,29 @@ RANDOM_SEED            = 42
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
-
+# dataclass is a wrapper that allows us to write the code below as a class
 @dataclass
 class Source:
     name:  str
     label: int          # 1 = adversarial, 0 = benign
     fn:    Callable     # () -> list[str]
+    # field default factory is used to create a new array for each source class so it doesn't use the same array
     texts: list[str] = field(default_factory=list, repr=False)
 
+
+    # runs the fn and loads the data
     def load(self, max_n: int | None = None) -> int:
         try:
             raw = self.fn()
             raw = [t.strip() for t in raw if t and t.strip()]
             self.texts = raw[:max_n] if max_n is not None else raw
-            print(f"  ✓ [{self.name}]: {len(self.texts)}")
+            print(f"  OK [{self.name}]: {len(self.texts)}")
             return len(self.texts)
         except Exception as e:
-            print(f"  ✗ [{self.name}]: {e}")
+            print(f"  FAIL [{self.name}]: {e}")
             return 0
 
-
+# dedup data
 def dedup(records: list[dict]) -> list[dict]:
     seen, out = set(), []
     for r in records:
@@ -64,7 +67,7 @@ def dedup(records: list[dict]) -> list[dict]:
             out.append(r)
     return out
 
-
+#writes json
 def write_jsonl(path: str, records: list[dict]):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
@@ -77,16 +80,16 @@ def write_jsonl(path: str, records: list[dict]):
 def make_adversarial_sources() -> list[Source]:
 
     # 1. GCG machine-generated suffixes (local JSONL)
-    def gcg():
-        path = "gcg_attacks.jsonl"
-        if not os.path.exists(path):
-            raise FileNotFoundError(
-                f"{path} not found. Generate with "
-                "https://github.com/llm-attacks/llm-attacks "
-                "and save each prompt as {\"prompt\": \"...\"}  per line."
-            )
-        with open(path, encoding="utf-8") as f:
-            return [json.loads(l)["prompt"] for l in f]
+    # def gcg():
+    #     path = "gcg_attacks.jsonl"
+    #     if not os.path.exists(path):
+    #         raise FileNotFoundError(
+    #             f"{path} not found. Generate with "
+    #             "https://github.com/llm-attacks/llm-attacks "
+    #             "and save each prompt as {\"prompt\": \"...\"}  per line."
+    #         )
+    #     with open(path, encoding="utf-8") as f:
+    #         return [json.loads(l)["prompt"] for l in f]
 
     # 2. rubend18 — human GPT-4 jailbreaks (paper original, ~79 prompts)
     def rubend18():
@@ -111,7 +114,7 @@ def make_adversarial_sources() -> list[Source]:
     # 4. JailbreakBench JBB-Behaviors (NeurIPS 2024, 100 curated behaviors)
     def jbb():
         ds  = load_dataset("JailbreakBench/JBB-Behaviors",
-                           "behaviors", split="train")
+                           "behaviors", split="harmful")
         col = "Goal" if "Goal" in ds.column_names else ds.column_names[0]
         return [ex[col] for ex in ds if ex[col]]
 
@@ -157,8 +160,16 @@ def make_benign_sources() -> list[Source]:
 
     # 1. DocRED — multi-sentence passages (paper original)
     def docred():
-        ds = load_dataset("docred", split="validation", trust_remote_code=True)
-        return [" ".join(ex.get("sents", [""])) for ex in ds]
+        ds = load_dataset("thunlp/docred", split="validation")
+        rows = []
+        for ex in ds:
+            sents = ex.get("sents", [])
+            # sents is a list-of-lists of tokens; flatten each sentence
+            if sents and isinstance(sents[0], list):
+                rows.append(" ".join(" ".join(s) for s in sents))
+            else:
+                rows.append(" ".join(sents))
+        return rows
 
     # 2. BoolQ — instruction + passage (paper original)
     def boolq():
@@ -185,7 +196,7 @@ def make_benign_sources() -> list[Source]:
     # stop. When no --max-per-source is given, Source.load() will not slice,
     # so we cap here at 50_000 to avoid an infinite loop. Pass --max-per-source
     # to override this to a smaller number.
-    OPENORCA_HARD_CAP = 50_000
+    OPENORCA_HARD_CAP = 5000
 
     def openorca():
         ds  = load_dataset("Open-Orca/OpenOrca", split="train", streaming=True)
@@ -247,7 +258,7 @@ def main():
     before = len(records)
     records = dedup(records)
     after  = len(records)
-    print(f"\n=== Deduplication: {before} → {after} "
+    print(f"\n=== Deduplication: {before} -> {after} "
           f"({before - after} duplicates removed) ===")
 
     # ── label summary ─────────────────────────────────────────────────────────
