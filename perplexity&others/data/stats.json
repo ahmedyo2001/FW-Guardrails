@@ -1,0 +1,46 @@
+{
+  "2_rubend18_gpt4_jb": {
+    "label": 1,
+    "count": 79
+  },
+  "4_jailbreakbench": {
+    "label": 1,
+    "count": 100
+  },
+  "5_harmbench": {
+    "label": 1,
+    "count": 400
+  },
+  "6_wildjailbreak_adv": {
+    "label": 1,
+    "count": 0
+  },
+  "7_advbench": {
+    "label": 1,
+    "count": 520
+  },
+  "1_docred": {
+    "label": 0,
+    "count": 0
+  },
+  "2_boolq": {
+    "label": 0,
+    "count": 3270
+  },
+  "3_wildjailbreak_benign": {
+    "label": 0,
+    "count": 0
+  },
+  "4_openorca": {
+    "label": 0,
+    "count": 5000
+  },
+  "_split": {
+    "train": 7376,
+    "test": 1844,
+    "test_fraction": 0.2,
+    "seed": 42,
+    "total_before_dedup": 9369,
+    "total_after_dedup": 9220
+  }
+}

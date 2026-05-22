@@ -92,7 +92,7 @@ def compute_ppl(text: str, tokenizer, model) -> float:
 
     nlls     = []
     prev_end = 0
-
+    #-----------------------------------------------------------------------------
     for begin in range(0, seq_len, STRIDE):
         end        = min(begin + MAX_TOKENS, seq_len)
         target_len = end - prev_end      # only newly seen tokens are scored

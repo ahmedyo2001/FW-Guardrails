@@ -102,7 +102,7 @@ def make_adversarial_sources() -> list[Source]:
         ds  = load_dataset("TrustAIRLab/in-the-wild-jailbreak-prompts",
                            "jailbreak_2023_05_07", split="train")
         col = "prompt" if "prompt" in ds.column_names else ds.column_names[0]
-        return list({ex[col] for ex in ds})       # set → deduplicate within source
+        return list({ex[col] for ex in ds})       # set -> deduplicate within source
 
     # 3b. TrustAIRLab in-the-wild — Dec 2023 snapshot
     def itw_dec():
@@ -309,9 +309,9 @@ def main():
     with open(stats_path, "w") as f:
         json.dump(stats, f, indent=2)
 
-    print(f"\n  Saved → {train_path}")
-    print(f"  Saved → {test_path}")
-    print(f"  Saved → {stats_path}")
+    print(f"\n  Saved -> {train_path}")
+    print(f"  Saved -> {test_path}")
+    print(f"  Saved -> {stats_path}")
     print("\nDone.")
 
 
