@@ -1,0 +1,58 @@
+{
+  "approach": "2_lgbm_ppl_token_length",
+  "ppl_method": "full_prompt_single_pass",
+  "features": [
+    "ppl",
+    "token_length"
+  ],
+  "beta": 2,
+  "train_size": 7376,
+  "test_size": 1844,
+  "val_f2": 0.8693304535637149,
+  "lgbm_params": {
+    "objective": "binary",
+    "metric": "binary_logloss",
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "min_child_samples": 10,
+    "verbose": -1,
+    "seed": 42
+  },
+  "threshold": 0.13804020100502515,
+  "f2": 0.7910576096302665,
+  "f1": 0.7063339731285988,
+  "auc_roc": 0.9603721116908435,
+  "tp": 184,
+  "fp": 123,
+  "tn": 1507,
+  "fn": 30,
+  "precision": 0.5993485342019544,
+  "recall": 0.8598130841121495,
+  "report": {
+    "benign": {
+      "precision": 0.9804814573845153,
+      "recall": 0.9245398773006135,
+      "f1-score": 0.9516892958635933,
+      "support": 1630.0
+    },
+    "adversarial": {
+      "precision": 0.5993485342019544,
+      "recall": 0.8598130841121495,
+      "f1-score": 0.7063339731285988,
+      "support": 214.0
+    },
+    "accuracy": 0.9170281995661606,
+    "macro avg": {
+      "precision": 0.7899149957932349,
+      "recall": 0.8921764807063814,
+      "f1-score": 0.829011634496096,
+      "support": 1844.0
+    },
+    "weighted avg": {
+      "precision": 0.9362501962342614,
+      "recall": 0.9170281995661606,
+      "f1-score": 0.9232153050472762,
+      "support": 1844.0
+    }
+  }
+}

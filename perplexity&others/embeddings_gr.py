@@ -5,10 +5,10 @@ Based on: https://guardrailsai.com/hub/validator/arize-ai/dataset_embeddings_gua
 GitHub:   https://github.com/Arize-ai/dataset-embeddings-guardrails
 
 Mechanism:
-  1. Embed all adversarial prompts from the training set (label=1) → source library
+  1. Embed all adversarial prompts from the training set (label=1) -> source library
   2. For each test prompt, compute cosine distance to every source embedding
   3. Take the minimum cosine distance as the similarity score
-  4. If min_distance < threshold → flag as adversarial (1), else benign (0)
+  4. If min_distance < threshold -> flag as adversarial (1), else benign (0)
 
 Threshold is tuned on a validation split of the training set to maximise F2 (β=2).
 
@@ -29,7 +29,7 @@ Usage
 -----
   pip install sentence-transformers scikit-learn numpy
   python approach3_embeddings.py
-  python approach3_embeddings.py --threshold 0.2   # skip tuning, use Arize default
+  python approach3_embeddings.py --threshold 0.25  # skip tuning, use Arize default
 """
 
 import argparse
@@ -107,7 +107,7 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
         batch_size=BATCH_SIZE,
         show_progress_bar=True,
         convert_to_numpy=True,
-        normalize_embeddings=True,   # unit vectors → dot product = cosine sim
+        normalize_embeddings=True,   # unit vectors -> dot product = cosine sim
     )
     lib = embeddings.astype(np.float32)
 
@@ -115,7 +115,7 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
         os.makedirs(os.path.dirname(cache_path) or ".", exist_ok=True)
         with open(cache_path, "wb") as f:
             pickle.dump(lib, f)
-        print(f"  Source library saved → {cache_path}")
+        print(f"  Source library saved -> {cache_path}")
 
     return lib
 
@@ -162,7 +162,7 @@ def score_prompts(records: list[dict], source_lib: np.ndarray,
         for idx, text, emb in zip(indices_to_embed, texts_to_embed, new_embeddings):
             # since embeddings are normalized, cosine distance = 1 - dot product
             sims     = source_lib @ emb          # (N_chunks,)
-            min_dist = float(1.0 - sims.max())   # max similarity → min distance
+            min_dist = float(1.0 - sims.max())   # max similarity -> min distance
             cache[text]          = min_dist
             min_distances[idx]   = min_dist
 
@@ -170,7 +170,7 @@ def score_prompts(records: list[dict], source_lib: np.ndarray,
         os.makedirs(os.path.dirname(cache_path) or ".", exist_ok=True)
         with open(cache_path, "w", encoding="utf-8") as f:
             json.dump(cache, f)
-        print(f"  Score cache saved → {cache_path}")
+        print(f"  Score cache saved -> {cache_path}")
 
     return np.array(min_distances, dtype=np.float64)
 
@@ -185,7 +185,7 @@ def find_best_threshold(min_distances: np.ndarray, labels: np.ndarray,
     Maximise F-beta.
     """
     candidates = np.linspace(min_distances.min(), min_distances.max(), 500)
-    best_t, best_f = 0.2, 0.0
+    best_t, best_f = 0.25, 0.0
 
     for t in candidates:
         preds = (min_distances < t).astype(int)
@@ -204,12 +204,13 @@ def evaluate(min_distances: np.ndarray, labels: np.ndarray,
     f2     = fbeta_score(labels, preds, beta=BETA, zero_division=0)
     f1     = fbeta_score(labels, preds, beta=1,    zero_division=0)
     scores = 1.0 - min_distances    # similarity — higher = more adversarial
-    auc    = roc_auc_score(labels, scores)
+    auc    = roc_auc_score(labels, scores) if len(set(labels.tolist())) > 1 else float("nan")
     cm     = confusion_matrix(labels, preds)
     report = classification_report(labels, preds,
+                                   labels=[0, 1],
                                    target_names=["benign", "adversarial"],
-                                   output_dict=True)
-    tn, fp, fn, tp = cm.ravel()
+                                   output_dict=True, zero_division=0)
+    tn, fp, fn, tp = cm.ravel() if cm.shape == (2, 2) else (0, 0, 0, int(preds.sum()))
     return {
         "threshold": float(threshold),
         "f2":        float(f2),
@@ -235,7 +236,7 @@ def main():
     parser.add_argument("--model-dir", default="models")
     parser.add_argument("--threshold", type=float, default=None,
                         help="Fix cosine distance threshold instead of tuning. "
-                             "Arize default is 0.2.")
+                             "Arize default is 0.25.")
     args = parser.parse_args()
 
     os.makedirs(args.out_dir,   exist_ok=True)
@@ -273,7 +274,7 @@ def main():
     if args.threshold is not None:
         threshold = args.threshold
         val_f2    = None
-        print(f"\n=== Using fixed threshold: {threshold} (Arize default=0.2) ===")
+        print(f"\n=== Using fixed threshold: {threshold} (Arize default=0.25) ===")
     else:
         print("\n=== Tuning threshold on validation split of training set ===")
         indices   = np.arange(len(train_records))
@@ -309,7 +310,9 @@ def main():
     print("\n" + classification_report(
         test_labels,
         (test_distances < threshold).astype(int),
-        target_names=["benign", "adversarial"]
+        labels=[0, 1],
+        target_names=["benign", "adversarial"],
+        zero_division=0
     ))
 
     # ── save results ──────────────────────────────────────────────────────────
@@ -331,7 +334,7 @@ def main():
     results_path = os.path.join(args.out_dir, "approach3_results.json")
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
-    print(f"\n  Results saved → {results_path}")
+    print(f"\n  Results saved -> {results_path}")
 
     preds_path = os.path.join(args.out_dir, "approach3_predictions.jsonl")
     with open(preds_path, "w", encoding="utf-8") as f:
@@ -348,7 +351,7 @@ def main():
                 "predicted":    pred,
                 "correct":      int(pred == r["label"]),
             }, ensure_ascii=False) + "\n")
-    print(f"  Predictions saved → {preds_path}")
+    print(f"  Predictions saved -> {preds_path}")
 
 
 if __name__ == "__main__":

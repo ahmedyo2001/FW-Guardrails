@@ -7,6 +7,16 @@ Detection: single PPL threshold, tuned on training data to maximise F2 (β=2),
 
 This is the simplest perplexity-based guardrail — no classifier, just one number.
 
+
+
+Windowed perplexity following the HuggingFace Transformers documentation:
+https://huggingface.co/docs/transformers/en/perplexity
+
+Paper:BASELINE DEFENSES FOR ADVERSARIAL ATTACKS
+AGAINST ALIGNED LANGUAGE MODELS
+
+
+
 Input
 -----
   data/train.jsonl   produced by load_dataset.py
@@ -43,7 +53,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 MODEL_NAME  = "meta-llama/Llama-3.2-1B"
 MAX_TOKENS  = 2048          # LLaMA 3.2 supports up to 128k, but 2048 is enough
 STRIDE      = 1024          # half-window stride
-BETA        = 2             # F-beta score β — penalises false negatives more
+BETA        = 2            # F-beta score β — penalises false negatives more
 RANDOM_SEED = 42
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -92,27 +102,35 @@ def compute_ppl(text: str, tokenizer, model) -> float:
 
     nlls     = []
     prev_end = 0
-    #-----------------------------------------------------------------------------
+    
     for begin in range(0, seq_len, STRIDE):
+        # end of window considered
         end        = min(begin + MAX_TOKENS, seq_len)
-        target_len = end - prev_end      # only newly seen tokens are scored
+        # length of scoring window, at first it is 2048 then 1024
+        target_len = end - prev_end      
 
-        # mask context tokens — -100 is ignored by CrossEntropyLoss
+        # 2d array due to batch dim, clones beginning to end 
         target_ids                      = input_ids[:, begin:end].clone()
+        # mask context tokens — -100 is ignored by CrossEntropyLoss 
+        # makes the tokens considered before ignored in new run
         target_ids[:, :-target_len]     = -100
 
+
+        # the model calculates the loss on the input with the output as the ground truth
+        # any tokens with target id = -100 is ignored
         with torch.no_grad():
             loss = model(
                 input_ids[:, begin:end],
                 labels=target_ids
             ).loss
-
+        # the part above outputs the avg loss so we multiply by the target len to get the loss
         nlls.append(loss * target_len)
         prev_end = end
 
         if end == seq_len:
             break
-
+    # here we sum the NLL then divide by seq length to get the avg then we take exp to get the perplexity
+    
     ppl = torch.exp(torch.stack(nlls).sum() / seq_len).item()
     return ppl
 
@@ -158,7 +176,7 @@ def score_records(records: list[dict], tokenizer, model,
         os.makedirs(os.path.dirname(cache_path) or ".", exist_ok=True)
         with open(cache_path, "w", encoding="utf-8") as f:
             json.dump(cache, f)
-        print(f"  Cache saved → {cache_path}  ({len(cache)} total entries)")
+        print(f"  Cache saved -> {cache_path}  ({len(cache)} total entries)")
 
     return np.array(ppls, dtype=np.float64)
 
@@ -191,12 +209,13 @@ def evaluate(ppls: np.ndarray, labels: np.ndarray,
     preds  = (ppls >= threshold).astype(int)
     f2     = fbeta_score(labels, preds, beta=BETA, zero_division=0)
     f1     = fbeta_score(labels, preds, beta=1,    zero_division=0)
-    auc    = roc_auc_score(labels, ppls)
+    auc    = roc_auc_score(labels, ppls) if len(set(labels.tolist())) > 1 else float("nan")
     cm     = confusion_matrix(labels, preds)
     report = classification_report(labels, preds,
+                                   labels=[0, 1],
                                    target_names=["benign", "adversarial"],
-                                   output_dict=True)
-    tn, fp, fn, tp = cm.ravel()
+                                   output_dict=True, zero_division=0)
+    tn, fp, fn, tp = cm.ravel() if cm.shape == (2, 2) else (0, 0, 0, int(preds.sum()))
     return {
         "threshold": float(threshold),
         "f2":        float(f2),
@@ -268,7 +287,9 @@ def main():
     print("\n" + classification_report(
         test_labels,
         (test_ppls >= threshold).astype(int),
-        target_names=["benign", "adversarial"]
+        labels=[0, 1],
+        target_names=["benign", "adversarial"],
+        zero_division=0
     ))
 
     # ── save results ──────────────────────────────────────────────────────────
@@ -287,7 +308,7 @@ def main():
     results_path = os.path.join(args.out_dir, "approach1_results.json")
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
-    print(f"\n  Saved → {results_path}")
+    print(f"\n  Saved -> {results_path}")
 
     # ── per-sample predictions ────────────────────────────────────────────────
     preds_path = os.path.join(args.out_dir, "approach1_predictions.jsonl")
@@ -305,7 +326,7 @@ def main():
                 "predicted": pred,
                 "correct":   int(pred == r["label"]),
             }, ensure_ascii=False) + "\n")
-    print(f"  Saved → {preds_path}")
+    print(f"  Saved -> {preds_path}")
 
 
 if __name__ == "__main__":

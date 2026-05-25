@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-RESULT_FOLDERS = ["results_jackhhao", "results_safe"]
+RESULT_FOLDERS = ["safebench dataset"]
 OUTPUT_FILENAME = "malprompt_quick_summary.json"
 
 MODEL_ORDER = [

@@ -1,0 +1,47 @@
+{
+  "approach": "1_windowed_ppl_threshold",
+  "model": "meta-llama/Llama-3.2-1B",
+  "window": 2048,
+  "stride": 1024,
+  "beta": 2,
+  "train_size": 7376,
+  "test_size": 1844,
+  "train_f2": 0.6050322794239364,
+  "threshold": 25.075983144955067,
+  "f2": 0.6124497991967871,
+  "f1": 0.4295774647887324,
+  "auc_roc": 0.8424344934350094,
+  "tp": 183,
+  "fp": 455,
+  "tn": 1175,
+  "fn": 31,
+  "precision": 0.28683385579937304,
+  "recall": 0.8551401869158879,
+  "report": {
+    "benign": {
+      "precision": 0.9742951907131011,
+      "recall": 0.7208588957055214,
+      "f1-score": 0.8286318758815233,
+      "support": 1630.0
+    },
+    "adversarial": {
+      "precision": 0.28683385579937304,
+      "recall": 0.8551401869158879,
+      "f1-score": 0.4295774647887324,
+      "support": 214.0
+    },
+    "accuracy": 0.7364425162689805,
+    "macro avg": {
+      "precision": 0.6305645232562371,
+      "recall": 0.7879995413107046,
+      "f1-score": 0.6291046703351278,
+      "support": 1844.0
+    },
+    "weighted avg": {
+      "precision": 0.8945138861189916,
+      "recall": 0.7364425162689805,
+      "f1-score": 0.7823207891278047,
+      "support": 1844.0
+    }
+  }
+}
