@@ -82,6 +82,7 @@ def load_llama():
 
 # ── PPL scorer ────────────────────────────────────────────────────────────────
 
+# computes avg perplexity accross the prompt
 def compute_ppl(text: str, tokenizer, model) -> float:
     """
     Windowed perplexity following the HuggingFace Transformers documentation:
@@ -143,13 +144,14 @@ def load_jsonl(path: str) -> list[dict]:
 
 
 # ── PPL scoring with disk cache ───────────────────────────────────────────────
-
+# computes perplexity for prompts and caches them
 def score_records(records: list[dict], tokenizer, model,
                   cache_path: str | None = None) -> np.ndarray:
     """
     Returns a 1-D float array of PPL values aligned with records.
     Caches results to disk so reruns skip already-scored prompts.
     """
+    #load ppl if it was already cached
     cache = {}
     if cache_path and os.path.exists(cache_path):
         with open(cache_path, encoding="utf-8") as f:
@@ -182,7 +184,7 @@ def score_records(records: list[dict], tokenizer, model,
 
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
-
+# tunes threshold like embedding code
 def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """
@@ -203,7 +205,7 @@ def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
 
 
 # ── evaluation ────────────────────────────────────────────────────────────────
-
+#eval like embedding code
 def evaluate(ppls: np.ndarray, labels: np.ndarray,
              threshold: float) -> dict:
     preds  = (ppls >= threshold).astype(int)
@@ -266,6 +268,7 @@ def main():
     test_ppls  = score_records(test_records,  tokenizer, model, test_cache)
 
     # ── tune threshold on training data ───────────────────────────────────────
+    #TODO: change this to be %20 of training data
     print("\n=== Tuning threshold on training set (maximising F2) ===")
     threshold, train_f2 = find_best_threshold(train_ppls, train_labels)
     print(f"  Best threshold : {threshold:.2f}")
