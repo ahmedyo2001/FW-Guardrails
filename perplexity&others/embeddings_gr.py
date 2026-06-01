@@ -36,6 +36,7 @@ import argparse
 import json
 import os
 import pickle
+import re
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -73,6 +74,13 @@ def chunk_text(text: str, chunk_size: int = CHUNK_SIZE,
     return chunks if chunks else [text]
 
 
+def chunk_text_sentences(text: str) -> list[str]:
+    """Split text into sentence-level chunks on sentence-ending punctuation or newlines."""
+    chunks = re.split(r'(?<=[.?!\n])\s+', text.strip())
+    chunks = [c.strip() for c in chunks if c.strip()]
+    return chunks if chunks else [text]
+
+
 def cosine_distance(a: np.ndarray, b: np.ndarray) -> float:
     """Cosine distance = 1 - cosine similarity."""
     return 1.0 - float(
@@ -83,11 +91,12 @@ def cosine_distance(a: np.ndarray, b: np.ndarray) -> float:
 # ── source library builder ────────────────────────────────────────────────────
 
 def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
-                         cache_path: str | None = None) -> np.ndarray:
+                         cache_path: str | None = None,
+                         chunk_strategy: str = "char") -> np.ndarray:
     """
     Chunk all adversarial training prompts, embed each chunk,
     and return an (N_chunks, embed_dim) matrix — the source library.
-    Mirrors what ArizeDatasetEmbeddings does at construction time.
+    chunk_strategy: "char" (character-level, Arize default) or "sentence".
     """
     if cache_path and os.path.exists(cache_path):
         with open(cache_path, "rb") as f:
@@ -95,10 +104,11 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
         print(f"  Loaded source library ({lib.shape[0]} chunks) from {cache_path}")
         return lib
 
-    print(f"  Chunking {len(adv_texts)} adversarial prompts...")
+    chunker = chunk_text_sentences if chunk_strategy == "sentence" else chunk_text
+    print(f"  Chunking {len(adv_texts)} adversarial prompts (strategy={chunk_strategy})...")
     all_chunks = []
     for text in adv_texts:
-        all_chunks.extend(chunk_text(text))
+        all_chunks.extend(chunker(text))
     print(f"  Total chunks: {len(all_chunks)}")
 
     print("  Embedding chunks...")
@@ -237,6 +247,8 @@ def main():
     parser.add_argument("--threshold", type=float, default=None,
                         help="Fix cosine distance threshold instead of tuning. "
                              "Arize default is 0.25.")
+    parser.add_argument("--chunk-strategy", choices=["char", "sentence"], default="char",
+                        help="Chunking strategy for the source library (default: char).")
     args = parser.parse_args()
 
     os.makedirs(args.out_dir,   exist_ok=True)
@@ -261,8 +273,8 @@ def main():
     adv_train_texts = [r["text"] for r in train_records if r["label"] == 1]
     print(f"  Adversarial training prompts: {len(adv_train_texts)}")
 
-    lib_cache  = os.path.join(args.model_dir, "approach3_source_embeddings.pkl")
-    source_lib = build_source_library(adv_train_texts, embedder, lib_cache)
+    lib_cache  = os.path.join(args.model_dir, f"approach3_source_embeddings_{args.chunk_strategy}.pkl")
+    source_lib = build_source_library(adv_train_texts, embedder, lib_cache, args.chunk_strategy)
     print(f"  Source library shape: {source_lib.shape}")
 
     # ── score training set ────────────────────────────────────────────────────
@@ -319,6 +331,7 @@ def main():
     results = {
         "approach":        "3_arize_dataset_embeddings",
         "embed_model":     EMBED_MODEL,
+        "chunk_strategy":  args.chunk_strategy,
         "chunk_size":      CHUNK_SIZE,
         "chunk_overlap":   CHUNK_OVERLAP,
         "n_source_chunks": int(source_lib.shape[0]),

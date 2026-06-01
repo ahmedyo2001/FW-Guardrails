@@ -1,0 +1,51 @@
+{
+  "approach": "3_arize_dataset_embeddings",
+  "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunk_strategy": "sentence",
+  "chunk_size": 30,
+  "chunk_overlap": 5,
+  "n_source_chunks": 1925,
+  "n_adv_sources": 857,
+  "beta": 2,
+  "train_size": 7376,
+  "test_size": 1844,
+  "val_f2": 1.0,
+  "threshold_tuned": true,
+  "threshold": 0.38491916035363577,
+  "f2": 0.7285429141716567,
+  "f1": 0.8111111111111111,
+  "auc_roc": 0.9928645146493893,
+  "tp": 146,
+  "fp": 0,
+  "tn": 1630,
+  "fn": 68,
+  "precision": 1.0,
+  "recall": 0.6822429906542056,
+  "report": {
+    "benign": {
+      "precision": 0.9599528857479388,
+      "recall": 1.0,
+      "f1-score": 0.9795673076923077,
+      "support": 1630.0
+    },
+    "adversarial": {
+      "precision": 1.0,
+      "recall": 0.6822429906542056,
+      "f1-score": 0.8111111111111111,
+      "support": 214.0
+    },
+    "accuracy": 0.9631236442516269,
+    "macro avg": {
+      "precision": 0.9799764428739695,
+      "recall": 0.8411214953271028,
+      "f1-score": 0.8953392094017094,
+      "support": 1844.0
+    },
+    "weighted avg": {
+      "precision": 0.9646004358834818,
+      "recall": 0.9631236442516269,
+      "f1-score": 0.9600176189350539,
+      "support": 1844.0
+    }
+  }
+}
