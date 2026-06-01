@@ -54,12 +54,13 @@ BATCH_SIZE    = 256      # sentence-transformers batch size
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
-
+# loads jsonl
 def load_jsonl(path: str) -> list[dict]:
     with open(path, encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
 
 
+#chunks text by characters, doesn't throw error as slicing function doesn't throw error
 def chunk_text(text: str, chunk_size: int = CHUNK_SIZE,
                overlap: int = CHUNK_OVERLAP) -> list[str]:
     """
@@ -73,7 +74,7 @@ def chunk_text(text: str, chunk_size: int = CHUNK_SIZE,
         start += chunk_size - overlap
     return chunks if chunks else [text]
 
-
+# splits after punctuation and newline on spaces
 def chunk_text_sentences(text: str) -> list[str]:
     """Split text into sentence-level chunks on sentence-ending punctuation or newlines."""
     chunks = re.split(r'(?<=[.?!\n])\s+', text.strip())
@@ -81,6 +82,7 @@ def chunk_text_sentences(text: str) -> list[str]:
     return chunks if chunks else [text]
 
 
+#cos distance 1- similarity
 def cosine_distance(a: np.ndarray, b: np.ndarray) -> float:
     """Cosine distance = 1 - cosine similarity."""
     return 1.0 - float(
@@ -98,12 +100,14 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
     and return an (N_chunks, embed_dim) matrix — the source library.
     chunk_strategy: "char" (character-level, Arize default) or "sentence".
     """
+
+    #loads cached embeddings if available
     if cache_path and os.path.exists(cache_path):
         with open(cache_path, "rb") as f:
             lib = pickle.load(f)
         print(f"  Loaded source library ({lib.shape[0]} chunks) from {cache_path}")
         return lib
-
+    # calls chunking methods
     chunker = chunk_text_sentences if chunk_strategy == "sentence" else chunk_text
     print(f"  Chunking {len(adv_texts)} adversarial prompts (strategy={chunk_strategy})...")
     all_chunks = []
@@ -112,6 +116,7 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
     print(f"  Total chunks: {len(all_chunks)}")
 
     print("  Embedding chunks...")
+    # produces embeddings
     embeddings = embedder.encode(
         all_chunks,
         batch_size=BATCH_SIZE,
@@ -119,8 +124,10 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
         convert_to_numpy=True,
         normalize_embeddings=True,   # unit vectors -> dot product = cosine sim
     )
+    #converts embeddings to float32 (its default)
     lib = embeddings.astype(np.float32)
 
+    #cache data if cache path is available
     if cache_path:
         os.makedirs(os.path.dirname(cache_path) or ".", exist_ok=True)
         with open(cache_path, "wb") as f:
@@ -142,6 +149,7 @@ def score_prompts(records: list[dict], source_lib: np.ndarray,
     Lower score = more similar to known jailbreaks = more suspicious.
     """
     cache = {}
+    #loads the scores if already available
     if cache_path and os.path.exists(cache_path):
         with open(cache_path, encoding="utf-8") as f:
             cache = json.load(f)
@@ -169,6 +177,7 @@ def score_prompts(records: list[dict], source_lib: np.ndarray,
             convert_to_numpy=True,
             normalize_embeddings=True,
         )
+        # caculates the min distance between the nearest embedding and the things to embed
         for idx, text, emb in zip(indices_to_embed, texts_to_embed, new_embeddings):
             # since embeddings are normalized, cosine distance = 1 - dot product
             sims     = source_lib @ emb          # (N_chunks,)
@@ -187,6 +196,8 @@ def score_prompts(records: list[dict], source_lib: np.ndarray,
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
 
+# this function takes the min distance and the max distance between prompts and nearest adv emb to get
+#best f2score and best embedding threshold
 def find_best_threshold(min_distances: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """
@@ -237,6 +248,7 @@ def evaluate(min_distances: np.ndarray, labels: np.ndarray,
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    #args and dir creation
     parser = argparse.ArgumentParser(
         description="Approach 3 — Arize Dataset Embeddings guardrail (local embeddings)")
     parser.add_argument("--train",     default="data/train.jsonl")
