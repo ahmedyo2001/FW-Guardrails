@@ -268,7 +268,6 @@ def main():
     test_ppls  = score_records(test_records,  tokenizer, model, test_cache)
 
     # ── tune threshold on training data ───────────────────────────────────────
-    #TODO: change this to be %20 of training data
     print("\n=== Tuning threshold on training set (maximising F2) ===")
     threshold, train_f2 = find_best_threshold(train_ppls, train_labels)
     print(f"  Best threshold : {threshold:.2f}")

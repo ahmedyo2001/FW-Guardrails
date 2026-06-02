@@ -1,25 +1,26 @@
 {
   "approach": "3_arize_dataset_embeddings",
   "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunk_strategy": "char",
   "chunk_size": 30,
   "chunk_overlap": 5,
-  "n_source_chunks": 7615,
-  "n_adv_sources": 857,
+  "n_source_chunks": 5787,
+  "n_adv_sources": 686,
   "beta": 2,
   "train_size": 7376,
   "test_size": 517,
-  "val_f2": 0.9456398640996603,
+  "val_f2": 0.8407079646017699,
   "threshold_tuned": true,
-  "threshold": 0.45764790699333846,
-  "f2": 0.49062363715656343,
-  "f1": 0.6064690026954178,
+  "threshold": 0.5235177340631734,
+  "f2": 0.7535934291581109,
+  "f1": 0.830316742081448,
   "auc_roc": NaN,
-  "tp": 225,
+  "tp": 367,
   "fp": 0,
   "tn": 0,
-  "fn": 292,
+  "fn": 150,
   "precision": 1.0,
-  "recall": 0.43520309477756286,
+  "recall": 0.7098646034816247,
   "report": {
     "benign": {
       "precision": 0.0,
@@ -29,21 +30,21 @@
     },
     "adversarial": {
       "precision": 1.0,
-      "recall": 0.43520309477756286,
-      "f1-score": 0.6064690026954178,
+      "recall": 0.7098646034816247,
+      "f1-score": 0.830316742081448,
       "support": 517.0
     },
-    "accuracy": 0.43520309477756286,
+    "accuracy": 0.7098646034816247,
     "macro avg": {
       "precision": 0.5,
-      "recall": 0.21760154738878143,
-      "f1-score": 0.3032345013477089,
+      "recall": 0.35493230174081236,
+      "f1-score": 0.415158371040724,
       "support": 517.0
     },
     "weighted avg": {
       "precision": 1.0,
-      "recall": 0.43520309477756286,
-      "f1-score": 0.6064690026954178,
+      "recall": 0.7098646034816247,
+      "f1-score": 0.830316742081448,
       "support": 517.0
     }
   }

@@ -4,23 +4,23 @@
   "chunk_strategy": "sentence",
   "chunk_size": 30,
   "chunk_overlap": 5,
-  "n_source_chunks": 1925,
-  "n_adv_sources": 857,
+  "n_source_chunks": 1471,
+  "n_adv_sources": 686,
   "beta": 2,
   "train_size": 7376,
   "test_size": 350,
-  "val_f2": 1.0,
+  "val_f2": 0.9048723897911833,
   "threshold_tuned": true,
-  "threshold": 0.38491916035363577,
-  "f2": 0.32710280373831774,
-  "f1": 0.4375,
+  "threshold": 0.5131970995174859,
+  "f2": 0.7446808510638298,
+  "f1": 0.8235294117647058,
   "auc_roc": NaN,
-  "tp": 98,
+  "tp": 245,
   "fp": 0,
   "tn": 0,
-  "fn": 252,
+  "fn": 105,
   "precision": 1.0,
-  "recall": 0.28,
+  "recall": 0.7,
   "report": {
     "benign": {
       "precision": 0.0,
@@ -30,21 +30,21 @@
     },
     "adversarial": {
       "precision": 1.0,
-      "recall": 0.28,
-      "f1-score": 0.4375,
+      "recall": 0.7,
+      "f1-score": 0.8235294117647058,
       "support": 350.0
     },
-    "accuracy": 0.28,
+    "accuracy": 0.7,
     "macro avg": {
       "precision": 0.5,
-      "recall": 0.14,
-      "f1-score": 0.21875,
+      "recall": 0.35,
+      "f1-score": 0.4117647058823529,
       "support": 350.0
     },
     "weighted avg": {
       "precision": 1.0,
-      "recall": 0.28,
-      "f1-score": 0.4375,
+      "recall": 0.7,
+      "f1-score": 0.823529411764706,
       "support": 350.0
     }
   }

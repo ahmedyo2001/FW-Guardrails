@@ -280,36 +280,34 @@ def main():
     train_labels = np.array([r["label"] for r in train_records])
     test_labels  = np.array([r["label"] for r in test_records])
 
-    # ── build source library from adversarial training prompts ────────────────
+    # ── train/val split (before library to avoid leakage) ────────────────────
+    indices = np.arange(len(train_records))
+    tr_idx, val_idx = train_test_split(
+        indices, test_size=0.2,
+        stratify=train_labels,
+        random_state=RANDOM_SEED,
+    )
+
+    # ── build source library from train-split adversarial prompts only ────────
     print("\n=== Building source library (adversarial training prompts) ===")
-    adv_train_texts = [r["text"] for r in train_records if r["label"] == 1]
+    adv_train_texts = [train_records[i]["text"] for i in tr_idx if train_records[i]["label"] == 1]
     print(f"  Adversarial training prompts: {len(adv_train_texts)}")
 
     lib_cache  = os.path.join(args.model_dir, f"approach3_source_embeddings_{args.chunk_strategy}.pkl")
     source_lib = build_source_library(adv_train_texts, embedder, lib_cache, args.chunk_strategy)
     print(f"  Source library shape: {source_lib.shape}")
 
-    # ── score training set ────────────────────────────────────────────────────
-    print("\n=== Scoring training set ===")
-    train_cache     = os.path.join(args.cache_dir, "train_scores.json")
-    train_distances = score_prompts(train_records, source_lib, embedder, train_cache)
-
-    # ── tune threshold on validation split of training set ────────────────────
+    # ── tune threshold on val split (scored against library it didn't build) ──
     if args.threshold is not None:
         threshold = args.threshold
         val_f2    = None
         print(f"\n=== Using fixed threshold: {threshold} (Arize default=0.25) ===")
     else:
         print("\n=== Tuning threshold on validation split of training set ===")
-        indices   = np.arange(len(train_records))
-        tr_idx, val_idx = train_test_split(
-            indices, test_size=0.2,
-            stratify=train_labels,
-            random_state=RANDOM_SEED,
-        )
-        threshold, val_f2 = find_best_threshold(
-            train_distances[val_idx], train_labels[val_idx]
-        )
+        val_records = [train_records[i] for i in val_idx]
+        val_cache   = os.path.join(args.cache_dir, "val_scores.json")
+        val_distances = score_prompts(val_records, source_lib, embedder, val_cache)
+        threshold, val_f2 = find_best_threshold(val_distances, train_labels[val_idx])
         print(f"  Best threshold : {threshold:.4f}")
         print(f"  Validation F2  : {val_f2:.4f}")
 
