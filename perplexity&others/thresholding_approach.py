@@ -184,7 +184,7 @@ def score_records(records: list[dict], tokenizer, model,
 
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
-# tunes threshold like embedding code
+# tunes threshold on full data since there is no training or DB here
 def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """
@@ -205,7 +205,7 @@ def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
 
 
 # ── evaluation ────────────────────────────────────────────────────────────────
-#eval like embedding code
+#TODO: check eval part
 def evaluate(ppls: np.ndarray, labels: np.ndarray,
              threshold: float) -> dict:
     preds  = (ppls >= threshold).astype(int)

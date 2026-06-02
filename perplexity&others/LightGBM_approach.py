@@ -77,7 +77,7 @@ def load_llama():
     print(f"  Model loaded. Device map: {model.hf_device_map if hasattr(model, 'hf_device_map') else DEVICE}")
     return tokenizer, model
 
-
+# computes perplexity like other code but without multiplying and dividing
 def compute_ppl_and_length(text: str, tokenizer, model) -> tuple[float, int]:
     """
     Returns (perplexity, token_length).
@@ -104,7 +104,7 @@ def load_jsonl(path: str) -> list[dict]:
     with open(path, encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
 
-
+# checks for cache, if not there computes 
 def extract_features(records: list[dict], tokenizer, model,
                      cache_path: str | None = None) -> np.ndarray:
     """
@@ -112,6 +112,7 @@ def extract_features(records: list[dict], tokenizer, model,
     Cache stores {text: [ppl, token_length]} to avoid rescoring on reruns.
     """
     cache = {}
+    #loads already cached entries
     if cache_path and os.path.exists(cache_path):
         with open(cache_path, encoding="utf-8") as f:
             cache = json.load(f)
@@ -119,6 +120,7 @@ def extract_features(records: list[dict], tokenizer, model,
 
     rows  = []
     n_new = 0
+    #computes new entries
     for i, r in enumerate(records):
         key = r["text"]
         if key in cache:
@@ -131,7 +133,7 @@ def extract_features(records: list[dict], tokenizer, model,
 
         if (i + 1) % 100 == 0:
             print(f"  Scored {i+1}/{len(records)}  (new: {n_new})")
-
+    #adds new entries to cache
     if cache_path and n_new > 0:
         os.makedirs(os.path.dirname(cache_path) or ".", exist_ok=True)
         with open(cache_path, "w", encoding="utf-8") as f:
@@ -142,7 +144,7 @@ def extract_features(records: list[dict], tokenizer, model,
 
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
-
+# finds best accept reject threshold 
 def find_best_threshold(probs: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """Sweep 200 thresholds on validation probs, maximise F-beta."""
@@ -156,7 +158,7 @@ def find_best_threshold(probs: np.ndarray, labels: np.ndarray,
 
 
 # ── evaluation ────────────────────────────────────────────────────────────────
-
+# same eval
 def evaluate(probs: np.ndarray, labels: np.ndarray,
              threshold: float) -> dict:
     preds  = (probs >= threshold).astype(int)
@@ -185,6 +187,7 @@ def evaluate(probs: np.ndarray, labels: np.ndarray,
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    #arguments
     parser = argparse.ArgumentParser(
         description="Approach 2 — LightGBM on PPL + token length (full prompt)")
     parser.add_argument("--train",     default="data/train.jsonl")
