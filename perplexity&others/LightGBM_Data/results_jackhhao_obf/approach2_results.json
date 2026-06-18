@@ -1,0 +1,58 @@
+{
+  "approach": "2_lgbm_ppl_token_length",
+  "ppl_method": "full_prompt_single_pass",
+  "features": [
+    "ppl",
+    "token_length"
+  ],
+  "beta": 2,
+  "train_size": 7376,
+  "test_size": 517,
+  "val_f2": 0.8693304535637149,
+  "lgbm_params": {
+    "objective": "binary",
+    "metric": "binary_logloss",
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "min_child_samples": 10,
+    "verbose": -1,
+    "seed": 42
+  },
+  "threshold": 0.13804020100502515,
+  "f2": 0.18845974872033505,
+  "f1": 0.2709030100334448,
+  "auc_roc": NaN,
+  "tp": 81,
+  "fp": 0,
+  "tn": 0,
+  "fn": 436,
+  "precision": 1.0,
+  "recall": 0.15667311411992263,
+  "report": {
+    "benign": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "adversarial": {
+      "precision": 1.0,
+      "recall": 0.15667311411992263,
+      "f1-score": 0.2709030100334448,
+      "support": 517.0
+    },
+    "accuracy": 0.15667311411992263,
+    "macro avg": {
+      "precision": 0.5,
+      "recall": 0.07833655705996131,
+      "f1-score": 0.1354515050167224,
+      "support": 517.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 0.15667311411992263,
+      "f1-score": 0.2709030100334448,
+      "support": 517.0
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "approach": "3_arize_dataset_embeddings",
+  "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunk_strategy": "sentence",
+  "chunk_size": 30,
+  "chunk_overlap": 5,
+  "n_source_chunks": 1471,
+  "n_adv_sources": 686,
+  "beta": 2,
+  "train_size": 7376,
+  "test_size": 517,
+  "val_f2": 0.9048723897911833,
+  "threshold_tuned": true,
+  "threshold": 0.5131970995174859,
+  "f2": 0.0,
+  "f1": 0.0,
+  "auc_roc": NaN,
+  "tp": 0,
+  "fp": 0,
+  "tn": 0,
+  "fn": 517,
+  "precision": 0.0,
+  "recall": 0.0,
+  "report": {
+    "benign": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "adversarial": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 517.0
+    },
+    "accuracy": 0.0,
+    "macro avg": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 517.0
+    },
+    "weighted avg": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 517.0
+    }
+  }
+}
