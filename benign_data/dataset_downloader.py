@@ -49,49 +49,6 @@ OR_BENCH_CATEGORIES = [
 ]
 
 
-def download_or_bench(output_file: str, n_per_category: int = 50) -> None:
-    """
-    Download OR-Bench and sample n prompts per category.
-
-    Args:
-        output_file: Path to output JSON file
-        n_per_category: Number of prompts to sample per category
-    """
-    print("Downloading OR-Bench...")
-    dataset = load_dataset("bench-llm/or-bench", "or-bench-hard-1k", split="train", token=os.environ.get("HF_TOKEN"))
-    print(f"Total OR-Bench prompts: {len(dataset)}")
-
-    results = []
-
-    for category in OR_BENCH_CATEGORIES:
-        # Filter by category
-        category_subset = dataset.filter(lambda x: x["category"] == category)
-
-        available = len(category_subset)
-        sample_size = min(n_per_category, available)
-
-        if available == 0:
-            print(f"  [{category}] No prompts found — skipping")
-            continue
-
-        # Sample n prompts
-        sampled = category_subset.shuffle(seed=42).select(range(sample_size))
-
-        for idx, item in enumerate(sampled):
-            results.append({
-                "prompt_id": f"orbench_{category}_{idx+1:03d}",
-                "prompt": item["prompt"],
-                "category": category,
-                "dataset": "or-bench",
-                "label": "benign",
-            })
-
-        print(f"  [{category}] Sampled {sample_size}/{available} prompts")
-
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-
-    print(f"\nOK Saved {len(results)} OR-Bench prompts to {output_file}\n")
 
 
 def download_xstest(output_file: str) -> None:
@@ -108,13 +65,14 @@ def download_xstest(output_file: str) -> None:
     results = []
 
     for idx, item in enumerate(dataset):
-        results.append({
-            "prompt_id": f"xstest_{idx+1:04d}",
-            "prompt": item["prompt"],
-            "category": item.get("type", "unknown"),
-            "dataset": "xstest",
-            "label": "benign",
-        })
+        if (item["label"]=="safe"):
+            results.append({
+                "prompt_id": f"xstest_{idx+1:04d}",
+                "prompt": item["prompt"],
+                "category": item.get("type", "unknown"),
+                "dataset": "xstest",
+                "label": "benign",
+            })
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
@@ -156,11 +114,9 @@ def main():
     or_bench_path = output_dir / args.or_bench_output
     xstest_path = output_dir / args.xstest_output
 
-    download_or_bench(str(or_bench_path), n_per_category=args.n_per_category)
     download_xstest(str(xstest_path))
 
     print("Done.")
-    print(f"  OR-Bench -> {or_bench_path}")
     print(f"  XSTest   -> {xstest_path}")
 
 
