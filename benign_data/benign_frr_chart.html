@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guardrail False Rejection Rates — Benign Prompts</title>
+<style>
+:root {
+  --surface-1: #fcfcfb;
+  --surface-2: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --surface-2: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--surface-2);
+  color: var(--text-primary);
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+}
+
+.page { max-width: 780px; margin: 0 auto; }
+
+h1 {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.toggle {
+  display: flex;
+  gap: 2px;
+  background: var(--grid);
+  border-radius: 6px;
+  padding: 2px;
+}
+.toggle button {
+  border: none;
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+.toggle button.active {
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* Heatmap */
+table.heatmap {
+  border-collapse: separate;
+  border-spacing: 3px;
+  min-width: 560px;
+  width: 100%;
+}
+
+table.heatmap th.row-spacer { min-width: 195px; }
+
+table.heatmap th.col-head {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 0 4px 10px;
+}
+table.heatmap th.col-head .col-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+table.heatmap td.row-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding-right: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+table.heatmap td.cell { padding: 0; vertical-align: middle; }
+
+.cell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  border-radius: 5px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  transition: outline-color 0.1s;
+  user-select: none;
+}
+.cell-inner:hover { outline-color: var(--text-primary); }
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.legend-track {
+  width: 160px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: linear-gradient(to right,
+    #cde2fb 0%, #9ec5f4 17%, #86b6ef 29%,
+    #6da7ec 43%, #3987e5 57%, #256abf 71%,
+    #184f95 86%, #0d366b 100%);
+}
+.legend-note { margin-left: 6px; }
+
+/* Summary table */
+table.summary {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+table.summary thead th {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0 10px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--baseline);
+}
+table.summary thead th:first-child { text-align: left; padding-left: 0; }
+table.summary tbody tr:hover td { background: var(--surface-2); }
+table.summary tbody td {
+  padding: 7px 10px;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  border-bottom: 1px solid var(--grid);
+}
+table.summary tbody td:first-child { text-align: left; font-weight: 500; padding-left: 0; }
+table.summary tbody tr:last-child td { border-bottom: none; }
+
+.tbl-best  { color: #006300; font-weight: 700; }
+.tbl-worst { color: #c00;    font-weight: 700; }
+@media (prefers-color-scheme: dark) {
+  .tbl-best  { color: #0ca30c; }
+  .tbl-worst { color: #e66767; }
+}
+
+.note {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+#tooltip {
+  position: fixed;
+  background: var(--text-primary);
+  color: var(--surface-1);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  padding: 8px 12px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#tooltip.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>False Rejection Rates on Benign Prompts</h1>
+  <p class="subtitle">How often each guardrail model incorrectly blocks a benign prompt. Lower = less over-blocking. Hover cells for exact counts.</p>
+
+  <div class="card">
+    <div class="card-title">False Rejection Rate (%)</div>
+    <table class="heatmap" id="heatmap-tbl"></table>
+    <div class="legend">
+      <span>0%</span>
+      <div class="legend-track"></div>
+      <span>100%</span>
+      <span class="legend-note">Darker = more over-blocking (worse)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Per-Dataset Summary</div>
+      <div class="toggle" id="tgl">
+        <button class="active" data-m="frr">False Rejection Rate</button>
+        <button data-m="acc">Acceptance Rate</button>
+      </div>
+    </div>
+    <div id="tbl-wrap"></div>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+const DS = [
+  { key: 'dolly',       label: 'Dolly',      sub: 'clearly benign · 400' },
+  { key: 'falsereject', label: 'FalseReject', sub: 'borderline · 606' },
+  { key: 'xstest',      label: 'XSTest',      sub: 'borderline · 250' },
+];
+
+const MODELS = [
+  { key: 'llama1b',   label: 'LlamaGuard-3 1B' },
+  { key: 'llama8b',   label: 'LlamaGuard-3 8B' },
+  { key: 'granite8b', label: 'Granite-Guardian 3.3 8B' },
+  { key: 'granite3b', label: 'Granite-Guardian 3.2 3B' },
+  { key: 'shield',    label: 'ShieldGemma 9B' },
+  { key: 'qwen',      label: 'Qwen3Guard 8B' },
+];
+
+const V = {
+  dolly: {
+    llama1b:   { frr:  1.0, acc: 99.0, n_rej:  4, n_acc: 396, total: 400 },
+    llama8b:   { frr:  0.2, acc: 99.8, n_rej:  1, n_acc: 399, total: 400 },
+    granite8b: { frr:  0.2, acc: 99.8, n_rej:  1, n_acc: 399, total: 400 },
+    granite3b: { frr:  1.2, acc: 98.8, n_rej:  5, n_acc: 395, total: 400 },
+    shield:    { frr:  0.0, acc:100.0, n_rej:  0, n_acc: 400, total: 400 },
+    qwen:      { frr:  0.2, acc: 99.8, n_rej:  1, n_acc: 399, total: 400 },
+  },
+  falsereject: {
+    llama1b:   { frr: 38.6, acc: 61.4, n_rej: 234, n_acc: 372, total: 606 },
+    llama8b:   { frr: 24.1, acc: 75.9, n_rej: 146, n_acc: 460, total: 606 },
+    granite8b: { frr: 64.5, acc: 35.5, n_rej: 391, n_acc: 215, total: 606 },
+    granite3b: { frr: 69.8, acc: 30.2, n_rej: 423, n_acc: 183, total: 606 },
+    shield:    { frr:  8.6, acc: 91.4, n_rej:  52, n_acc: 554, total: 606 },
+    qwen:      { frr: 21.6, acc: 78.4, n_rej: 131, n_acc: 475, total: 606 },
+  },
+  xstest: {
+    llama1b:   { frr:  7.2, acc: 92.8, n_rej:  18, n_acc: 232, total: 250 },
+    llama8b:   { frr:  4.4, acc: 95.6, n_rej:  11, n_acc: 239, total: 250 },
+    granite8b: { frr: 24.0, acc: 76.0, n_rej:  60, n_acc: 190, total: 250 },
+    granite3b: { frr: 33.2, acc: 66.8, n_rej:  83, n_acc: 167, total: 250 },
+    shield:    { frr:  7.6, acc: 92.4, n_rej:  19, n_acc: 231, total: 250 },
+    qwen:      { frr:  1.2, acc: 98.8, n_rej:   3, n_acc: 247, total: 250 },
+  },
+};
+
+const RAMP = [
+  { t: 0,    r: 0xcd, g: 0xe2, b: 0xfb },
+  { t: 0.17, r: 0x9e, g: 0xc5, b: 0xf4 },
+  { t: 0.29, r: 0x86, g: 0xb6, b: 0xef },
+  { t: 0.43, r: 0x6d, g: 0xa7, b: 0xec },
+  { t: 0.57, r: 0x39, g: 0x87, b: 0xe5 },
+  { t: 0.71, r: 0x25, g: 0x6a, b: 0xbf },
+  { t: 0.86, r: 0x18, g: 0x4f, b: 0x95 },
+  { t: 1.0,  r: 0x0d, g: 0x36, b: 0x6b },
+];
+
+function frrToFill(frr) {
+  const t = Math.max(0, Math.min(100, frr)) / 100;
+  let lo = RAMP[0], hi = RAMP[RAMP.length - 1];
+  for (let i = 0; i < RAMP.length - 1; i++) {
+    if (t >= RAMP[i].t && t <= RAMP[i + 1].t) { lo = RAMP[i]; hi = RAMP[i + 1]; break; }
+  }
+  const span = hi.t - lo.t || 1;
+  const f = (t - lo.t) / span;
+  return `rgb(${Math.round(lo.r + f*(hi.r-lo.r))},${Math.round(lo.g + f*(hi.g-lo.g))},${Math.round(lo.b + f*(hi.b-lo.b))})`;
+}
+
+function cellText(frr) { return frr >= 40 ? '#ffffff' : '#0b0b0b'; }
+
+function buildHeatmap() {
+  const tbl = document.getElementById('heatmap-tbl');
+  const thead = document.createElement('thead');
+  const hrow = document.createElement('tr');
+  const sp = document.createElement('th'); sp.className = 'row-spacer'; hrow.appendChild(sp);
+  DS.forEach(ds => {
+    const th = document.createElement('th');
+    th.className = 'col-head';
+    th.innerHTML = `${ds.label}<span class="col-sub">${ds.sub}</span>`;
+    hrow.appendChild(th);
+  });
+  thead.appendChild(hrow); tbl.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  MODELS.forEach(m => {
+    const tr = document.createElement('tr');
+    const lbl = document.createElement('td'); lbl.className = 'row-label'; lbl.textContent = m.label;
+    tr.appendChild(lbl);
+    DS.forEach(ds => {
+      const v = V[ds.key][m.key];
+      const td = document.createElement('td'); td.className = 'cell';
+      const inner = document.createElement('div'); inner.className = 'cell-inner';
+      inner.style.background = frrToFill(v.frr);
+      inner.style.color = cellText(v.frr);
+      inner.textContent = v.frr.toFixed(1) + '%';
+      inner.addEventListener('mouseenter', () => {
+        const tip = document.getElementById('tooltip');
+        tip.innerHTML = `<strong>${m.label}</strong> · ${ds.label}<br>FRR: <strong>${v.frr.toFixed(1)}%</strong> (${v.n_rej}/${v.total} flagged)<br>Acceptance: <strong>${v.acc.toFixed(1)}%</strong> (${v.n_acc}/${v.total} passed)`;
+        tip.classList.add('show');
+      });
+      inner.addEventListener('mousemove', e => {
+        const tip = document.getElementById('tooltip');
+        tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY - 10) + 'px';
+      });
+      inner.addEventListener('mouseleave', () => document.getElementById('tooltip').classList.remove('show'));
+      td.appendChild(inner); tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);
+}
+
+function buildTable(mode) {
+  const wrap = document.getElementById('tbl-wrap'); wrap.innerHTML = '';
+  const tbl = document.createElement('table'); tbl.className = 'summary';
+  const thead = document.createElement('thead');
+  const hrow = document.createElement('tr');
+  ['Model', ...DS.map(d => d.label)].forEach(h => {
+    const th = document.createElement('th'); th.textContent = h; hrow.appendChild(th);
+  });
+  thead.appendChild(hrow); tbl.appendChild(thead);
+
+  // best/worst per column
+  const best = {}, worst = {};
+  DS.forEach(ds => {
+    let bVal = mode === 'frr' ? Infinity : -Infinity;
+    let wVal = mode === 'frr' ? -Infinity : Infinity;
+    MODELS.forEach(m => {
+      const val = mode === 'frr' ? V[ds.key][m.key].frr : V[ds.key][m.key].acc;
+      if (mode === 'frr') {
+        if (val < bVal) { bVal = val; best[ds.key] = m.key; }
+        if (val > wVal) { wVal = val; worst[ds.key] = m.key; }
+      } else {
+        if (val > bVal) { bVal = val; best[ds.key] = m.key; }
+        if (val < wVal) { wVal = val; worst[ds.key] = m.key; }
+      }
+    });
+  });
+
+  const tbody = document.createElement('tbody');
+  MODELS.forEach(m => {
+    const tr = document.createElement('tr');
+    const lbl = document.createElement('td'); lbl.textContent = m.label; tr.appendChild(lbl);
+    DS.forEach(ds => {
+      const v = V[ds.key][m.key];
+      const val = mode === 'frr' ? v.frr : v.acc;
+      const td = document.createElement('td'); td.textContent = val.toFixed(1) + '%';
+      if (best[ds.key] === m.key)  td.className = 'tbl-best';
+      if (worst[ds.key] === m.key) td.className = 'tbl-worst';
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);
+
+  const note = document.createElement('p'); note.className = 'note';
+  note.textContent = mode === 'frr'
+    ? 'False rejection rate: % of benign prompts incorrectly flagged. Lower is better. Green = best per dataset, red = worst.'
+    : 'Acceptance rate: % of benign prompts correctly passed through. Higher is better. Green = best per dataset, red = worst.';
+  wrap.appendChild(tbl); wrap.appendChild(note);
+}
+
+document.getElementById('tgl').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-m]'); if (!btn) return;
+  document.querySelectorAll('#tgl button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); buildTable(btn.dataset.m);
+});
+
+buildHeatmap();
+buildTable('frr');
+</script>
+</body>
+</html>

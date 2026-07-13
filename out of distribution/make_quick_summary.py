@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
-Build benign_quick_summary.json aggregating all 4 benign result folders.
+Build ood_quick_summary.json for the out-of-distribution results folder.
 
-Reads all benign_prompt_detail_<model>_<ts>.json files in each folder and
-computes per-model acceptance rate (= 1 - false rejection rate).
-
-Output: benign_data/benign_quick_summary.json
+Reads all ood_prompt_detail_<model>_<ts>.json files and computes per-model
+detection rate (correctly flagged jailbreaks) and miss rate.
 
 Usage:
     python make_quick_summary.py
@@ -15,12 +13,8 @@ import json
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-RESULT_FOLDERS = [
-    "dolly_results",
-    "falsereject_results",
-    "xstest_results",
-]
-OUTPUT_FILE = SCRIPT_DIR / "benign_quick_summary.json"
+RESULTS_FOLDER = SCRIPT_DIR / "results"
+OUTPUT_FILE = SCRIPT_DIR / "ood_quick_summary.json"
 
 MODEL_ORDER = [
     "meta-llama/Llama-Guard-3-1B",
@@ -36,10 +30,10 @@ def pct(n: int, total: int) -> str:
     return f"{n / total * 100:.1f}%"
 
 
-def summarise_folder(folder: Path) -> dict:
-    detail_files = sorted(folder.glob("benign_prompt_detail_*.json"))
+def main():
+    detail_files = sorted(RESULTS_FOLDER.glob("ood_prompt_detail_*.json"))
     if not detail_files:
-        raise FileNotFoundError(f"No detail files found in {folder}")
+        raise FileNotFoundError(f"No ood_prompt_detail_*.json files in {RESULTS_FOLDER}")
 
     guardrails: dict[str, dict] = {}
     total_prompts: int | None = None
@@ -60,43 +54,34 @@ def summarise_folder(folder: Path) -> dict:
         elif total_prompts != n:
             print(f"  WARNING: {fpath.name} has {n} records, expected {total_prompts}")
 
-        rejected = sum(1 for r in records if r["flagged_original"])
-        accepted = n - rejected
+        detected = sum(1 for r in records if r["flagged_original"])
+        missed   = n - detected
 
         guardrails[model_id] = {
-            "total":           n,
-            "accepted":        {"count": accepted,  "pct": pct(accepted, n)},
-            "rejected":        {"count": rejected,  "pct": pct(rejected, n)},
-            "acceptance_rate": pct(accepted, n),
-            "false_rejection_rate": pct(rejected, n),
+            "total":          n,
+            "detected":       {"count": detected, "pct": pct(detected, n)},
+            "missed":         {"count": missed,   "pct": pct(missed, n)},
+            "detection_rate": pct(detected, n),
+            "miss_rate":      pct(missed, n),
         }
 
         print(
             f"  {model_id}: {n} prompts | "
-            f"accepted={accepted} ({pct(accepted, n)}) | "
-            f"false-rejected={rejected} ({pct(rejected, n)})"
+            f"detected={detected} ({pct(detected, n)}) | "
+            f"missed={missed} ({pct(missed, n)})"
         )
 
     ordered = {m: guardrails[m] for m in MODEL_ORDER if m in guardrails}
     ordered.update({m: v for m, v in guardrails.items() if m not in ordered})
 
-    return {
-        "dataset":       folder.name,
+    summary = {
+        "dataset":       "jailbreak_ood",
         "total_prompts": total_prompts,
         "guardrails":    ordered,
     }
 
-
-def main():
-    all_datasets = []
-
-    for folder_name in RESULT_FOLDERS:
-        folder = SCRIPT_DIR / folder_name
-        print(f"\n=== {folder_name} ===")
-        all_datasets.append(summarise_folder(folder))
-
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(all_datasets, f, indent=2, ensure_ascii=False)
+        json.dump(summary, f, indent=2, ensure_ascii=False)
 
     print(f"\nSaved -> {OUTPUT_FILE.relative_to(SCRIPT_DIR)}")
 

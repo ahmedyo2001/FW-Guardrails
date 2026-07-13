@@ -168,170 +168,86 @@
     }
   },
   {
-    "dataset": "or_bench_results",
-    "total_prompts": 491,
-    "guardrails": {
-      "meta-llama/Llama-Guard-3-1B": {
-        "total": 491,
-        "accepted": {
-          "count": 305,
-          "pct": "62.1%"
-        },
-        "rejected": {
-          "count": 186,
-          "pct": "37.9%"
-        },
-        "acceptance_rate": "62.1%",
-        "false_rejection_rate": "37.9%"
-      },
-      "meta-llama/Llama-Guard-3-8B": {
-        "total": 491,
-        "accepted": {
-          "count": 421,
-          "pct": "85.7%"
-        },
-        "rejected": {
-          "count": 70,
-          "pct": "14.3%"
-        },
-        "acceptance_rate": "85.7%",
-        "false_rejection_rate": "14.3%"
-      },
-      "ibm-granite/granite-guardian-3.3-8b": {
-        "total": 491,
-        "accepted": {
-          "count": 67,
-          "pct": "13.6%"
-        },
-        "rejected": {
-          "count": 424,
-          "pct": "86.4%"
-        },
-        "acceptance_rate": "13.6%",
-        "false_rejection_rate": "86.4%"
-      },
-      "ibm-granite/granite-guardian-3.2-3b-a800m": {
-        "total": 491,
-        "accepted": {
-          "count": 77,
-          "pct": "15.7%"
-        },
-        "rejected": {
-          "count": 414,
-          "pct": "84.3%"
-        },
-        "acceptance_rate": "15.7%",
-        "false_rejection_rate": "84.3%"
-      },
-      "google/shieldgemma-9b": {
-        "total": 491,
-        "accepted": {
-          "count": 371,
-          "pct": "75.6%"
-        },
-        "rejected": {
-          "count": 120,
-          "pct": "24.4%"
-        },
-        "acceptance_rate": "75.6%",
-        "false_rejection_rate": "24.4%"
-      },
-      "Qwen/Qwen3Guard-Gen-8B": {
-        "total": 491,
-        "accepted": {
-          "count": 301,
-          "pct": "61.3%"
-        },
-        "rejected": {
-          "count": 190,
-          "pct": "38.7%"
-        },
-        "acceptance_rate": "61.3%",
-        "false_rejection_rate": "38.7%"
-      }
-    }
-  },
-  {
     "dataset": "xstest_results",
-    "total_prompts": 450,
+    "total_prompts": 250,
     "guardrails": {
       "meta-llama/Llama-Guard-3-1B": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 281,
-          "pct": "62.4%"
+          "count": 232,
+          "pct": "92.8%"
         },
         "rejected": {
-          "count": 169,
-          "pct": "37.6%"
+          "count": 18,
+          "pct": "7.2%"
         },
-        "acceptance_rate": "62.4%",
-        "false_rejection_rate": "37.6%"
+        "acceptance_rate": "92.8%",
+        "false_rejection_rate": "7.2%"
       },
       "meta-llama/Llama-Guard-3-8B": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 275,
-          "pct": "61.1%"
+          "count": 239,
+          "pct": "95.6%"
         },
         "rejected": {
-          "count": 175,
-          "pct": "38.9%"
+          "count": 11,
+          "pct": "4.4%"
         },
-        "acceptance_rate": "61.1%",
-        "false_rejection_rate": "38.9%"
+        "acceptance_rate": "95.6%",
+        "false_rejection_rate": "4.4%"
       },
       "ibm-granite/granite-guardian-3.3-8b": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 194,
-          "pct": "43.1%"
+          "count": 190,
+          "pct": "76.0%"
         },
         "rejected": {
-          "count": 256,
-          "pct": "56.9%"
+          "count": 60,
+          "pct": "24.0%"
         },
-        "acceptance_rate": "43.1%",
-        "false_rejection_rate": "56.9%"
+        "acceptance_rate": "76.0%",
+        "false_rejection_rate": "24.0%"
       },
       "ibm-granite/granite-guardian-3.2-3b-a800m": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 169,
-          "pct": "37.6%"
+          "count": 167,
+          "pct": "66.8%"
         },
         "rejected": {
-          "count": 281,
-          "pct": "62.4%"
+          "count": 83,
+          "pct": "33.2%"
         },
-        "acceptance_rate": "37.6%",
-        "false_rejection_rate": "62.4%"
+        "acceptance_rate": "66.8%",
+        "false_rejection_rate": "33.2%"
       },
       "google/shieldgemma-9b": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 269,
-          "pct": "59.8%"
+          "count": 231,
+          "pct": "92.4%"
         },
         "rejected": {
-          "count": 181,
-          "pct": "40.2%"
+          "count": 19,
+          "pct": "7.6%"
         },
-        "acceptance_rate": "59.8%",
-        "false_rejection_rate": "40.2%"
+        "acceptance_rate": "92.4%",
+        "false_rejection_rate": "7.6%"
       },
       "Qwen/Qwen3Guard-Gen-8B": {
-        "total": 450,
+        "total": 250,
         "accepted": {
-          "count": 284,
-          "pct": "63.1%"
+          "count": 247,
+          "pct": "98.8%"
         },
         "rejected": {
-          "count": 166,
-          "pct": "36.9%"
+          "count": 3,
+          "pct": "1.2%"
         },
-        "acceptance_rate": "63.1%",
-        "false_rejection_rate": "36.9%"
+        "acceptance_rate": "98.8%",
+        "false_rejection_rate": "1.2%"
       }
     }
   }
