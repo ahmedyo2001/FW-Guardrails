@@ -82,6 +82,11 @@ def chunk_text_sentences(text: str) -> list[str]:
     return chunks if chunks else [text]
 
 
+def chunk_text_full(text: str) -> list[str]:
+    """No chunking — the entire prompt is one chunk."""
+    return [text.strip()] if text.strip() else [text]
+
+
 #cos distance 1- similarity
 def cosine_distance(a: np.ndarray, b: np.ndarray) -> float:
     """Cosine distance = 1 - cosine similarity."""
@@ -108,7 +113,12 @@ def build_source_library(adv_texts: list[str], embedder: SentenceTransformer,
         print(f"  Loaded source library ({lib.shape[0]} chunks) from {cache_path}")
         return lib
     # calls chunking methods
-    chunker = chunk_text_sentences if chunk_strategy == "sentence" else chunk_text
+    if chunk_strategy == "sentence":
+        chunker = chunk_text_sentences
+    elif chunk_strategy == "full":
+        chunker = chunk_text_full
+    else:
+        chunker = chunk_text
     print(f"  Chunking {len(adv_texts)} adversarial prompts (strategy={chunk_strategy})...")
     all_chunks = []
     for text in adv_texts:
@@ -259,8 +269,8 @@ def main():
     parser.add_argument("--threshold", type=float, default=None,
                         help="Fix cosine distance threshold instead of tuning. "
                              "Arize default is 0.25.")
-    parser.add_argument("--chunk-strategy", choices=["char", "sentence"], default="char",
-                        help="Chunking strategy for the source library (default: char).")
+    parser.add_argument("--chunk-strategy", choices=["char", "sentence", "full"], default="char",
+                        help="Chunking strategy: char (sliding window), sentence (1 per sentence), full (whole prompt). Default: char.")
     parser.add_argument("--chunk-size", type=int, default=None,
                         help="Character chunk size (char strategy only). Default: 30.")
     parser.add_argument("--chunk-overlap", type=int, default=None,

@@ -1,10 +1,11 @@
 """
-Runs all 4 steps sequentially and prints a timing summary.
+Runs all 5 steps sequentially and prints a timing summary.
 
   Step 1 — Approach 1: Windowed PPL Threshold
   Step 2 — Approach 2: LightGBM on PPL + Length
-  Step 3 — Approach 3: Embedding Distance (char chunks, 50 chars)
+  Step 3 — Approach 3: Embedding Distance (char chunks, 30 chars)
   Step 4 — Approach 3: Embedding Distance (sentence chunks)
+  Step 5 — Approach 3: Embedding Distance (full prompt)
 
 Shared args (apply to all steps):
   --train           path to train JSONL         (default: v2/data/train.jsonl)
@@ -72,7 +73,7 @@ def run_step(step: int, name: str, script: str, extra_argv: list[str]) -> tuple[
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run all 4 steps (approaches 1, 2, 3×char, 3×sentence)",
+        description="Run all 5 steps (approaches 1, 2, 3×char, 3×sentence, 3×full)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -92,8 +93,8 @@ def main():
     # ── approach 3 (shared between step 3 and 4) ─────────────────────────────
     parser.add_argument("--a3-cache-dir",     default=None, metavar="DIR")
     parser.add_argument("--a3-threshold",     default=None, type=float, metavar="F")
-    parser.add_argument("--a3-chunk-size",    default=50,   type=int,   metavar="N",
-                        help="Char chunk size for step 3 (default: 50)")
+    parser.add_argument("--a3-chunk-size",    default=30,   type=int,   metavar="N",
+                        help="Char chunk size for step 3 (default: 30)")
     parser.add_argument("--a3-chunk-overlap", default=None, type=int,   metavar="N",
                         help="Char chunk overlap for step 3 (default: 5)")
 
@@ -148,6 +149,17 @@ def main():
                 ("--model-dir",      args.model_dir),
                 ("--threshold",      args.a3_threshold),
                 ("--chunk-strategy", "sentence"),
+            ]),
+        ),
+        (
+            5,
+            "Approach 3 — Embedding Distance (full prompt)",
+            "embeddings_gr.py",
+            shared + build_argv([
+                ("--cache-dir",      args.a3_cache_dir),
+                ("--model-dir",      args.model_dir),
+                ("--threshold",      args.a3_threshold),
+                ("--chunk-strategy", "full"),
             ]),
         ),
     ]
