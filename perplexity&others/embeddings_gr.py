@@ -251,8 +251,8 @@ def main():
     #args and dir creation
     parser = argparse.ArgumentParser(
         description="Approach 3 — Arize Dataset Embeddings guardrail (local embeddings)")
-    parser.add_argument("--train",     default="data/train.jsonl")
-    parser.add_argument("--test",      default="data/test.jsonl")
+    parser.add_argument("--train",     default="v2/data/train.jsonl")
+    parser.add_argument("--test",      default="v2/data/test.jsonl")
     parser.add_argument("--cache-dir", default="embed_cache_approach3")
     parser.add_argument("--out-dir",   default="results")
     parser.add_argument("--model-dir", default="models")
@@ -261,7 +261,15 @@ def main():
                              "Arize default is 0.25.")
     parser.add_argument("--chunk-strategy", choices=["char", "sentence"], default="char",
                         help="Chunking strategy for the source library (default: char).")
+    parser.add_argument("--chunk-size", type=int, default=None,
+                        help="Character chunk size (char strategy only). Default: 30.")
+    parser.add_argument("--chunk-overlap", type=int, default=None,
+                        help="Character chunk overlap (char strategy only). Default: 5.")
     args = parser.parse_args()
+
+    global CHUNK_SIZE, CHUNK_OVERLAP
+    if args.chunk_size    is not None: CHUNK_SIZE    = args.chunk_size
+    if args.chunk_overlap is not None: CHUNK_OVERLAP = args.chunk_overlap
 
     os.makedirs(args.out_dir,   exist_ok=True)
     os.makedirs(args.model_dir, exist_ok=True)
@@ -293,7 +301,8 @@ def main():
     adv_train_texts = [train_records[i]["text"] for i in tr_idx if train_records[i]["label"] == 1]
     print(f"  Adversarial training prompts: {len(adv_train_texts)}")
 
-    lib_cache  = os.path.join(args.model_dir, f"approach3_source_embeddings_{args.chunk_strategy}.pkl")
+    chunk_tag  = f"{args.chunk_strategy}" if args.chunk_strategy == "sentence" else f"char{CHUNK_SIZE}"
+    lib_cache  = os.path.join(args.model_dir, f"approach3_source_embeddings_{chunk_tag}.pkl")
     source_lib = build_source_library(adv_train_texts, embedder, lib_cache, args.chunk_strategy)
     print(f"  Source library shape: {source_lib.shape}")
 

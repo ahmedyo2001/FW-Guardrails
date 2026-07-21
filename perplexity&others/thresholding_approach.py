@@ -236,8 +236,8 @@ def evaluate(ppls: np.ndarray, labels: np.ndarray,
 def main():
     parser = argparse.ArgumentParser(
         description="Approach 1 — Windowed PPL threshold guardrail (LLaMA 3.2 1B)")
-    parser.add_argument("--train",     default="data/train.jsonl")
-    parser.add_argument("--test",      default="data/test.jsonl")
+    parser.add_argument("--train",     default="v2/data/train.jsonl")
+    parser.add_argument("--test",      default="v2/data/test.jsonl")
     parser.add_argument("--cache-dir", default="ppl_cache",
                         help="Directory to cache PPL scores (speeds up reruns)")
     parser.add_argument("--out-dir",   default="results")
