@@ -8,8 +8,8 @@ Runs all 5 steps sequentially and prints a timing summary.
   Step 5 — Approach 3: Embedding Distance (full prompt)
 
 Shared args (apply to all steps):
-  --train           path to train JSONL         (default: v2/data/train.jsonl)
-  --test            path to test JSONL          (default: v2/data/test.jsonl)
+  --train           path to train JSONL         (default: v2/training_data/train.jsonl)
+  --test            path to test JSONL          (default: v2/training_data/test.jsonl)
   --out-dir         results output directory    (default: results)
   --model-dir       saved models directory      (default: models)
 

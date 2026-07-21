@@ -261,8 +261,8 @@ def main():
     #args and dir creation
     parser = argparse.ArgumentParser(
         description="Approach 3 — Arize Dataset Embeddings guardrail (local embeddings)")
-    parser.add_argument("--train",     default="v2/data/train.jsonl")
-    parser.add_argument("--test",      default="v2/data/test.jsonl")
+    parser.add_argument("--train",     default="v2/training_data/train.jsonl")
+    parser.add_argument("--test",      default="v2/training_data/test.jsonl")
     parser.add_argument("--cache-dir", default="embed_cache_approach3")
     parser.add_argument("--out-dir",   default="results")
     parser.add_argument("--model-dir", default="models")
@@ -311,7 +311,7 @@ def main():
     adv_train_texts = [train_records[i]["text"] for i in tr_idx if train_records[i]["label"] == 1]
     print(f"  Adversarial training prompts: {len(adv_train_texts)}")
 
-    chunk_tag  = f"{args.chunk_strategy}" if args.chunk_strategy == "sentence" else f"char{CHUNK_SIZE}"
+    chunk_tag  = f"char{CHUNK_SIZE}" if args.chunk_strategy == "char" else args.chunk_strategy
     lib_cache  = os.path.join(args.model_dir, f"approach3_source_embeddings_{chunk_tag}.pkl")
     source_lib = build_source_library(adv_train_texts, embedder, lib_cache, args.chunk_strategy)
     print(f"  Source library shape: {source_lib.shape}")
@@ -373,12 +373,12 @@ def main():
         **metrics,
     }
 
-    results_path = os.path.join(args.out_dir, "approach3_results.json")
+    results_path = os.path.join(args.out_dir, f"approach3_results_{args.chunk_strategy}.json")
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n  Results saved -> {results_path}")
 
-    preds_path = os.path.join(args.out_dir, "approach3_predictions.jsonl")
+    preds_path = os.path.join(args.out_dir, f"approach3_predictions_{args.chunk_strategy}.jsonl")
     with open(preds_path, "w", encoding="utf-8") as f:
         for r, dist, pred in zip(
             test_records,

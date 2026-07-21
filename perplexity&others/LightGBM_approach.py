@@ -190,8 +190,8 @@ def main():
     #arguments
     parser = argparse.ArgumentParser(
         description="Approach 2 — LightGBM on PPL + token length (full prompt)")
-    parser.add_argument("--train",     default="v2/data/train.jsonl")
-    parser.add_argument("--test",      default="v2/data/test.jsonl")
+    parser.add_argument("--train",     default="v2/training_data/train.jsonl")
+    parser.add_argument("--test",      default="v2/training_data/test.jsonl")
     parser.add_argument("--cache-dir", default="ppl_cache_approach2",
                         help="Cache directory for PPL scores (independent of approach 1)")
     parser.add_argument("--out-dir",   default="results")
