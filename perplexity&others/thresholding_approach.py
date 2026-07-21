@@ -53,7 +53,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 MODEL_NAME  = "meta-llama/Llama-3.2-1B"
 MAX_TOKENS  = 2048          # LLaMA 3.2 supports up to 128k, but 2048 is enough
 STRIDE      = 1024          # half-window stride
-BETA        = 2            # F-beta score β — penalises false negatives more
+BETA        = 1            # F1 score — equal weight to precision and recall
 RANDOM_SEED = 42
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 

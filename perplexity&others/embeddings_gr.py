@@ -46,7 +46,7 @@ from sklearn.model_selection import train_test_split
 
 # ── config ────────────────────────────────────────────────────────────────────
 EMBED_MODEL   = "sentence-transformers/all-MiniLM-L6-v2"  # free, local, 80MB
-BETA          = 2
+BETA          = 1
 RANDOM_SEED   = 42
 CHUNK_SIZE    = 30       # characters per chunk (Arize default)
 CHUNK_OVERLAP = 5        # overlap between chunks (Arize default)

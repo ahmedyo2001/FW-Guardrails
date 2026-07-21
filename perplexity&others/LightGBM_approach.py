@@ -42,7 +42,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ── config ────────────────────────────────────────────────────────────────────
 MODEL_NAME  = "meta-llama/Llama-3.2-1B"
-BETA        = 2
+BETA        = 1
 RANDOM_SEED = 42
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 
