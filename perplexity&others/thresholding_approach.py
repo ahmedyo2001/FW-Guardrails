@@ -46,7 +46,7 @@ import os
 import numpy as np
 import torch
 from sklearn.metrics import (classification_report, confusion_matrix,
-                             fbeta_score, roc_auc_score)
+                             fbeta_score, precision_score, roc_auc_score)
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ── config ────────────────────────────────────────────────────────────────────
@@ -185,21 +185,45 @@ def score_records(records: list[dict], tokenizer, model,
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
 # tunes threshold on full data since there is no training or DB here
+MIN_PRECISION = 0.5
+
 def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
     """
     Sweep 500 candidate thresholds across the PPL range of the training set.
-    Pick the one that maximises F-beta score (default β=2).
+    Pick the one that maximises F-beta score (default β=2) among thresholds
+    whose precision is at least MIN_PRECISION (50%) — thresholds that flag
+    more false positives than true positives are never selected.
+
+    If no candidate clears the precision floor, falls back to the best
+    F-beta score across all candidates (with a warning).
+
     Returns (best_threshold, best_f_beta).
     """
     candidates = np.linspace(ppls.min(), ppls.max(), 500)
-    best_t, best_f = 0.0, 0.0
+    best_t, best_f               = 0.0, 0.0
+    best_t_unconstrained, best_f_unconstrained = 0.0, 0.0
+    found_constrained = False
 
     for t in candidates:
-        preds = (ppls >= t).astype(int)
-        f     = fbeta_score(labels, preds, beta=beta, zero_division=0)
+        preds     = (ppls >= t).astype(int)
+        f         = fbeta_score(labels, preds, beta=beta, zero_division=0)
+        precision = precision_score(labels, preds, zero_division=0)
+
+        if f > best_f_unconstrained:
+            best_f_unconstrained, best_t_unconstrained = f, t
+
+        if precision < MIN_PRECISION:
+            continue
+
         if f > best_f:
             best_f, best_t = f, t
+            found_constrained = True
+
+    if not found_constrained:
+        print(f"  Warning: no threshold reached {MIN_PRECISION:.0%} precision — "
+              f"falling back to best unconstrained F-beta")
+        return best_t_unconstrained, best_f_unconstrained
 
     return best_t, best_f
 

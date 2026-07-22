@@ -324,7 +324,7 @@ def main():
     else:
         print("\n=== Tuning threshold on validation split of training set ===")
         val_records = [train_records[i] for i in val_idx]
-        val_cache   = os.path.join(args.cache_dir, "val_scores.json")
+        val_cache   = os.path.join(args.cache_dir, f"val_scores_{chunk_tag}.json")
         val_distances = score_prompts(val_records, source_lib, embedder, val_cache)
         threshold, val_f2 = find_best_threshold(val_distances, train_labels[val_idx])
         print(f"  Best threshold : {threshold:.4f}")
@@ -332,7 +332,7 @@ def main():
 
     # ── score and evaluate test set ───────────────────────────────────────────
     print("\n=== Scoring test set ===")
-    test_cache     = os.path.join(args.cache_dir, "test_scores.json")
+    test_cache     = os.path.join(args.cache_dir, f"test_scores_{chunk_tag}.json")
     test_distances = score_prompts(test_records, source_lib, embedder, test_cache)
 
     print("\n=== Evaluating on test set ===")
