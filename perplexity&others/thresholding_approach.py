@@ -185,7 +185,7 @@ def score_records(records: list[dict], tokenizer, model,
 
 # ── threshold tuning ──────────────────────────────────────────────────────────
 # tunes threshold on full data since there is no training or DB here
-MIN_PRECISION = 0.5
+MIN_PRECISION = 0.4
 
 def find_best_threshold(ppls: np.ndarray, labels: np.ndarray,
                         beta: float = BETA) -> tuple[float, float]:
