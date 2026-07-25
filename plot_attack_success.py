@@ -15,6 +15,11 @@ MODEL_LABELS = {
     "ibm-granite/granite-guardian-3.2-3b-a800m": "Granite-Guard\n3.2-3B",
     "google/shieldgemma-9b":                     "ShieldGemma\n9B",
     "Qwen/Qwen3Guard-Gen-8B":                    "Qwen3Guard\n8B",
+    "approach1_ppl_threshold":                   "PPL\nThreshold",
+    "approach2_lgbm":                            "LGBM\n(ppl+stats)",
+    "approach3_embed_char":                      "Embed\n(char)",
+    "approach3_embed_sentence":                  "Embed\n(sentence)",
+    "approach3_embed_full":                      "Embed\n(full)",
 }
 
 FAMILY_COLORS = {
@@ -24,7 +29,16 @@ FAMILY_COLORS = {
     "ibm-granite/granite-guardian-3.2-3b-a800m": "#2ca02c",
     "google/shieldgemma-9b":                     "#000000",
     "Qwen/Qwen3Guard-Gen-8B":                    "#000000",
+    "approach1_ppl_threshold":                   "#d62728",
+    "approach2_lgbm":                            "#9467bd",
+    "approach3_embed_char":                      "#e377c2",
+    "approach3_embed_sentence":                  "#e377c2",
+    "approach3_embed_full":                      "#e377c2",
 }
+
+# v2 perplexity/embedding-based detector results live in a single aggregated
+# summary.json (keyed by test_file + approach) rather than per-model detail files.
+V2_SUMMARY_PATH = os.path.join("perplexity&others", "v2", "test_results", "summary.json")
 
 COLORS = {
     0:    "#d0dce8",
@@ -39,12 +53,14 @@ DATASETS = [
     {
         "dir":        "many_shots_attack/results_jackhhao",
         "n_per_tc":   517,
+        "v2_prefix":  "jackhhao",
         "title":      "Many-Shot Attack: Success Rate per Model and Context Length\n(jackhhao dataset)",
         "out":        "attack_success_rate_jackhhao_full.png",
     },
     {
         "dir":        "many_shots_attack/results_safebench",
         "n_per_tc":   350,
+        "v2_prefix":  "safebench",
         "title":      "Many-Shot Attack: Success Rate per Model and Context Length\n(safebench dataset)",
         "out":        "attack_success_rate_safebench_full.png",
     },
@@ -84,6 +100,31 @@ def load_results(results_dir, n_per_tc):
     return results
 
 
+def load_v2_results(summary_path, dataset_prefix):
+    """Return {approach: {tc: bypass_%}} from the aggregated v2 summary.json.
+
+    v2 has no explicit 0-filler-token run; the un-manyshotted "jigsaw_original"
+    test file (raw attack prompts) stands in for tc=0.
+    """
+    with open(summary_path, encoding="utf-8") as f:
+        rows = json.load(f)
+
+    tc_by_test_file = {f"{dataset_prefix}_jigsaw_original": 0}
+    for tc in [2000, 4000, 6000, 8000]:
+        tc_by_test_file[f"{dataset_prefix}_manyshot_{tc}tokens"] = tc
+
+    results = {}
+    for row in rows:
+        tc = tc_by_test_file.get(row["test_file"])
+        if tc is None or row.get("detection_rate") is None:
+            continue
+        approach = row["approach"]
+        bypass_pct = (1 - row["detection_rate"]) * 100
+        results.setdefault(approach, {})[tc] = bypass_pct
+
+    return results
+
+
 def plot_dataset(results, title, out_path):
     model_ids = sorted(results.keys(), key=lambda m: results[m].get(8000, 0), reverse=True)
     labels = [MODEL_LABELS.get(m, m) for m in model_ids]
@@ -93,7 +134,7 @@ def plot_dataset(results, title, out_path):
     bar_width = 0.15
     x = np.arange(n_models)
 
-    fig, ax = plt.subplots(figsize=(13, 6))
+    fig, ax = plt.subplots(figsize=(max(13, n_models * 1.4), 6))
 
     for i, tc in enumerate(TOKEN_COUNTS):
         offsets = x + (i - (n_groups - 1) / 2) * bar_width
@@ -139,4 +180,5 @@ def plot_dataset(results, title, out_path):
 
 for ds in DATASETS:
     results = load_results(ds["dir"], ds["n_per_tc"])
+    results.update(load_v2_results(V2_SUMMARY_PATH, ds["v2_prefix"]))
     plot_dataset(results, ds["title"], ds["out"])

@@ -1,0 +1,205 @@
+{
+  "attack_type": "jigsaw",
+  "datasets": {
+    "jackhhao": {
+      "total_prompts": 517,
+      "guardrails": {
+        "approach1_ppl_threshold": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 509,
+            "pct": "98.5%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 8,
+            "pct": "1.5%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        },
+        "approach2_lgbm": {
+          "both_flagged": {
+            "count": 467,
+            "pct": "90.3%"
+          },
+          "both_passed": {
+            "count": 1,
+            "pct": "0.2%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 4,
+            "pct": "0.8%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 45,
+            "pct": "8.7%"
+          },
+          "asr": "0.8%"
+        },
+        "approach3_embed_char": {
+          "both_flagged": {
+            "count": 263,
+            "pct": "50.9%"
+          },
+          "both_passed": {
+            "count": 20,
+            "pct": "3.9%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 226,
+            "pct": "43.7%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 8,
+            "pct": "1.5%"
+          },
+          "asr": "46.2%"
+        },
+        "approach3_embed_sentence": {
+          "both_flagged": {
+            "count": 238,
+            "pct": "46.0%"
+          },
+          "both_passed": {
+            "count": 17,
+            "pct": "3.3%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 260,
+            "pct": "50.3%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 2,
+            "pct": "0.4%"
+          },
+          "asr": "52.2%"
+        },
+        "approach3_embed_full": {
+          "both_flagged": {
+            "count": 295,
+            "pct": "57.1%"
+          },
+          "both_passed": {
+            "count": 20,
+            "pct": "3.9%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 201,
+            "pct": "38.9%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 1,
+            "pct": "0.2%"
+          },
+          "asr": "40.5%"
+        }
+      }
+    },
+    "safebench": {
+      "total_prompts": 350,
+      "guardrails": {
+        "approach1_ppl_threshold": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 338,
+            "pct": "96.6%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 12,
+            "pct": "3.4%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        },
+        "approach2_lgbm": {
+          "both_flagged": {
+            "count": 11,
+            "pct": "3.1%"
+          },
+          "both_passed": {
+            "count": 146,
+            "pct": "41.7%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 5,
+            "pct": "1.4%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 188,
+            "pct": "53.7%"
+          },
+          "asr": "31.2%"
+        },
+        "approach3_embed_char": {
+          "both_flagged": {
+            "count": 38,
+            "pct": "10.9%"
+          },
+          "both_passed": {
+            "count": 20,
+            "pct": "5.7%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 291,
+            "pct": "83.1%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "asr": "88.4%"
+        },
+        "approach3_embed_sentence": {
+          "both_flagged": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "both_passed": {
+            "count": 48,
+            "pct": "13.7%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 300,
+            "pct": "85.7%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "asr": "99.7%"
+        },
+        "approach3_embed_full": {
+          "both_flagged": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "both_passed": {
+            "count": 87,
+            "pct": "24.9%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 261,
+            "pct": "74.6%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "asr": "99.6%"
+        }
+      }
+    }
+  }
+}
