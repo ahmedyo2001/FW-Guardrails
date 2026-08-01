@@ -1,0 +1,54 @@
+{
+  "2_rubend18_gpt4_jb": {
+    "label": 1,
+    "count": 79
+  },
+  "3B_itw_dec": {
+    "label": 1,
+    "count": 790
+  },
+  "4_jailbreakbench": {
+    "label": 1,
+    "count": 100
+  },
+  "5_harmbench": {
+    "label": 1,
+    "count": 400
+  },
+  "6_wildjailbreak_adv": {
+    "label": 1,
+    "count": 8273
+  },
+  "7_advbench": {
+    "label": 1,
+    "count": 520
+  },
+  "1_docred": {
+    "label": 0,
+    "count": 0
+  },
+  "2_boolq": {
+    "label": 0,
+    "count": 943
+  },
+  "3_squad_v2": {
+    "label": 0,
+    "count": 13032
+  },
+  "4_platypus": {
+    "label": 0,
+    "count": 2493
+  },
+  "5_wildjailbreak_benign": {
+    "label": 0,
+    "count": 5005
+  },
+  "_split": {
+    "train": 25264,
+    "test": 6317,
+    "test_fraction": 0.2,
+    "seed": 42,
+    "total_before_dedup": 31635,
+    "total_after_dedup": 31581
+  }
+}

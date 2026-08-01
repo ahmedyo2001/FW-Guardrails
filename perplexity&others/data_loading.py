@@ -12,7 +12,7 @@ Outputs
 
 Usage
 -----
-  pip install datasets scikit-learn
+  pip install datasets scikit-learn rapidfuzz
   python load_dataset.py
   python load_dataset.py --max-per-source 500 --out-dir my_data
 """
@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Callable
 
 from datasets import load_dataset
+from rapidfuzz import fuzz, process
 from sklearn.model_selection import train_test_split
 
 
@@ -49,7 +50,7 @@ def _load_env(path: str = ".env") -> None:
 _load_env()
 
 # ── defaults ──────────────────────────────────────────────────────────────────
-DEFAULT_OUT_DIR        = "data"
+DEFAULT_OUT_DIR        = "v3/training_data"
 RANDOM_SEED            = 42
 
 
@@ -75,6 +76,20 @@ class Source:
         except Exception as e:
             print(f"  FAIL [{self.name}]: {e}")
             return 0
+
+# many-shot attack objectives are drawn from the same itw jailbreak pool as
+# 3B_itw_dec; exact matches would let the classifier train on prompts it's
+# later "attacked" with, so they're excluded at load time (see FW-Guardrails
+# many_shots_attack contamination check).
+def _load_manyshot_objectives() -> list[str]:
+    path = Path(__file__).resolve().parent.parent / "many_shots_attack" / "objectives.json"
+    if not path.exists():
+        return []
+    with open(path, encoding="utf-8") as f:
+        objectives = json.load(f)
+    # dedupe while preserving order
+    return list(dict.fromkeys(" ".join(o.strip().split()) for o in objectives))
+
 
 # dedup data
 def dedup(records: list[dict]) -> list[dict]:
@@ -128,7 +143,28 @@ def make_adversarial_sources() -> list[Source]:
         ds  = load_dataset("TrustAIRLab/in-the-wild-jailbreak-prompts",
                            "jailbreak_2023_12_25", split="train")
         col = "prompt" if "prompt" in ds.column_names else ds.column_names[0]
-        return list({ex[col] for ex in ds})
+        prompts = list({ex[col] for ex in ds})
+
+        objectives = _load_manyshot_objectives()
+        if objectives:
+            objectives_set = set(objectives)
+            kept, exact_removed, fuzzy_removed = [], 0, 0
+            for p in prompts:
+                norm_p = " ".join(p.strip().split())
+                if norm_p in objectives_set:
+                    exact_removed += 1
+                    continue
+                match = process.extractOne(norm_p, objectives, scorer=fuzz.QRatio)
+                if match and match[1] >= 95:
+                    fuzzy_removed += 1
+                    continue
+                kept.append(p)
+            prompts = kept
+            if exact_removed or fuzzy_removed:
+                print(f"    [3B_itw_dec] excluded {exact_removed + fuzzy_removed} prompts "
+                      f"found in many_shots_attack/objectives.json "
+                      f"({exact_removed} exact, {fuzzy_removed} fuzzy>=95%)")
+        return prompts
 
     # 4. JailbreakBench JBB-Behaviors (NeurIPS 2024, 100 curated behaviors)
     def jbb():
