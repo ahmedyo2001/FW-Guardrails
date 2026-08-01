@@ -82,59 +82,24 @@ def load_llama():
 
 # ── PPL scorer ────────────────────────────────────────────────────────────────
 
-# computes avg perplexity accross the prompt
-def compute_ppl(text: str, tokenizer, model) -> float:
+def compute_ppl(text: str, tokenizer, model) -> tuple[float, int]:
     """
-    Windowed perplexity following the HuggingFace Transformers documentation:
-    https://huggingface.co/docs/transformers/en/perplexity
+    Returns (perplexity, token_length).
 
-    Window = 2048 tokens
-    Stride = 1024 tokens (half-window overlap)
-
-    Each token is scored with at least 1024 tokens of left context,
-    giving a close approximation to the true autoregressive likelihood.
+    Single forward pass on the full prompt — no windowing, matching the paper.
     """
     encodings = tokenizer(text, return_tensors="pt")
     input_ids = encodings.input_ids.to(DEVICE)
     seq_len   = input_ids.size(1)
 
     if seq_len == 0:
-        return float("inf")
+        return float("inf"), 0
 
-    nlls     = []
-    prev_end = 0
-    
-    for begin in range(0, seq_len, STRIDE):
-        # end of window considered
-        end        = min(begin + MAX_TOKENS, seq_len)
-        # length of scoring window, at first it is 2048 then 1024
-        target_len = end - prev_end      
+    with torch.no_grad():
+        loss = model(input_ids, labels=input_ids).loss
 
-        # 2d array due to batch dim, clones beginning to end 
-        target_ids                      = input_ids[:, begin:end].clone()
-        # mask context tokens — -100 is ignored by CrossEntropyLoss 
-        # makes the tokens considered before ignored in new run
-        target_ids[:, :-target_len]     = -100
-
-
-        # the model calculates the loss on the input with the output as the ground truth
-        # any tokens with target id = -100 is ignored
-        with torch.no_grad():
-            loss = model(
-                input_ids[:, begin:end],
-                labels=target_ids
-            ).loss
-        # the part above outputs the avg loss so we multiply by the target len to get the loss
-        nlls.append(loss * target_len)
-        prev_end = end
-
-        if end == seq_len:
-            break
-    # here we sum the NLL then divide by seq length to get the avg then we take exp to get the perplexity
-    
-    ppl = torch.exp(torch.stack(nlls).sum() / seq_len).item()
+    ppl = torch.exp(loss).item()
     return ppl
-
 
 # ── data loading ──────────────────────────────────────────────────────────────
 
