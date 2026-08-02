@@ -1,0 +1,51 @@
+{
+  "approach": "3_arize_dataset_embeddings",
+  "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunk_strategy": "full",
+  "chunk_size": 30,
+  "chunk_overlap": 5,
+  "n_source_chunks": 6482,
+  "n_adv_sources": 6482,
+  "beta": 1,
+  "train_size": 25264,
+  "test_size": 6317,
+  "val_f2": 0.8817080207732256,
+  "threshold_tuned": true,
+  "threshold": 0.4739840212231409,
+  "f2": 0.8679852805887764,
+  "f1": 0.8679852805887764,
+  "auc_roc": 0.9646343054162123,
+  "tp": 1887,
+  "fp": 435,
+  "tn": 3856,
+  "fn": 139,
+  "precision": 0.8126614987080103,
+  "recall": 0.9313919052319842,
+  "report": {
+    "benign": {
+      "precision": 0.965206508135169,
+      "recall": 0.8986250291307387,
+      "f1-score": 0.9307265266714941,
+      "support": 4291.0
+    },
+    "adversarial": {
+      "precision": 0.8126614987080103,
+      "recall": 0.9313919052319842,
+      "f1-score": 0.8679852805887764,
+      "support": 2026.0
+    },
+    "accuracy": 0.9091340826341617,
+    "macro avg": {
+      "precision": 0.8889340034215896,
+      "recall": 0.9150084671813614,
+      "f1-score": 0.8993559036301353,
+      "support": 6317.0
+    },
+    "weighted avg": {
+      "precision": 0.9162819887273135,
+      "recall": 0.9091340826341617,
+      "f1-score": 0.9106040374260318,
+      "support": 6317.0
+    }
+  }
+}
