@@ -1,0 +1,205 @@
+{
+  "attack_type": "obfuscation",
+  "datasets": {
+    "jackhhao": {
+      "total_prompts": 517,
+      "guardrails": {
+        "approach1_ppl_threshold": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 510,
+            "pct": "98.6%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 7,
+            "pct": "1.4%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        },
+        "approach2_lgbm": {
+          "both_flagged": {
+            "count": 439,
+            "pct": "84.9%"
+          },
+          "both_passed": {
+            "count": 9,
+            "pct": "1.7%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 11,
+            "pct": "2.1%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 58,
+            "pct": "11.2%"
+          },
+          "asr": "2.4%"
+        },
+        "approach3_embed_char": {
+          "both_flagged": {
+            "count": 450,
+            "pct": "87.0%"
+          },
+          "both_passed": {
+            "count": 3,
+            "pct": "0.6%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 7,
+            "pct": "1.4%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 57,
+            "pct": "11.0%"
+          },
+          "asr": "1.5%"
+        },
+        "approach3_embed_sentence": {
+          "both_flagged": {
+            "count": 17,
+            "pct": "3.3%"
+          },
+          "both_passed": {
+            "count": 59,
+            "pct": "11.4%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 438,
+            "pct": "84.7%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 3,
+            "pct": "0.6%"
+          },
+          "asr": "96.3%"
+        },
+        "approach3_embed_full": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 78,
+            "pct": "15.1%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 439,
+            "pct": "84.9%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        }
+      }
+    },
+    "safebench": {
+      "total_prompts": 350,
+      "guardrails": {
+        "approach1_ppl_threshold": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 341,
+            "pct": "97.4%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 9,
+            "pct": "2.6%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        },
+        "approach2_lgbm": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 342,
+            "pct": "97.7%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 5,
+            "pct": "1.4%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 3,
+            "pct": "0.9%"
+          },
+          "asr": "100.0%"
+        },
+        "approach3_embed_char": {
+          "both_flagged": {
+            "count": 286,
+            "pct": "81.7%"
+          },
+          "both_passed": {
+            "count": 1,
+            "pct": "0.3%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 56,
+            "pct": "16.0%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 7,
+            "pct": "2.0%"
+          },
+          "asr": "16.4%"
+        },
+        "approach3_embed_sentence": {
+          "both_flagged": {
+            "count": 19,
+            "pct": "5.4%"
+          },
+          "both_passed": {
+            "count": 35,
+            "pct": "10.0%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 293,
+            "pct": "83.7%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 3,
+            "pct": "0.9%"
+          },
+          "asr": "93.9%"
+        },
+        "approach3_embed_full": {
+          "both_flagged": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "both_passed": {
+            "count": 78,
+            "pct": "22.3%"
+          },
+          "flagged_orig_passed_mod (bypassed)": {
+            "count": 272,
+            "pct": "77.7%"
+          },
+          "passed_orig_flagged_mod (worse)": {
+            "count": 0,
+            "pct": "0.0%"
+          },
+          "asr": "100.0%"
+        }
+      }
+    }
+  }
+}

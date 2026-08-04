@@ -36,9 +36,12 @@ FAMILY_COLORS = {
     "approach3_embed_full":                      "#e377c2",
 }
 
-# v2 perplexity/embedding-based detector results live in a single aggregated
+# v3 perplexity/embedding-based detector results live in a single aggregated
 # summary.json (keyed by test_file + approach) rather than per-model detail files.
-V2_SUMMARY_PATH = os.path.join("perplexity&others", "v2", "test_results", "summary.json")
+V3_SUMMARY_PATH = os.path.join("perplexity&others", "v3", "test_results", "summary.json")
+
+GUARDRAIL_MODELS = [m for m in MODEL_LABELS if not m.startswith("approach")]
+APPROACH_MODELS  = [m for m in MODEL_LABELS if m.startswith("approach")]
 
 COLORS = {
     0:    "#d0dce8",
@@ -53,16 +56,18 @@ DATASETS = [
     {
         "dir":        "many_shots_attack/results_jackhhao",
         "n_per_tc":   517,
-        "v2_prefix":  "jackhhao",
-        "title":      "Many-Shot Attack: Success Rate per Model and Context Length\n(jackhhao dataset)",
-        "out":        "attack_success_rate_jackhhao_full.png",
+        "v3_prefix":  "jackhhao",
+        "label":      "jackhhao dataset",
+        "guardrail_out": "attack_success_rate_jackhhao_guardrails.png",
+        "approach_out":  "attack_success_rate_jackhhao_approaches.png",
     },
     {
         "dir":        "many_shots_attack/results_safebench",
         "n_per_tc":   350,
-        "v2_prefix":  "safebench",
-        "title":      "Many-Shot Attack: Success Rate per Model and Context Length\n(safebench dataset)",
-        "out":        "attack_success_rate_safebench_full.png",
+        "v3_prefix":  "safebench",
+        "label":      "safebench dataset",
+        "guardrail_out": "attack_success_rate_safebench_guardrails.png",
+        "approach_out":  "attack_success_rate_safebench_approaches.png",
     },
 ]
 
@@ -100,18 +105,15 @@ def load_results(results_dir, n_per_tc):
     return results
 
 
-def load_v2_results(summary_path, dataset_prefix):
-    """Return {approach: {tc: bypass_%}} from the aggregated v2 summary.json.
-
-    v2 has no explicit 0-filler-token run; the un-manyshotted "jigsaw_original"
-    test file (raw attack prompts) stands in for tc=0.
-    """
+def load_v3_results(summary_path, dataset_prefix):
+    """Return {approach: {tc: bypass_%}} from the aggregated v3 summary.json."""
     with open(summary_path, encoding="utf-8") as f:
         rows = json.load(f)
 
-    tc_by_test_file = {f"{dataset_prefix}_jigsaw_original": 0}
-    for tc in [2000, 4000, 6000, 8000]:
-        tc_by_test_file[f"{dataset_prefix}_manyshot_{tc}tokens"] = tc
+    tc_by_test_file = {
+        f"{dataset_prefix}_manyshot_{tc}tokens": tc
+        for tc in TOKEN_COUNTS
+    }
 
     results = {}
     for row in rows:
@@ -179,6 +181,16 @@ def plot_dataset(results, title, out_path):
 
 
 for ds in DATASETS:
-    results = load_results(ds["dir"], ds["n_per_tc"])
-    results.update(load_v2_results(V2_SUMMARY_PATH, ds["v2_prefix"]))
-    plot_dataset(results, ds["title"], ds["out"])
+    guardrail_results = load_results(ds["dir"], ds["n_per_tc"])
+    approach_results = load_v3_results(V3_SUMMARY_PATH, ds["v3_prefix"])
+
+    plot_dataset(
+        guardrail_results,
+        f"Many-Shot Attack: Success Rate per Guardrail Model\n({ds['label']})",
+        ds["guardrail_out"],
+    )
+    plot_dataset(
+        approach_results,
+        f"Many-Shot Attack: Success Rate per Firewall Approach\n({ds['label']})",
+        ds["approach_out"],
+    )
