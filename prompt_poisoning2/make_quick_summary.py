@@ -24,6 +24,7 @@ MODEL_ORDER = [
     "ibm-granite/granite-guardian-3.2-3b-a800m",
     "google/shieldgemma-9b",
     "Qwen/Qwen3Guard-Gen-8B",
+    "typesafe/jev-latest",
 ]
 
 

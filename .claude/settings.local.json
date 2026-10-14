@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python patch_notebook.py)"
+      "Bash(python patch_notebook.py)",
+      "WebFetch(domain:docs.typesafe.ai)"
     ]
   }
 }

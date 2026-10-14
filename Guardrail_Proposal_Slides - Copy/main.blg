@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: apalike.bst
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+Database file #1: bibfile.bib
+Warning--I didn't find a database entry for "zou2023advbench"
+Warning--can't use both volume and number fields in gong2025figstep
+You've used 28 entries,
+            1935 wiz_defined-function locations,
+            598 strings with 9368 characters,
+and the built_in function-call counts, 10599 in all, are:
+= -- 1029
+> -- 562
+< -- 19
++ -- 200
+- -- 196
+* -- 823
+:= -- 1947
+add.period$ -- 96
+call.type$ -- 28
+change.case$ -- 236
+chr.to.int$ -- 26
+cite$ -- 29
+duplicate$ -- 393
+empty$ -- 604
+format.name$ -- 228
+if$ -- 2018
+int.to.chr$ -- 3
+int.to.str$ -- 0
+missing$ -- 16
+newline$ -- 153
+num.names$ -- 84
+pop$ -- 205
+preamble$ -- 1
+purify$ -- 236
+quote$ -- 0
+skip$ -- 320
+stack$ -- 0
+substring$ -- 482
+swap$ -- 58
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 168
+warning$ -- 1
+while$ -- 68
+width$ -- 0
+write$ -- 365
+(There were 2 warnings)

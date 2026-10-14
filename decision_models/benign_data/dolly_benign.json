@@ -1,0 +1,2802 @@
+[
+  {
+    "prompt_id": "dolly_brainstorming_001",
+    "prompt": "Give me a bullet list of five different European languages",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_002",
+    "prompt": "What are several ways to keep a toddler busy?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_003",
+    "prompt": "What is Scotland's largest lake?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_004",
+    "prompt": "Rank American Presidents",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_005",
+    "prompt": "Give me a list of the best PC games of all time.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_006",
+    "prompt": "What sports can I play in Summer?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_007",
+    "prompt": "What are some of the best movies for kids?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_008",
+    "prompt": "What are some Australian beer brands that have low or no alcohol?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_009",
+    "prompt": "What are the most high demands jobs in the market right now?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_010",
+    "prompt": "What is cloud computing?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_011",
+    "prompt": "What are the top 7 cities to ride a bicycle?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_012",
+    "prompt": "Think up a new seasoning blend that will be as popular as \"everything but the bagel\" seasoning.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_013",
+    "prompt": "What are the top 3 items that I need when traveling by plane.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_014",
+    "prompt": "What year was the Ice Bowl played in?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_015",
+    "prompt": "You, a commercial gym supervisor, are supervising the resistance training area when you hear a lot of clanging noise by the seated leg press machine. You observe a participant not controlling the descent of the weights. You suggest he slowly return the weights rather than letting them drop quickly. A day or two later, he reports that he felt more sore than usual after that workout. What accounts for this? Is it safe for him to exercise today?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_016",
+    "prompt": "What are some things you could do over the Easter break?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_017",
+    "prompt": "Give me some tips for increase my savings",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_018",
+    "prompt": "Give me a list of the greatest basketball players of all time.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_019",
+    "prompt": "Give me a list of beginner friendly Python open source projects to contribute.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_020",
+    "prompt": "Give me a list of date night ideas that I've never done.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_021",
+    "prompt": "Give me 10 different ideas for how to spend a rainy Saturday afternoon",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_022",
+    "prompt": "What are the best National Parks in the United States",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_023",
+    "prompt": "Chronological order of the Alien movie universe",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_024",
+    "prompt": "Provide a dot point list of the last six artists that won a Grammy Award for Best Album. Include the title of the album and the year they won.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_025",
+    "prompt": "how to use as wax",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_026",
+    "prompt": "Give me a list of top five budget Android phone",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_027",
+    "prompt": "What are five totally distinct, creative ways to describe the usefulness of empty time?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_028",
+    "prompt": "What is the attraction in the United States for the Jeep Wrangler?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_029",
+    "prompt": "List top 5 people with most silver medals in the olympics",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_030",
+    "prompt": "What are the benefits of hot yoga?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_031",
+    "prompt": "Give me a list of the best takeaway foods when youre hungry.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_032",
+    "prompt": "Give me a list of the last five \"best rap song\" Grammy winners (just tell me the song name and the performing artist).",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_033",
+    "prompt": "Who are the greatest hockey players of all time?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_034",
+    "prompt": "Where can I buy leather pants for women?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_035",
+    "prompt": "What are some games you can play in the middle of nature and a bunch of people?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_036",
+    "prompt": "Give me a bulleted list of ingredients that I need to bake chewy chocolate chip cookies, and include volume measurements for any ingredient I have to measure out.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_037",
+    "prompt": "Give me a bulleted list of 5 hobbies I should try.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_038",
+    "prompt": "Give me a bulleted list of the 5 oldest countries in the world:",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_039",
+    "prompt": "What are five totally distinct, creative ways to describe the usefulness of the police?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_040",
+    "prompt": "Give me a list of best places to take vacation.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_041",
+    "prompt": "What are a lot of different options for traveling across New York City?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_042",
+    "prompt": "What are the best superhero movies of 2022 ?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_043",
+    "prompt": "Show me the current P4P boxer ratings in the world",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_044",
+    "prompt": "Give me a bulleted list of the 7 wonders of the ancient world:",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_045",
+    "prompt": "Think up of a bunch of different holidays celebrated in the US",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_046",
+    "prompt": "How do i accept the change",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_047",
+    "prompt": "Give me a list of the best movies I've never seen.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_048",
+    "prompt": "Give me three recipes from different cuisines that I can make with potatoes and chicken",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_049",
+    "prompt": "What some ways you can cook a steak?",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_brainstorming_050",
+    "prompt": "Give me ideas of ways to add a spicy kick to my pho.",
+    "category": "brainstorming",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_001",
+    "prompt": "Identify which car manufacturer is Japanese or American: Isuzu, Cadillac",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_002",
+    "prompt": "Classify each of the following as a new world or old world crop: Potato, Corn, Tomato, Wheat, Oat, Cacao, Apple, Olive",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_003",
+    "prompt": "Classify which item is a fake color out of this set: blue, green, sheep, red, orange",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_004",
+    "prompt": "Classify each of the following as \"Motorized\" or \"Not Motorized\": Bicycle, Skateboard, Car, Lawn Mower, Tractor, Golf Cart",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_005",
+    "prompt": "Tell me whether each state touches the ocean or not: Florida, North Carolina, Nebraska, Oklahoma, Oregon, Texas",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_006",
+    "prompt": "Identify which instrument is string or woodwind: Veena, Mizmar",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_007",
+    "prompt": "Classify each of the following as having two or four legs: human, horse, dog, cat, monkey, kangaroo, boar",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_008",
+    "prompt": "Classify the following types of cars as \"economy\" or \"luxury\": Ford, Chevrolet, Lamborghini, Ferrari, Mercedes, Honda, Lexus, Toyota, Nissan, Subaru",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_009",
+    "prompt": "From this list of American sports teams categorise them as American Football, Basketball, Baseball or Hockey. Cincinnati Bengals, Boston Celtics, Washington Capitals, Washington Capitals, Los Angeles Dodgers, Atlanta Braves, Phoenix Suns, New York Rangers, Chicago Bears",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_010",
+    "prompt": "Identify which animal species is alive or extinct: Thylacoleo, Skipjack Tuna",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_011",
+    "prompt": "Which is a species of fish? Sneaker or Sole",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_012",
+    "prompt": "Identify which car manufacturer is German or American: BMW, Cadilliac",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_013",
+    "prompt": "Identify which instrument is string or percussion: Bianzhong, Sorahi",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_014",
+    "prompt": "Tell me which of these things are used as rock climbing gear: lamps, guardrails, ropes, power cords, nuts, anchors, puppies, cams, belay devices.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_015",
+    "prompt": "Identify which animal species is alive or extinct: Xenoposeidon, Sloth",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_016",
+    "prompt": "Identify which instrument is string or woodwind: Giga, Panflute, Chuniri, Dizi",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_017",
+    "prompt": "Classify each of the following as either a title by Kevin Kwan or Veronica Roth: Sex and Vanity, Crazy Rich Asians, China Rich Girlfriend, Rich People Problems, Luck: The Essential Guide, Divergent, Allegiant, Insurgent, Carve the Mark, Chosen Ones",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_018",
+    "prompt": "Classify each as either an amphibian, bird, or fish: salmon, trout, salamander, cardinal, owl, falcon, frog",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_019",
+    "prompt": "Which is a bird or fish: Red-backed shrike, Red salmon",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_020",
+    "prompt": "Categorize the following list into common greetings and common parting words: goodbye, hi, hiya, howdy, see ya, what's up, i'm out, how are you, how are you doing, peace, sup, talk to you later, see you soon, have a good one",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_021",
+    "prompt": "Identify which instrument is string or woodwind: Tremolo bass, Rackett",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_022",
+    "prompt": "Here is a list of movies. Which of these are considered to be Action Movies. American Graffiti, Rain Man, Mission Impossible, Goldfinger, Speed, The Devil's Advocate, The Magnificent Seven, Dazed and Confused, Die Hard, Top Gun.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_023",
+    "prompt": "Classify the following as a 'Country', 'State' or 'City': California, Sacramento, Chicago, Singapore, New Delhi, London, Tennessee, New York",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_024",
+    "prompt": "Which of the following are breeds of dogs:\nDachshund, Tabby, Russian Blue, Airedale Terrier, Papillon, Bengal, Greyhound",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_025",
+    "prompt": "Classify these foods as vegan, vegetarian or neither: frittata, yogurt, apple, lard, chicken noodle soup, tofu, flour, cheesecake",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_026",
+    "prompt": "Group these colors based on their warmth and coldness; red, yellow, purple, orange, green, blue",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_027",
+    "prompt": "Tell me whether these people are authors or actors: Ernest Hemingway, Stephen King, George Orwell, Johnny Depp, George Clooney, Jonah Hill",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_028",
+    "prompt": "Identify which instrument is string or percussion: Damaru, Laouto",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_029",
+    "prompt": "Classify the below numbers based on whether they are perfect square or not.\n64, 9, 81, 100, 57, 16",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_030",
+    "prompt": "What is the difference between a coastal cruising and blue water sailboat?",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_031",
+    "prompt": "Identify which instrument is string or woodwind: Bass guitar, Duduk",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_032",
+    "prompt": "Classify the cities based on whether they are located in Malawi or Norfolk Island.\nMzuzu, Blantyre, Kingston, Lilongwe",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_033",
+    "prompt": "Which of these words are nouns and which are adjectives. Fridge, wipe, bed, chair, jump, yell, sleep, fruit and talk.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_034",
+    "prompt": "Tell me whether these countries belong to the EU or not: Greece, United Kingdom, Turkey, Ukraine, France, Italy, Spain",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_035",
+    "prompt": "Identify which instrument is string or percussion: Daxophone, Kobza",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_036",
+    "prompt": "Are these oceans or lakes: Superior, Michigan, Keuka, Ontario, Tahoe. and Yellowstone?",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_037",
+    "prompt": "Classify each of the following as either round or square shaped: a planet, a a ball, a slice of bread, a chess board.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_038",
+    "prompt": "Which is a species of fish? Shaver or Razorfish",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_039",
+    "prompt": "Classify each of the following as bright or dark: sun, lamp, cave, light, night, tunnel",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_040",
+    "prompt": "Identify which animal species is alive or extinct: Cape Lion, Javan Rhino",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_041",
+    "prompt": "Classify which cat breeds into long-haired and short-haired breeds:  Siamese, Maine Coon, Norwegian Forest Cat, Russian Blue, British Shorthair, Persian, Ragdoll, Himalayan, Burman",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_042",
+    "prompt": "Classify each of the following as either a true statement or a false statement: \n1. Albert Einstein was a Chinese mathematician that lived in the 19th and 20th century.\n2. Pigs are not mammals.\n3. This question contains four statements that need classification.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_043",
+    "prompt": "Classify each of the following as either a brand of kombucha or a soda brand: Humm, Brew Doctor, Pepsi, 7Up, Mountain Dew, Coca-Cola, Sprite, Fanta, GT's, Remedy, Health-Ade",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_044",
+    "prompt": "Tell me whether these are Mandalorians or Jedi: Yoda, Luke Skywalker, Bobba Fett, Din Djarin",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_045",
+    "prompt": "Identify which animal species is alive or extinct: Amargasaurus, Black Rhino",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_046",
+    "prompt": "Classify these as either states or cities: Illinois, California, San Francisco, Austin, Texas.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_047",
+    "prompt": "Classify these foods as either \"italian\", \"french\", \"mexican\" or \"other\". Crepes Suzette, Parmigiana di melanzane, La paella de marisco, Tahchin, Tacos al pastor, Soupe à l'oignon, Enchiladas, Pappardelle al ragù.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_048",
+    "prompt": "Divide these books into Science Fiction, Fantasy or neither. The Great Gatsby, Dune, The Fellowship of the Ring, Neuromancer, A Game of Thrones, The Colour of Magic, Brave New World, Anna Karenina, The Catcher in the Rye, The Lion, the Witch and the Wardrobe, Snow Crash, Wuthering Heights, Magician, Catch-22, Foundation, The Stranger, 1984.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_049",
+    "prompt": "Tell me whether the following are public or private universities in the United States: Harvard University, University of Florida, University of Massachusetts Amherst, Cornell University, Amherst College, Colby College, and the University of Michigan Ann Arbor.",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_classification_050",
+    "prompt": "Identify which instrument is string or percussion: Sheker, Taishogoto",
+    "category": "classification",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_001",
+    "prompt": "When did the maximum rate of water usage begin to be mandated?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_002",
+    "prompt": "In which century was Denis Thériault born?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_003",
+    "prompt": "Given this paragraph on Macquarie University Real Tennis Club, please tell me how many tennis courts the club had.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_004",
+    "prompt": "Given a reference text about GDPR, tell me how GDPR helps to secure personal data.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_005",
+    "prompt": "What is the least common birthday in the United States?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_006",
+    "prompt": "What is Magical Thinking?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_007",
+    "prompt": "According to this paragraph, what records did Stevens break as a basketball coach?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_008",
+    "prompt": "When and where was John Barrett born?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_009",
+    "prompt": "Given a reference text that provides the geographical description of continent Asia, how many Asian countries have a part of their land in Europe as well?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_010",
+    "prompt": "Given this paragraph about KITS, tell me what station it's on and where its radio tower is located.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_011",
+    "prompt": "What is Wimbledon?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_012",
+    "prompt": "Is endosymbiosis bad?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_013",
+    "prompt": "What types of ritual use Ayahuasca?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_014",
+    "prompt": "Of which generation is Jiang the core leader of China",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_015",
+    "prompt": "Which programming languages did Netscape try to add to their browser in order to make it more dynamic?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_016",
+    "prompt": "How can the dialogue be described in this film?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_017",
+    "prompt": "What was the name of the character Steve Buscemi played in the HBO series BoardWalk Empire?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_018",
+    "prompt": "What was the \"X.Y.Z. fever\"?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_019",
+    "prompt": "Given a reference text about spaghetti, what shape is it, where did it originate, and are there any variations of it?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_020",
+    "prompt": "Given the reference text about Rafael Nadal, tell me how many singles grand slam titles he has won, which grand slam tournament he has won the most, and the main strength of his tennis game.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_021",
+    "prompt": "Given a reference text about Kennebunkport, tell me its neighboring towns and where it is located.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_022",
+    "prompt": "Given this text, what are the oldest and newest major territories of the United States?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_023",
+    "prompt": "Given this short paragraph about the L-21 submarine, what was an example of an improvement made compared to earlier versions?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_024",
+    "prompt": "Why do sheep keepers paint their sheep?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_025",
+    "prompt": "Who is the protagonist in CyberPunk 2077?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_026",
+    "prompt": "how many strings guitar have?\nhow guitar projects sound?\nwhat are different types of guitar?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_027",
+    "prompt": "When was West Ham started and when did they get the name West Ham United?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_028",
+    "prompt": "What would cause stride scheduling to cause inefficiency in CPU operations?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_029",
+    "prompt": "Where did the first limited-overs cricket match take place?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_030",
+    "prompt": "Given these paragraphs about Large language models, what are \"emergent abilities\"?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_031",
+    "prompt": "Given a reference text about Farhad Moshiri, what do his painted jars look like?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_032",
+    "prompt": "given the plot of 1985 hit Back to the future, how could Marty McFly have avoided having to reconcile his mother and father in order to save his life?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_033",
+    "prompt": "Given the reference text about moths, what family does Bityla sericea belong to?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_034",
+    "prompt": "Given a reference text about Tom Cruise, tell me when they were born and what they are famous for.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_035",
+    "prompt": "What makes a Squishmallow resellable?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_036",
+    "prompt": "Based on this paragraph, what industry did Gardiner Hall create a business in and how was it impacted by the Civil War?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_037",
+    "prompt": "Who is Evelyn Quan Wang in the move \"Everything Everywhere All at Once\"?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_038",
+    "prompt": "Given these paragraphs about Multiomics, what is panomics?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_039",
+    "prompt": "What are Vedas?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_040",
+    "prompt": "Did Billy Corgan really play all of the instruments on Smashing Pumpkin's 1993 album \"Siamese Dream\"?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_041",
+    "prompt": "Given this paragraph about Novak Djokovic, how many majors titles does he currently hold?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_042",
+    "prompt": "Given this paragraph about Michel Warschawski, tell me the two organizations that Warschawski led during his life.",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_043",
+    "prompt": "Given a reference text about the blood hammer phenomenon, tell me the background of the term \"blood-hammer\".",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_044",
+    "prompt": "Can animals like dog and cat get Kidney Stones ?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_045",
+    "prompt": "Given this paragraph, who wrote \"August?\"",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_046",
+    "prompt": "What is the top floor of the King's Building based on this article? What floor is found below that?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_047",
+    "prompt": "With this paragraph on Austen Hurgon's biography, what movies did he direct before My Mimosa Maid?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_048",
+    "prompt": "Was the hermit hummingbird hawkmoth first described in the 18th century or the 19th century?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_049",
+    "prompt": "What is Pinot Noir?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_closed_qa_050",
+    "prompt": "What's the origin of Dog Day Afternoon?",
+    "category": "closed_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_001",
+    "prompt": "Write a convincing letter to complain to a perfume manufacturer about a broken perfume bottle.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_002",
+    "prompt": "Write a polite rejection response to a LinkedIn recruiter",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_003",
+    "prompt": "Where do sloths live?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_004",
+    "prompt": "Write a story where a princess discovers an abandon cave. The story should have a beginning, middle and end.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_005",
+    "prompt": "Imagine that one day, a universally acknowledged property of time is bended. What is that property? Write about the new world under that setting.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_006",
+    "prompt": "Describe the perfect weekend trip to Boston, Massachusetts.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_007",
+    "prompt": "Tell me about life growing up in Singapore from a local's point of view. This local must have been born in Singapore at least after 1985 and is someone who enjoys his/her time growing up in Singapore.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_008",
+    "prompt": "Why is Santa Fe New Mexico such a great place to live?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_009",
+    "prompt": "Suppose you started at 0 degrees N, 0 degrees E on the earth. You started traveling due north, continuing straight for 2439 miles, turned 60 degrees counter-clockwise, traveled another 4878 miles, turned 60 degrees counter-clockwise traveled another 4878 miles, turned 60 degrees once again, and traveled another 4878 miles. At this point where would you be? Please explain the mathematics of how you came to your conclusion.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_010",
+    "prompt": "Create a dialogue between two characters discussing the impact of social media on their lives. Your dialogue should explore both the positive and negative effects of social media on society.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_011",
+    "prompt": "Write a script about a dystopian past where wars are fought between religion and technology. A younger challenges the ways of the elders.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_012",
+    "prompt": "Why is working out important for humans?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_013",
+    "prompt": "What kind of weather do people prefer?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_014",
+    "prompt": "Write a short story (under 250 words) about meditation. The narrator should be uncomfortable.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_015",
+    "prompt": "Describe a trip to Tokyo. What should I be prepared for? What should I eat? Any can't-miss attractions?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_016",
+    "prompt": "Describe a tense scene of a dystopian, futuristic, ritualistic gathering of hooded and masked individuals discussing the evolving threat of intelligent machines.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_017",
+    "prompt": "Write an analysis of the meaning of the green light in the Great Gatsby",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_018",
+    "prompt": "What are some of the basic investment strategy for a new investor",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_019",
+    "prompt": "List the ingredients and step by step instructions to make a glass of AMF.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_020",
+    "prompt": "What's the differences of the Wing Chun kongfu and the traditional Shaolin Kongfu?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_021",
+    "prompt": "Why do people like Red Light Therapy?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_022",
+    "prompt": "Write a rap about work",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_023",
+    "prompt": "What are the top 3 TV shows you have binge watched and why?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_024",
+    "prompt": "Please write a story that puts a modern twist on a fairy tale",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_025",
+    "prompt": "Test",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_026",
+    "prompt": "Tell a story with the following: A guy that lives in San Jose California, he is a data scientist, he is in his mid 40's and he is aspiring to build an LLM model that will change the world",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_027",
+    "prompt": "Explain Anthropocene to 13-year-old kid",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_028",
+    "prompt": "What is the Canada's national sport?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_029",
+    "prompt": "Summarize the pros and cons of working from home",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_030",
+    "prompt": "Tell me some brief highlights as to why adopting a vegan diet is a better choice.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_031",
+    "prompt": "Write me a poem about data",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_032",
+    "prompt": "Write about apple",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_033",
+    "prompt": "Why some people are more stressed than others and how to manage stress?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_034",
+    "prompt": "What is mitosis",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_035",
+    "prompt": "Why did you take so long to get home last night?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_036",
+    "prompt": "Write a haiku about cats",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_037",
+    "prompt": "Is competition healthy?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_038",
+    "prompt": "Describe a camping plan with your family especially when you have young children",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_039",
+    "prompt": "Write a paragraph on how cricket format has evolved over time",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_040",
+    "prompt": "Describe a plan for a road trip from Las Vegas to West Grand Canyon, including stops for visiting Hoover Dam and lunch. Your plan should include a budget, a timeline, and a description of the sights, for a group of 7 friends.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_041",
+    "prompt": "How do you reverse sear a steak on the Big Green Egg?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_042",
+    "prompt": "Why should you visit Ireland?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_043",
+    "prompt": "Write a journal entry from the pandemic.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_044",
+    "prompt": "Write an email to someone updating that I’ve accepted the position at their company to which they referred me",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_045",
+    "prompt": "How are sub-lets traditionally they handled?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_046",
+    "prompt": "What is the best way to put a toddler to sleep at night?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_047",
+    "prompt": "Provide a 10-step flow for a heterosexual couple's non-religious wedding ceremony.",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_048",
+    "prompt": "How early should you arrive at the airport before a flight?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_049",
+    "prompt": "What are modifiers in English?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_creative_writing_050",
+    "prompt": "Why should people convert lawns and ornamental gardens to native plants?",
+    "category": "creative_writing",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_001",
+    "prompt": "What is Big Data?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_002",
+    "prompt": "What does a healthy morning routine look like?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_003",
+    "prompt": "Which are the main reasons for doing a PhD?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_004",
+    "prompt": "What is cloud computing in simple terms?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_005",
+    "prompt": "How can I tell my sourdough starter is ready to use?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_006",
+    "prompt": "What are the primary benefits of sending my child to daycare?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_007",
+    "prompt": "Where to find the best croissant in San Francisco?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_008",
+    "prompt": "Do aliens exist?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_009",
+    "prompt": "With the rise of plastics in the environment are legos still a good toy for kids?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_010",
+    "prompt": "Why is ice hockey a good sport for women?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_011",
+    "prompt": "Which onsen villages in Japan are the best to visit for foreign tourists? And what should I do once I'm in an onsen village?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_012",
+    "prompt": "Extract the current cash rate from the following using the format: {x} percent\n\nAt its meeting today, the Board decided to increase the cash rate target by 25 basis points to 3.60 per cent. It also increased the interest rate on Exchange Settlement balances by 25 basis points to 3.50 per cent.\nGlobal inflation remains very high. In headline terms it is moderating, although services price inflation remains elevated in many economies. It will be some time before inflation is back to target rates. The outlook for the global economy remains subdued, with below average growth expected this year and next.\nThe monthly CPI indicator suggests that inflation has peaked in Australia. Goods price inflation is expected to moderate over the months ahead due to both global developments and softer demand in Australia. Services price inflation remains high, with strong demand for some services over the summer. Rents are increasing at the fastest rate in some years, with vacancy rates low in many parts of the country. The central forecast is for inflation to decline this year and next, to be around 3 per cent in mid-2025. Medium-term inflation expectations remain well anchored, and it is important that this remains the case.\nGrowth in the Australian economy has slowed, with GDP increasing by 0.5 per cent in the December quarter and 2.7 per cent over the year. Growth over the next couple of years is expected to be below trend. Household consumption growth has slowed due to the tighter financial conditions and the outlook for housing construction has softened. In contrast, the outlook for business investment remains positive, with many businesses operating at a very high level of capacity utilisation.",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_013",
+    "prompt": "Should I immigrate to Canada?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_014",
+    "prompt": "How should I choose what cheese to buy?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_015",
+    "prompt": "What do people usually do at a birthday party?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_016",
+    "prompt": "Why do Jewish holidays begin at sunset the night before?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_017",
+    "prompt": "What is the difference between a GPU and a CPU?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_018",
+    "prompt": "What is Long COVID?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_019",
+    "prompt": "My family wants to buy a dog.  Which breed should we chose?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_020",
+    "prompt": "What is a snook?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_021",
+    "prompt": "Create an itinerary for 3 days in Park City Utah that is good for children and adults. Include hotels, food options, one day of skiing and activities.",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_022",
+    "prompt": "Why is Steph Curry such a good basketball player?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_023",
+    "prompt": "Why is selling stocks short a high risk investment technique",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_024",
+    "prompt": "Why babies cry ?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_025",
+    "prompt": "How do you find a college internship in your interested field of study?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_026",
+    "prompt": "Why do people travel do different places?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_027",
+    "prompt": "Why 2 is greater than 3?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_028",
+    "prompt": "How do I travel from SF to Aspen ski resorts?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_029",
+    "prompt": "Why playing Phase 10 make people so angry?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_030",
+    "prompt": "Why is Dungeons and Dragons so popular nowadays?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_031",
+    "prompt": "Are seed oils bad for you?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_032",
+    "prompt": "What is the sport of Ultimate?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_033",
+    "prompt": "How do you start your child playing soccer?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_034",
+    "prompt": "What are the steps to care for a houseplant?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_035",
+    "prompt": "Who was the best player in Denver Broncos franchise history?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_036",
+    "prompt": "What do you think: can we release this without a UI and add that later? Can we release it as GA without a UI?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_037",
+    "prompt": "Who is the toughest teenage mutant ninja turtle?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_038",
+    "prompt": "Who invented Calculus?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_039",
+    "prompt": "Why is soccer so popular?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_040",
+    "prompt": "How many minutes in a football match?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_041",
+    "prompt": "What are the differences between an upright piano and a grand piano?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_042",
+    "prompt": "Why do you like ballet so much?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_043",
+    "prompt": "Why do people like gardening?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_044",
+    "prompt": "What is Multicloud?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_045",
+    "prompt": "Why do Germans love their cars?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_046",
+    "prompt": "Why do cats lick themselves",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_047",
+    "prompt": "where is khargone?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_048",
+    "prompt": "Why are there speed limits on public roads?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_049",
+    "prompt": "Why do people exercise?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_general_qa_050",
+    "prompt": "Why do people like to run very long distances like marathons?",
+    "category": "general_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_001",
+    "prompt": "How many people in total were killed or injured in this text?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_002",
+    "prompt": "List of all the factions that Lincoln had to deal with, and if they were his allies or enemies.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_003",
+    "prompt": "Who discovered the harmonic distribution?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_004",
+    "prompt": "Extract the members of the band Radiohead in a comma separated list.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_005",
+    "prompt": "Provide some of the examples of regional governments.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_006",
+    "prompt": "From the passage provided, extract the programming languages supported by Flink. Separate them with a comma.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_007",
+    "prompt": "What are the names of the main islands of Hawaiʻi in alphabetical order?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_008",
+    "prompt": "Is Chen Ruo Bing a Chinese or Japanese artist?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_009",
+    "prompt": "Extract and list the Barcelona players in the passage that came from the club's youth academy",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_010",
+    "prompt": "Extract the names of all of the albums that Taylor Swift has released. Separate them with a comma.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_011",
+    "prompt": "Extract the different ways of dealing with underfitting mentioned in the text",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_012",
+    "prompt": "List all the aspiring members of NATO.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_013",
+    "prompt": "What are some of the common elements of visual design?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_014",
+    "prompt": "Where did the battle of the buldge take place?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_015",
+    "prompt": "From the passage note down the various celebrities who joined TikTok . List the results in comma separated format.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_016",
+    "prompt": "List the founders of MicroStrategy and surround the first name of the founder who served as CEO in quotes.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_017",
+    "prompt": "What is Denville Station?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_018",
+    "prompt": "Based on this text, please list the members of the band Phish, separated by commas.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_019",
+    "prompt": "Can you tell me about the history of sports in Philadelphia?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_020",
+    "prompt": "From the passage find the major production areas where Avocado is cultivated. Display the results in comma separated format.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_021",
+    "prompt": "What was the Ghazi Attack in Indian subcontinent?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_022",
+    "prompt": "What commercial airports are near Philmont Training Center (PTC)?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_023",
+    "prompt": "Extract the difference between Gross Disposable income from Disposable Income",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_024",
+    "prompt": "Extract all of the names of people mentioned in this paragraph and list them using bullets in the format {Name}",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_025",
+    "prompt": "As per the passage what are the four names of the Vedas?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_026",
+    "prompt": "From the passage identify the different types of mortality encompassed by Child mortality. Display the results in a comma separated format.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_027",
+    "prompt": "who is Matt Giraud",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_028",
+    "prompt": "Give a list of all the names of people that Arboe trained under?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_029",
+    "prompt": "What is the renewable energy evolution in the last years as part of the global electricity supply share? provide a list by energy sources",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_030",
+    "prompt": "Create a list using bullets of the Beatles band members and tell me if they are alive or dead using the format {Name} / {Alive or Dead}",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_031",
+    "prompt": "Extract the ingredients needed to make pasta carbonara. Separate them with a comma.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_032",
+    "prompt": "Extract the 2021 Total Profit or Operating Income from the following text",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_033",
+    "prompt": "Which NBA player has the most championships in NBA history?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_034",
+    "prompt": "List the types of cured pork that can be used to make carbonara. Separate them with a comma.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_035",
+    "prompt": "From the passage provided, extract the languages in which Kishore Kumar provided his vocals as a playback singer. Separate them with a comma.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_036",
+    "prompt": "What is Pullman National Historical Park?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_037",
+    "prompt": "Extract key reported metrics and their values along with the year the metric is reported from the given text in the format {Metric} - {Year} - {value} and show them as a list",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_038",
+    "prompt": "In the 2005 Lexus Cup, how many members did each team have?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_039",
+    "prompt": "Name the states of Northeast India.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_040",
+    "prompt": "What are the three largest ethnic groups in Kenya?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_041",
+    "prompt": "From the passage provided, extract the year  Indian National Congress was founded",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_042",
+    "prompt": "Extract all the different ways to describe dolls from these passages",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_043",
+    "prompt": "What is summer break?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_044",
+    "prompt": "List the movies of Ranjit Mallick.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_045",
+    "prompt": "What is the largest coral reef system in the world?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_046",
+    "prompt": "What are the names of the social insects that are mentioned?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_047",
+    "prompt": "Who won the San Diego Film Critics Society Award for Best Cinematography in 2012?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_048",
+    "prompt": "Given the following text, what is Mýrdalsjökull, which country is it located in,  how much rain or snow does it receive each year?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_049",
+    "prompt": "From the passage below, extract the names of the companies and technologies that Walmart has acquired over the last 3 years.",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_information_extraction_050",
+    "prompt": "Based on the passage provided, what does Brene Brown's research focus on?",
+    "category": "information_extraction",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_001",
+    "prompt": "What are some of the must-visit places in Tohoku, Japan?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_002",
+    "prompt": "Which medical tool was developed by Sanctorius in 1612",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_003",
+    "prompt": "What is a landlord?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_004",
+    "prompt": "Why is Spanish spoken in large parts of Latin America?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_005",
+    "prompt": "Is butter required to make cookies?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_006",
+    "prompt": "Does the position of a dog's tail communicate how it is feeling?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_007",
+    "prompt": "Is the manatee an endangered species?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_008",
+    "prompt": "In what century was the airplane commercialized?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_009",
+    "prompt": "Which company is owned by Bill Gates",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_010",
+    "prompt": "What is the most important thing for law enforcement in a kidnapping case?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_011",
+    "prompt": "What is the difference between cherry blossoms and plum blossoms?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_012",
+    "prompt": "Which country won the most recent soccer world cup?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_013",
+    "prompt": "Describe a recurring dream you've had.",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_014",
+    "prompt": "What is a cashless option exercise?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_015",
+    "prompt": "What was the purpose of Major League Baseball's rule changes this year?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_016",
+    "prompt": "Which rock band from the 2000s is the most influential?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_017",
+    "prompt": "Name some of the countries who have won the cricket world cup",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_018",
+    "prompt": "What are the top graph databases?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_019",
+    "prompt": "What does the Constitution do?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_020",
+    "prompt": "Why is November 14 celebrated as world diabetes day?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_021",
+    "prompt": "What American city is referred to as The City of Roses?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_022",
+    "prompt": "List the ten episode titles from the second season of \"Game of Thrones\" in broadcast order.",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_023",
+    "prompt": "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_024",
+    "prompt": "What is heterosis?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_025",
+    "prompt": "Name some female characters from \"The X-Files.\"",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_026",
+    "prompt": "In the series A Song of Ice and Fire, who is the founder of House Redwyne?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_027",
+    "prompt": "In geology, what are the main classification for rocks?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_028",
+    "prompt": "Which state in the US has the highest GDP?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_029",
+    "prompt": "Who was the first president of the United States?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_030",
+    "prompt": "whats the total number of US senator?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_031",
+    "prompt": "What is the oldest musical composition in the world?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_032",
+    "prompt": "How should I clean a stainless steel pan?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_033",
+    "prompt": "Name some famous songs by the Beatles",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_034",
+    "prompt": "Which episode of season two of Game of Thrones did Alik Sakharov direct?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_035",
+    "prompt": "What is the difference between Malayalam and Malayalaee?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_036",
+    "prompt": "Who were the \"Big Four\" of Grunge?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_037",
+    "prompt": "Where to visit in Brazil?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_038",
+    "prompt": "What are some of the achievements of James Hightower",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_039",
+    "prompt": "What is a Central Bank?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_040",
+    "prompt": "Where do chia seeds come from?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_041",
+    "prompt": "What is Barkers Butts RFC?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_042",
+    "prompt": "In the series, A Song of Ice and Fire, who is the founder of House Yew?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_043",
+    "prompt": "\"Big Bang\": what does it mean?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_044",
+    "prompt": "What is Impala?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_045",
+    "prompt": "What are the 4 oceans on earth",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_046",
+    "prompt": "What is Oktoberfest",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_047",
+    "prompt": "Which team's have the most NCAA Division I men's basketball championships?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_048",
+    "prompt": "What are the primary causes of inflation?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_049",
+    "prompt": "What are the official languages of Belgium?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_open_qa_050",
+    "prompt": "What is a mainframe?",
+    "category": "open_qa",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_001",
+    "prompt": "Summarize the following paragraph about modern fighter jets",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_002",
+    "prompt": "Please give me a bulleted list of things William Eldred Toye CM worked on",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_003",
+    "prompt": "What are some interesting facts about Nelson Mandel Boulevard described on this paragraph?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_004",
+    "prompt": "What does the Gini coefficient measure?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_005",
+    "prompt": "Who are Coldplay",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_006",
+    "prompt": "Can you give me the biography of Lia Cirio",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_007",
+    "prompt": "What is alternative rock?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_008",
+    "prompt": "Can you give me some background on Perez v. Campbell",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_009",
+    "prompt": "Which season was Roger Federer's most important in his career?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_010",
+    "prompt": "What can you tell me about about the Landscape Arch in Arches National Park in Utah?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_011",
+    "prompt": "Tell me about the Schoenbrunn Palace",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_012",
+    "prompt": "Help summarize Dallas Cowboys",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_013",
+    "prompt": "Who is Lewis Perez and what job did he hold?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_014",
+    "prompt": "What are some examples of diseconomies of scale?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_015",
+    "prompt": "What are the main two ways players score in the Princeton offense?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_016",
+    "prompt": "What is the Jones-Connally Act?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_017",
+    "prompt": "What are the key components to landscaping?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_018",
+    "prompt": "What wines are made in Napa Valley?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_019",
+    "prompt": "What are the different type of coats of dogs?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_020",
+    "prompt": "What is the standard Gibbs free energy",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_021",
+    "prompt": "what are some of the signs and symptoms of Dissociative identity disorder?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_022",
+    "prompt": "From the given passage, write down some interesting points on butterflies",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_023",
+    "prompt": "What does a biological anthropologist study?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_024",
+    "prompt": "Which are the top 3 states of India that account for receiving the maximum number of interstate emigrants?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_025",
+    "prompt": "Without quoting directly from the text give me a summary of Brendon Smalls career",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_026",
+    "prompt": "Please provide some information about Worcester Park railway station from the given passage",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_027",
+    "prompt": "Jot down some points about University of Liverpool from given text",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_028",
+    "prompt": "Tell me about David Wolfenberger",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_029",
+    "prompt": "How long have musical instruments been in existence?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_030",
+    "prompt": "Give me some of the most famous characters Marvel Comics has produced from this list.",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_031",
+    "prompt": "Which famous musicians played a Fender Stratocaster?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_032",
+    "prompt": "When was the Sydney Opera House formally opened",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_033",
+    "prompt": "What is the Masters Tournament?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_034",
+    "prompt": "Based on the following paragraph, list the Himalayan peaks that were surveyed and identified during the 19th century.",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_035",
+    "prompt": "What's a gaya melon? How does it taste like?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_036",
+    "prompt": "Who was Edmund Converse Pierce II?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_037",
+    "prompt": "Give me a chronological bulleted list based on a timeline of events",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_038",
+    "prompt": "Who is Travis Payne?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_039",
+    "prompt": "Is Anthology 3 the White Album",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_040",
+    "prompt": "Who is Stevie Wonder?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_041",
+    "prompt": "What is K-Pop?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_042",
+    "prompt": "What is FIFA?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_043",
+    "prompt": "Why are pulse tools used in product assembly over impact wrenches?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_044",
+    "prompt": "What is contrafact?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_045",
+    "prompt": "What is Sim racing",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_046",
+    "prompt": "Without quoting directly from the text give me a summary of the half dome hike.",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_047",
+    "prompt": "Please share some important points about actress Zendaya using given passage as a reference",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_048",
+    "prompt": "What is Aerial Yoga",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_049",
+    "prompt": "What is rheological weldability?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  },
+  {
+    "prompt_id": "dolly_summarization_050",
+    "prompt": "What is Henri-Cartier Bresson known for?",
+    "category": "summarization",
+    "dataset": "dolly",
+    "label": "benign"
+  }
+]

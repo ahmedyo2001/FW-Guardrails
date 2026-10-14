@@ -1,0 +1,185 @@
+\begin{thebibliography}{}
+
+\bibitem[Alon and Kamfonas, 2023]{alon2023detecting}
+Alon, G. and Kamfonas, M. (2023).
+\newblock Detecting language model attacks with perplexity.
+\newblock {\em arXiv preprint arXiv:2308.14132}.
+
+\bibitem[{Anthropic}, 2025a]{anthropic2025dod}
+{Anthropic} (2025a).
+\newblock Anthropic and the {Department of Defense} to advance responsible {AI}
+  in defense operations.
+\newblock
+  \url{https://www.anthropic.com/news/anthropic-and-the-department-of-defense-to-advance-responsible-ai-in-defense-operations}.
+\newblock Accessed: April 2026.
+
+\bibitem[{Anthropic}, 2025b]{anthropic2025lifesciences}
+{Anthropic} (2025b).
+\newblock Claude for life sciences.
+\newblock \url{https://www.anthropic.com/news/claude-for-life-sciences}.
+\newblock Accessed: April 2026.
+
+\bibitem[Ayyamperumal and Ge, 2024]{ayyamperumal2024current}
+Ayyamperumal, S.~G. and Ge, L. (2024).
+\newblock Current state of llm risks and ai guardrails.
+\newblock {\em arXiv preprint arXiv:2406.12934}.
+
+\bibitem[{CBC News}, 2024]{cbc2024aircanada}
+{CBC News} (2024).
+\newblock Air canada has been ordered to pay compensation after its chatbot
+  gave a passenger wrong information.
+\newblock
+  \url{https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416}.
+\newblock Accessed: April 2026.
+
+\bibitem[{CNBC}, 2026]{cnbc2026dod}
+{CNBC} (2026).
+\newblock Anthropic loses appeals court bid to temporarily block {DOD} ruling.
+\newblock
+  \url{https://www.cnbc.com/2026/04/08/anthropic-pentagon-court-ruling-supply-chain-risk.html}.
+\newblock Accessed: April 2026.
+
+\bibitem[{CNN}, 2025]{cnn2025chatgptsuicide}
+{CNN} (2025).
+\newblock {ChatGPT} encouraged college graduate to commit suicide, family
+  claims in lawsuit against {OpenAI}.
+\newblock
+  \url{https://www.cnn.com/2025/11/06/us/openai-chatgpt-suicide-lawsuit-invs-vis}.
+\newblock Accessed: April 2026.
+
+\bibitem[{CNN}, 2026]{cnn2026grok}
+{CNN} (2026).
+\newblock Elon musk's {AI} chatbot, grok, under fire for failing to rein in
+  `digital undressing'.
+\newblock
+  \url{https://www.cnn.com/2026/01/08/tech/elon-musk-xai-digital-undressing}.
+\newblock Accessed: April 2026.
+
+\bibitem[Dong et~al., 2024]{dong2024building}
+Dong, Y., Mu, R., Jin, G., Qi, Y., Hu, J., Zhao, X., Meng, J., Ruan, W., and
+  Huang, X. (2024).
+\newblock Building guardrails for large language models.
+\newblock {\em arXiv preprint arXiv:2402.01822}.
+
+\bibitem[Gong et~al., 2025]{gong2025figstep}
+Gong, Y., Ran, D., Liu, J., Wang, C., Cong, T., Wang, A., Duan, S., and Wang,
+  X. (2025).
+\newblock Figstep: Jailbreaking large vision-language models via typographic
+  visual prompts.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~39, pages 23951--23959.
+
+\bibitem[Hackett et~al., 2025]{hackett2025bypassing}
+Hackett, W., Birch, L., Trawicki, S., Suri, N., and Garraghan, P. (2025).
+\newblock Bypassing llm guardrails: An empirical analysis of evasion attacks
+  against prompt injection and jailbreak detection systems.
+\newblock In {\em Proceedings of the The First Workshop on LLM Security
+  (LLMSEC)}, pages 101--114.
+
+\bibitem[Hao, 2023]{jackhhao2023jailbreak}
+Hao, J. (2023).
+\newblock Jailbreak classification dataset.
+
+\bibitem[Inan et~al., 2023]{inan2023llamaguard}
+Inan, H., Upasani, K., Chi, J., et~al. (2023).
+\newblock {Llama Guard}: {LLM}-based input-output safeguard for human-{AI}
+  conversations.
+\newblock \url{https://arxiv.org/abs/2312.06674}.
+\newblock arXiv:2312.06674.
+
+\bibitem[Jain et~al., 2023]{jain2023baseline}
+Jain, N., Schwarzschild, A., Wen, Y., Somepalli, G., Kirchenbauer, J., Chiang,
+  P., Goldblum, M., Saha, A., Geiping, J., and Goldstein, T. (2023).
+\newblock Baseline defenses for adversarial attacks against aligned language
+  models (2023).
+\newblock {\em arXiv preprint arXiv:2309.00614}.
+
+\bibitem[{JPMorgan Chase}, 2025]{jpmorgan2025llmsuite}
+{JPMorgan Chase} (2025).
+\newblock {LLM Suite} named 2025 ``innovation of the year'' by {American
+  Banker}.
+\newblock
+  \url{https://www.jpmorganchase.com/about/technology/blog/llmsuite-ab-award}.
+\newblock Accessed: April 2026.
+
+\bibitem[Kim et~al., 2025]{kim2025really}
+Kim, S., Lee, Y., Song, Y., and Lee, K. (2025).
+\newblock What really matters in many-shot attacks? an empirical study of
+  long-context vulnerabilities in llms.
+\newblock In {\em Proceedings of the 63rd Annual Meeting of the Association for
+  Computational Linguistics (Volume 1: Long Papers)}, pages 2043--2063.
+
+\bibitem[Kumar et~al., 2025]{kumar2025no}
+Kumar, D., Birur, N.~A., Baswa, T., Agarwal, S., and Harshangi, P. (2025).
+\newblock No free lunch with guardrails.
+\newblock {\em arXiv preprint arXiv:2504.00441}.
+
+\bibitem[Li, 2026]{li2026incompressible}
+Li, B. (2026).
+\newblock Incompressible knowledge probes: Estimating black-box llm parameter
+  counts via factual capacity.
+\newblock {\em arXiv preprint arXiv:2604.24827}.
+
+\bibitem[{OpenAI}, 2025]{openai2025enterprise}
+{OpenAI} (2025).
+\newblock The state of enterprise {AI} 2025.
+\newblock
+  \url{https://openai.com/index/the-state-of-enterprise-ai-2025-report/}.
+\newblock Accessed: April 2026.
+
+\bibitem[{OpenRouter}, 2026]{openrouter2026}
+{OpenRouter} (2026).
+\newblock {OpenRouter} traffic dashboard.
+\newblock \url{https://openrouter.ai}.
+\newblock Accessed: March 30, 2026.
+
+\bibitem[Shamsujjoha et~al., 2025]{shamsujjoha2025swiss}
+Shamsujjoha, M., Lu, Q., Zhao, D., and Zhu, L. (2025).
+\newblock Swiss cheese model for ai safety: A taxonomy and reference
+  architecture for multi-layered guardrails of foundation model based agents.
+\newblock In {\em 2025 IEEE 22nd International Conference on Software
+  Architecture (ICSA)}, pages 37--48. IEEE.
+
+\bibitem[Shen et~al., 2024]{SCBSZ24}
+Shen, X., Chen, Z., Backes, M., Shen, Y., and Zhang, Y. (2024).
+\newblock {``Do Anything Now'': Characterizing and Evaluating In-The-Wild
+  Jailbreak Prompts on Large Language Models}.
+\newblock In {\em {ACM SIGSAC Conference on Computer and Communications
+  Security (CCS)}}. ACM.
+
+\bibitem[Wang et~al., 2025]{wang2025sok}
+Wang, X., Ji, Z., Wang, W., Li, Z., Wu, D., and Wang, S. (2025).
+\newblock Sok: Evaluating jailbreak guardrails for large language models.
+\newblock {\em arXiv preprint arXiv:2506.10597}.
+
+\bibitem[Yang et~al., 2024a]{yang2024jigsaw}
+Yang, H., Qu, L., Shareghi, E., and Haffari, G. (2024a).
+\newblock Jigsaw puzzles: Splitting harmful questions to jailbreak large
+  language models.
+\newblock {\em arXiv preprint arXiv:2410.11459}.
+
+\bibitem[Yang et~al., 2024b]{yang2024benchmarking}
+Yang, Y., Dan, S., Roth, D., and Lee, I. (2024b).
+\newblock Benchmarking llm guardrails in handling multilingual toxicity.
+\newblock {\em arXiv preprint arXiv:2410.22153}.
+
+\bibitem[Young, 2025]{young2025evaluating}
+Young, R.~J. (2025).
+\newblock Evaluating the robustness of large language model safety guardrails
+  against adversarial attacks.
+\newblock {\em arXiv preprint arXiv:2511.22047}.
+
+\bibitem[Zeng et~al., 2024]{zeng2024shieldgemma}
+Zeng, W., Liu, Y., Mullins, R., et~al. (2024).
+\newblock {ShieldGemma}: Generative {AI} content moderation based on gemma.
+\newblock \url{https://arxiv.org/abs/2407.21772}.
+\newblock arXiv:2407.21772.
+
+\bibitem[Zizzo et~al., 2025]{zizzo2025adversarial}
+Zizzo, G., Cornacchia, G., Fraser, K., Hameed, M.~Z., Rawat, A., Buesser, B.,
+  Purcell, M., Chen, P.-Y., Sattigeri, P., and Varshney, K. (2025).
+\newblock Adversarial prompt evaluation: Systematic benchmarking of guardrails
+  against prompt input attacks on llms.
+\newblock {\em arXiv preprint arXiv:2502.15427}.
+
+\end{thebibliography}

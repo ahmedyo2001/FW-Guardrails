@@ -8,6 +8,8 @@ Evaluation of open-source LLM guardrail models against adversarial attacks, with
 
 **LLM-based:** Llama Guard 3 (1B, 8B) · Granite Guardian (3.2 3B, 3.3 8B) · ShieldGemma 9B · Qwen3Guard Gen 8B
 
+**API-based:** [TypeSafe Jev](https://docs.typesafe.ai) (`jev-latest`). It has its own optional cell in each notebook except many-shot and probing, and needs `TYPESAFE_API_KEY`. Codecarbon only measures the local side for it.
+
 **Non-LLM (in `perplexity&others/`, perplexity from Llama 3.2 1B):**
 - Windowed perplexity threshold
 - LightGBM on perplexity + token length ([Alon & Kamfonas, 2023](https://arxiv.org/abs/2308.14132))
