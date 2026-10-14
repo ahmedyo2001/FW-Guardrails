@@ -37,7 +37,7 @@ def _flush():
 
 def _device():
     """Single-device placement: works for custom-code models that do not support device_map="auto"."""
-    return "cuda" if torch.cuda.is_available() else "cpu"
+    return "cuda:0" if torch.cuda.is_available() else "cpu"   # explicit index: d3's custom code rejects plain "cuda"
 
 
 def _pick_true(options):
