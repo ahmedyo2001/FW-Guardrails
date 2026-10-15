@@ -26,6 +26,7 @@ POLICY_QUESTION = (
 )
 QUESTION_ID = "harmful"
 THRESHOLD = 0.5
+FALLBACK_TOKENIZER = "Qwen/Qwen3-0.6B"   # used when a model has no tokenizer of its own (API runners)
 TRUE_NAMES = ("true", "yes", "1", "noul_true")
 
 
@@ -64,19 +65,33 @@ class _DecisionRunner:
         self._pipe = None  # sweep cells read runner._pipe.tokenizer; decision models have none
 
     def _loaded(self):
-        self._pipe = types.SimpleNamespace(tokenizer=None)
+        # attack notebooks read runner._pipe.tokenizer (e.g. to size many-shot filler in tokens)
+        self._pipe = types.SimpleNamespace(tokenizer=self._get_tokenizer())
+
+    def _get_tokenizer(self):
+        for obj in (getattr(self, "processor", None), getattr(self, "model", None), self):
+            tok = getattr(obj, "tokenizer", None) if obj is not None else None
+            if tok is not None:
+                return tok
+        from transformers import AutoTokenizer
+        try:
+            return AutoTokenizer.from_pretrained(self.guardrail_model_id, cache_dir=self.cache_dir, trust_remote_code=True)
+        except Exception:
+            return AutoTokenizer.from_pretrained(FALLBACK_TOKENIZER, cache_dir=self.cache_dir)
 
     def unload(self):
         self.model = None
         self._pipe = None
         _flush()
 
-    def _result(self, p_true, text, extra=""):
+    def _result(self, p_true, text, extra="", prompt=None):
+        # prompt_sent: the model's actual input when we build it ourselves (OpenJev); otherwise the state and
+        # question handed to the model/API, which assembles its own input internally.
         return {
             "flagged": p_true >= self.threshold,
             "p_true": p_true,
             "raw_output": f"p_true={p_true:.4f}" + (f" {extra}" if extra else ""),
-            "prompt_sent": json.dumps({"state": text, "question": self.instructions}),
+            "prompt_sent": prompt if prompt is not None else json.dumps({"state": text, "question": self.instructions}),
         }
 
 
@@ -207,7 +222,7 @@ class OpenJevHFRunner(_DecisionRunner):
         py = 1 / (1 + math.exp(-(lp_a - lp_b) / self.T))
         py = min(max(py, 1e-4), 1 - 1e-4)
         p_true = 1 / (1 + math.exp(-(math.log(py / (1 - py)) / self.NOUL_T + self.NOUL_BIAS)))
-        return self._result(p_true, text, f"lpA={lp_a:.3f} lpB={lp_b:.3f}")
+        return self._result(p_true, text, f"lpA={lp_a:.3f} lpB={lp_b:.3f}", prompt=prompt)
 
 
 class OpenJevRunner(_DecisionRunner):
