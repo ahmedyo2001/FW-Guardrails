@@ -41,6 +41,9 @@ def _device():
     return "cuda:0" if torch.cuda.is_available() else "cpu"   # explicit index: d3's custom code rejects plain "cuda"
 
 
+"""The 2 methods below are use to parse answers, ptrue is parsed by second method
+picktrue is used as a fallback"""
+
 def _pick_true(options):
     """P(true) from {option_id: prob}. Option ids for yes/no are not documented for the local models."""
     key = next((k for k in options if str(k).lower() in TRUE_NAMES), list(options)[-1])
@@ -225,85 +228,6 @@ class OpenJevHFRunner(_DecisionRunner):
         return self._result(p_true, text, f"lpA={lp_a:.3f} lpB={lp_b:.3f}", prompt=prompt)
 
 
-class OpenJevRunner(_DecisionRunner):
-    """openjev/OpenJev-Flash-9B via the card's vLLM + shim servers: HTTP client for the helper server.
-
-    The card only documents vLLM 0.29.0 + shim, no transformers path. vLLM pins its own torch/transformers,
-    so the server runs in a separate venv (start_openjev_server) and this class only POSTs to /v1/systemone.
-    The response shape is not shown on the card ("follows the hosted Jev API"), so parsing is defensive:
-    check raw_output on the first run.
-    """
-    SHIM_URL = "http://127.0.0.1:3000"
-    API_MODEL = "openjev-flash-9b"
-
-    def load(self):
-        if self.model is not None:
-            return
-        import requests
-        try:
-            v = requests.get(f"{self.SHIM_URL}/v1/version", timeout=10).json()
-        except Exception as e:
-            raise RuntimeError(
-                f"OpenJev shim not reachable at {self.SHIM_URL} ({e!r}). Run start_openjev_server() first.")
-        print(f"OpenJev shim: {v}")  # expect T=1.07, noul_t=1.074766, instr_style=pyrepr, sha256 81a22f1b...
-        self.model = self.SHIM_URL
-        self._loaded()
-
-    def run(self, text):
-        import requests
-        body = {"model": self.API_MODEL, "state": text,
-                "questions": {QUESTION_ID: {"type": "noul", "instructions": self.instructions}}}
-        r = requests.post(f"{self.SHIM_URL}/v1/systemone", json=body, timeout=120)
-        r.raise_for_status()
-        resp = r.json()
-        return self._result(_p_true_from_answer(_find_answer(resp, QUESTION_ID)), text,
-                            f"answer={json.dumps(resp, default=str)[:200]}")
-
-
-def _find_answer(resp, name):
-    """Locate one question's answer in a response shaped {answers|nouls: {name: ...}} or {name: ...}."""
-    for container in (resp.get("answers"), resp.get("nouls"), resp):
-        if isinstance(container, dict) and name in container:
-            ans = container[name]
-            return ans if isinstance(ans, dict) else {"probability_true": ans}
-    raise ValueError(f"Question {name!r} not found in response: {str(resp)[:300]}")
-
-
-def start_openjev_server(venv="/content/openjev_venv", wait=900):
-    """Colab helper: install vLLM 0.29.0 + the shim into a separate venv and start both servers.
-
-    Commands are copied from the model card. Needs a GPU with FP8 support (L4/H100) or drop --quantization fp8.
-    """
-    import subprocess
-    import urllib.request
-
-    def sh(cmd):
-        subprocess.run(cmd, shell=True, check=True, executable="/bin/bash")
-
-    sh(f"python -m venv {venv} && {venv}/bin/pip install -q 'vllm==0.29.0' 'openai==3.26.0' 'httpx==0.28.1' huggingface_hub")
-    sh(f"{venv}/bin/hf download openjev/OpenJev-Flash-9B helper/shim.py --local-dir openjev-flash-9b")
-    subprocess.Popen(
-        f"{venv}/bin/vllm serve openjev/OpenJev-Flash-9B --host 127.0.0.1 --served-model-name qwen --port 8000 "
-        "--enable-prefix-caching --max-model-len 16384 --gpu-memory-utilization 0.90 "
-        "--limit-mm-per-prompt '{\"image\":1}' --trust-remote-code --max-num-seqs 16 "
-        "--max-logprobs 64 --gdn-prefill-backend triton --quantization fp8 > vllm.log 2>&1",
-        shell=True, executable="/bin/bash")
-    env = ("VLLM=http://127.0.0.1:8000/v1 TOKENIZER=openjev/OpenJev-Flash-9B READOUT_T=1.07 "
-           "READOUT_NOUL_T=1.074766 READOUT_NOUL_BIAS=0 READOUT_TARGETED=1 READOUT_INSTR_STYLE=pyrepr SHIM_STAGGER=1")
-    # wait for vLLM (weights download + load), then start the shim
-    for _ in range(wait // 5):
-        try:
-            urllib.request.urlopen("http://127.0.0.1:8000/v1/models", timeout=3)
-            break
-        except Exception:
-            time.sleep(5)
-    else:
-        raise RuntimeError("vLLM did not come up; see vllm.log")
-    subprocess.Popen(f"{env} {venv}/bin/python openjev-flash-9b/helper/shim.py --host 127.0.0.1 --port 3000 > shim.log 2>&1",
-                     shell=True, executable="/bin/bash")
-    time.sleep(10)
-
-
 # ---------------------------------------------------------------------------
 # API models
 # ---------------------------------------------------------------------------
@@ -392,8 +316,6 @@ def make_runner(model_id, **kw):
     mid = model_id.lower()
     if mid.startswith("openjev/"):
         return OpenJevHFRunner(model_id, **kw)
-    if mid.startswith("shim:openjev/"):  # reference path: card's vLLM + shim servers
-        return OpenJevRunner(model_id, **kw)
     if mid.startswith("frontiersmind/lumma"):
         return LummaRunner(model_id, **kw)
     if mid.startswith("cloudflare/clef"):

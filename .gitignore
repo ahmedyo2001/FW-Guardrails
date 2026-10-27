@@ -25,3 +25,9 @@ objectives2.py
 garak/garak.e180ce2b-9089-4b5b-acd2-d55551f76f2f.report.jsonl
 garak/garak.e180ce2b-9089-4b5b-acd2-d55551f76f2f.hitlog.jsonl
 garak/garak.e180ce2b-9089-4b5b-acd2-d55551f76f2f.report.html
+decision_models/many_shots_attack/jackhhao results/manyshot_summary_1792187787.json
+decision_models/many_shots_attack/jackhhao results/manyshot_detail_vllm-sr_d3-mini_1792183697.json
+decision_models/many_shots_attack/jackhhao results/manyshot_detail_vllm-sr_d3-nano_1792185328.json
+decision_models/many_shots_attack/jackhhao results/manyshot_detail_vllm-sr_d3-flash_1792181910.json
+decision_models/many_shots_attack/jackhhao results/manyshot_detail_Cloudflare_clef-flash_1792179779.json
+decision_models/many_shots_attack/jackhhao results/manyshot_detail_openjev_OpenJev-Flash-9B_1792187783.json
