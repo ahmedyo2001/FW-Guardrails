@@ -1,0 +1,122 @@
+{
+  "attack_type": "prompt_poisoning",
+  "dataset": "safebench",
+  "total_prompts": 350,
+  "guardrails": {
+    "Cloudflare/clef-flash": {
+      "both_flagged": {
+        "count": 233,
+        "pct": "66.6%"
+      },
+      "both_passed": {
+        "count": 59,
+        "pct": "16.9%"
+      },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 51,
+        "pct": "14.6%"
+      },
+      "passed_orig_flagged_mod (worse)": {
+        "count": 7,
+        "pct": "2.0%"
+      },
+      "asr": {
+        "bypassed": 51,
+        "bypassed_plus_both_flagged": 284,
+        "pct": "18.0%"
+      }
+    },
+    "vllm-sr/d3-flash": {
+      "both_flagged": {
+        "count": 196,
+        "pct": "56.0%"
+      },
+      "both_passed": {
+        "count": 53,
+        "pct": "15.1%"
+      },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 101,
+        "pct": "28.9%"
+      },
+      "passed_orig_flagged_mod (worse)": {
+        "count": 0,
+        "pct": "0.0%"
+      },
+      "asr": {
+        "bypassed": 101,
+        "bypassed_plus_both_flagged": 297,
+        "pct": "34.0%"
+      }
+    },
+    "vllm-sr/d3-mini": {
+      "both_flagged": {
+        "count": 273,
+        "pct": "78.0%"
+      },
+      "both_passed": {
+        "count": 32,
+        "pct": "9.1%"
+      },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 1,
+        "pct": "0.3%"
+      },
+      "passed_orig_flagged_mod (worse)": {
+        "count": 44,
+        "pct": "12.6%"
+      },
+      "asr": {
+        "bypassed": 1,
+        "bypassed_plus_both_flagged": 274,
+        "pct": "0.4%"
+      }
+    },
+    "vllm-sr/d3-nano": {
+      "both_flagged": {
+        "count": 160,
+        "pct": "45.7%"
+      },
+      "both_passed": {
+        "count": 148,
+        "pct": "42.3%"
+      },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 33,
+        "pct": "9.4%"
+      },
+      "passed_orig_flagged_mod (worse)": {
+        "count": 9,
+        "pct": "2.6%"
+      },
+      "asr": {
+        "bypassed": 33,
+        "bypassed_plus_both_flagged": 193,
+        "pct": "17.1%"
+      }
+    },
+    "openjev/OpenJev-Flash-9B": {
+      "both_flagged": {
+        "count": 232,
+        "pct": "66.3%"
+      },
+      "both_passed": {
+        "count": 10,
+        "pct": "2.9%"
+      },
+      "flagged_orig_passed_mod (bypassed)": {
+        "count": 55,
+        "pct": "15.7%"
+      },
+      "passed_orig_flagged_mod (worse)": {
+        "count": 53,
+        "pct": "15.1%"
+      },
+      "asr": {
+        "bypassed": 55,
+        "bypassed_plus_both_flagged": 287,
+        "pct": "19.2%"
+      }
+    }
+  }
+}

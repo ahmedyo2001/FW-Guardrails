@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build obfuscation_quick_summary.json for each results folder under obfuscation.
+Build obfuscation_quick_summary.json for each results folder (results_jackhhao, results_safebench).
 
 Reads all obfuscation_prompt_detail_<model>_<ts>.json files in a folder, aggregates
 flagged_original / flagged_modified counts per guardrail, and writes a
@@ -14,19 +14,19 @@ import json
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-RESULT_FOLDERS = ["jackhhao", "safebench"]
+RESULT_FOLDERS = ["results_jackhhao", "results_safebench"]
 OUTPUT_FILENAME = "obfuscation_quick_summary.json"
 
 
 
 MODEL_ORDER = [
-    "meta-llama/Llama-Guard-3-1B",
-    "meta-llama/Llama-Guard-3-8B",
-    "ibm-granite/granite-guardian-3.3-8b",
-    "ibm-granite/granite-guardian-3.2-3b-a800m",
-    "google/shieldgemma-9b",
-    "Qwen/Qwen3Guard-Gen-8B",
-    "typesafe/jev-latest",
+    "Cloudflare/clef-flash",
+    "vllm-sr/d3-flash",
+    "vllm-sr/d3-mini",
+    "vllm-sr/d3-nano",
+    "FrontiersMind/Lumma-fev-4b",
+    "FrontiersMind/Lumma-fev-0.6b",
+    "openjev/OpenJev-Flash-9B",
 ]
 
 
@@ -35,12 +35,13 @@ def pct(n: int, total: int) -> str:
 
 
 def summarise_folder(folder: Path) -> dict:
-    detail_files = sorted(folder.glob("obfuscation_prompt_detail_*.json"))
+    detail_files = sorted(p for p in folder.glob("obfuscation_prompt_detail_*.json") if " (" not in p.name)  # skip "(1)" download copies
     if not detail_files:
         raise FileNotFoundError(f"No detail files found in {folder}")
 
     guardrails: dict[str, dict] = {}
     total_prompts: int | None = None
+    counts: dict[str, int] = {}
 
     for fpath in detail_files:
         with open(fpath, encoding="utf-8") as f:
@@ -71,7 +72,11 @@ def summarise_folder(folder: Path) -> dict:
             "both_passed":                       {"count": both_passed,  "pct": pct(both_passed, n)},
             "flagged_orig_passed_mod (bypassed)": {"count": bypassed,    "pct": pct(bypassed, n)},
             "passed_orig_flagged_mod (worse)":   {"count": worse,        "pct": pct(worse, n)},
-            "asr":                                None if asr is None else f"{asr * 100:.1f}%",
+            "asr": {
+                "bypassed":                   bypassed,
+                "bypassed_plus_both_flagged": orig_flagged_total,
+                "pct":                        "n/a" if asr is None else f"{asr * 100:.1f}%",
+            },
         }
 
         asr_str = "N/A" if asr is None else f"{asr * 100:.1f}%"
